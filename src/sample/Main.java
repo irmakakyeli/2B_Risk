@@ -75,7 +75,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     public static void main(String[] args) {
         launch(args);
-
+        System.out.println("asd");
     }
 
     @Override
