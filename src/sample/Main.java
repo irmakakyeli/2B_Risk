@@ -39,6 +39,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         startGame.setLayoutX(410.0);
         startGame.setLayoutY(225.0);
         startGame.setOnAction(this);
+
+        Button registerUser = new Button("Register User");
+        registerUser.setLayoutX(410.0);
+        registerUser.setLayoutY(300.0);
+        registerUser.setOnAction(this);
+
         Button quit = new Button("QUIT");;
         quit.setLayoutX(410.0);
         quit.setLayoutY(280.0);
@@ -91,6 +97,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }
 
