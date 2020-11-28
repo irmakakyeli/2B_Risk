@@ -1,4 +1,6 @@
 edu\bilkent\cs\risk2b\SecondaryController.class
+edu\bilkent\cs\risk2b\Dice.class
 edu\bilkent\cs\risk2b\PrimaryController.class
 module-info.class
 edu\bilkent\cs\risk2b\App.class
+edu\bilkent\cs\risk2b\Game_mapController.class
