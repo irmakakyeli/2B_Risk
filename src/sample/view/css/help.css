@@ -1,0 +1,4 @@
+.root{
+    -fx-background-image: url("resources/Help.png");
+    -fx-background-size: cover;
+}
