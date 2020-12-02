@@ -1,13 +1,18 @@
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\ActivatePLayerResponse.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\GameEngineService.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\GameEngine.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\ObjectFactory.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\simpleworldgame\Player.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\RegisterPLayerResponse.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\RegisterPLayer.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\ActivatePLayer.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\TestClientConsole.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\GetPLayers.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\package-info.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\client\GetPLayersResponse.java
-E:\dev\JavaProg\SimpleWorldGame\src\main\java\edu\bilkent\cs\simpleworldgame\GameEngine.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\edu\bilkent\cs\simpleworldgame\Region.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\GetWorld.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\GetWorldResponse.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\ObjectFactory.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\ActivatePLayerResponse.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\GetPLayers.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\edu\bilkent\cs\simpleworldgame\Player.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\GetPLayersResponse.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\RegisterPLayerResponse.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\edu\bilkent\cs\simpleworldgame\GameEngine.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\edu\bilkent\cs\simpleworldgame\Continent.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\MainGUI.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\GameEngineService.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\package-info.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\GameEngine.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\ActivatePLayer.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\ws\guiclient\stubs\RegisterPLayer.java
+E:\Yusuf Uni\Year 3\Semester 1\CS-319\Yeni\SimpleWorldGame\src\main\java\edu\bilkent\cs\simpleworldgame\World.java

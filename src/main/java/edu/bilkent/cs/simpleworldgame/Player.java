@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.ConcurrentSkipListSet;
 /**
  *
- * @author nedim.alpdemir
+ * @author
  */
 public class Player  {
 	 Integer id;
