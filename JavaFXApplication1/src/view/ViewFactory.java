@@ -138,6 +138,7 @@ public class ViewFactory {
         while (keys.hasNext()) {
             String key = keys.next();
             String user = json.get(key).toString();
+            user = retrieveName(user);
             list += key + " - " + user + "\n";
 
         }
@@ -146,6 +147,15 @@ public class ViewFactory {
         //viewFactory.showUsers();
         System.out.println(list);
         //viewFactory.closeStage(stage);
+    }
+    
+    public String retrieveName(String input){
+        String userName = "";
+        userName = input.substring(input.indexOf(":") + 2);
+        userName = userName.substring(0, userName.indexOf('\"'));
+        
+
+        return userName;
     }
     
 }

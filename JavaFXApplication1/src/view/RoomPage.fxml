@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import java.net.URL?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@css/room.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
@@ -13,4 +14,9 @@
       <TextArea fx:id="userList" editable="true"  layoutX="336.0" layoutY="40.0" opacity="0.65" prefHeight="195.0" prefWidth="605.0" wrapText="true" promptText="Registered Users will be seen here" style="-fx-background-color: #000000; -fx-promt-text-fill: white; -fx-text-fill: black; -fx-font-size: 18;" />
       
    </children>
+   
+   <stylesheets>
+    <URL value="@css/room.css" />
+  </stylesheets>
+   
 </AnchorPane>
