@@ -11,9 +11,7 @@
       <Button layoutY="283.0" mnemonicParsing="false" onAction="#backBtnAction" opacity="0.0" prefHeight="157.0" prefWidth="134.0" style="-fx-background-radius: 40;" text="BACK" />
       <Button layoutX="1138.0" layoutY="280.0" mnemonicParsing="false" onAction="#forwardBtnAction" opacity="0.0" prefHeight="159.0" prefWidth="142.0" style="-fx-background-radius: 40;" text="FORWARD" />
       <Button layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#helpBtnAction" opacity="0.0" prefHeight="64.0" prefWidth="65.0" style="-fx-background-radius: 100;" text="HELP" />
-      
-      <Button layoutX="1050.0"  layoutY="100.0" mnemonicParsing="false" onAction="#getUsersBtnAction" opacity="0.9" prefHeight="157.0" prefWidth="134.0" style="-fx-background-radius: 40;" text="GET USERS" />
-      <TextArea fx:id="userList" editable="true"  layoutX="336.0" layoutY="40.0" opacity="0.65" prefHeight="195.0" prefWidth="605.0" wrapText="true" promptText="Registered Users will be seen here" style="-fx-background-color: #000000; -fx-promt-text-fill: white; -fx-text-fill: black; -fx-font-size: 18;" />
+     
       
       <TextField layoutX="336.0" layoutY="254.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.65" prefHeight="122.0" prefWidth="606.0" promptText="Enter game code here" style="-fx-background-color: #000000; -fx-promt-text-fill: white; -fx-text-fill: white; -fx-font-size: 45;" />
       <Label fx:id="joinLabel" layoutX="328.0" layoutY="254.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="7.0" style="-fx-background-color: #C70706;" />

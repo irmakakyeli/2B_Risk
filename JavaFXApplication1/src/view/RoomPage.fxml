@@ -10,6 +10,7 @@
       <Button layoutX="1146.0" layoutY="281.0" mnemonicParsing="false" onAction="#forwardBtnAction" opacity="0.0" prefHeight="157.0" prefWidth="133.0" style="-fx-background-radius: 40;" text="FORWARD" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#helpBtnAction" opacity="0.0" prefHeight="65.0" prefWidth="70.0" style="-fx-background-radius: 100;" text="HELP" />
       <Label fx:id="roomLabel" layoutX="178.0" layoutY="79.0" />
+      <TextArea fx:id="userList" editable="true"  layoutX="336.0" layoutY="40.0" opacity="0.65" prefHeight="195.0" prefWidth="605.0" wrapText="true" promptText="Registered Users will be seen here" style="-fx-background-color: #000000; -fx-promt-text-fill: white; -fx-text-fill: black; -fx-font-size: 18;" />
       
    </children>
 </AnchorPane>

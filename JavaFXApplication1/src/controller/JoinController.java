@@ -15,36 +15,10 @@ public class JoinController extends BaseController{
     @FXML
     private Label joinLabel;
     
-    @FXML
-    private TextArea userList;
+    
 
     public JoinController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
         super(gameManager, viewFactory, fxmlName);
-    }
-
-    @FXML
-    void getUsersBtnAction() {
-        
-        GameEngineService service = new GameEngineService();
-        final GameEngine gmEngine = service.getGameEnginePort();
-        Stage stage = (Stage) joinLabel.getScene().getWindow();
-        userList.clear();
-        String response = gmEngine.getPLayers();
-
-        JSONObject json =  new JSONObject(response);
-        Iterator<String> keys = json.keys();
-        String list = "";
-        while (keys.hasNext()) {
-            String key = keys.next();
-            String user = json.get(key).toString();
-            list += key + " - " + user + "\n";
-
-        }
-
-        userList.setText(list);
-        //viewFactory.showUsers();
-        System.out.println(list);
-        //viewFactory.closeStage(stage);
     }
     
     

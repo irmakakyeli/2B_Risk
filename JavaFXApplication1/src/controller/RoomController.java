@@ -21,7 +21,12 @@ public class RoomController extends BaseController{
     @FXML
     private Label roomLabel;
     
-    @FXML public static TextArea userList;
+    @FXML
+    private TextArea userList;
+    
+    public TextArea getUserList(){
+        return userList;
+    }
 
     @FXML
     void forwardBtnAction() {

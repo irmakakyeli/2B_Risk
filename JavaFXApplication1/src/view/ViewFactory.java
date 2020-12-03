@@ -15,8 +15,17 @@ import javafx.stage.Stage;
 import javafxapplication1.GameManager;
 
 import java.io.IOException;
+import java.util.Iterator;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+import org.json.JSONObject;
+import ws.client.GameEngine;
+import ws.client.GameEngineService;
 
 public class ViewFactory {
+    
+    @FXML
+    private TextArea userList;
 
     private GameManager gameManager;
 
@@ -60,9 +69,29 @@ public class ViewFactory {
     }
 
     public void showRoomPage(){
-        BaseController baseController = new RoomController(gameManager, this, "RoomPage.fxml");
+        RoomController controller = new RoomController(gameManager, this, "RoomPage.fxml");
+        
 
-        initializeStage(baseController, "css/room.css");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
+        fxmlLoader.setController(controller);
+
+        Parent parent;
+
+        try{
+            parent = fxmlLoader.load();
+        } catch (IOException exception){
+            exception.printStackTrace();
+            return;
+        }
+
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        getUsersBtnAction(stage, controller);
+
+        scene.getStylesheets().addAll(this.getClass().getResource("css/room.css").toExternalForm());
+        stage.setScene(scene);
+
+        stage.show();
     }
 
     public void showBoard(){
@@ -95,4 +124,28 @@ public class ViewFactory {
     public void closeStage(Stage stage){
         stage.close();
     }
+    
+    void getUsersBtnAction(Stage stage, RoomController controller) {
+        
+        GameEngineService service = new GameEngineService();
+        final GameEngine gmEngine = service.getGameEnginePort();
+        controller.getUserList().clear();
+        String response = gmEngine.getPLayers();
+
+        JSONObject json =  new JSONObject(response);
+        Iterator<String> keys = json.keys();
+        String list = "";
+        while (keys.hasNext()) {
+            String key = keys.next();
+            String user = json.get(key).toString();
+            list += key + " - " + user + "\n";
+
+        }
+
+        controller.getUserList().setText(list);
+        //viewFactory.showUsers();
+        System.out.println(list);
+        //viewFactory.closeStage(stage);
+    }
+    
 }
