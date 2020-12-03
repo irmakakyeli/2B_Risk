@@ -31,6 +31,9 @@ public class JoinController extends BaseController{
 
     @FXML
     void helpBtnAction() {
+
         viewFactory.showHelp();
+        Stage stage = (Stage) joinLabel.getScene().getWindow();
+        viewFactory.closeStage(stage);
     }
 }

@@ -31,5 +31,7 @@ public class MainMenuController extends BaseController{
     @FXML
     void helpBtnAction() {
         viewFactory.showHelp();
+        Stage stage = (Stage) mainLabel.getScene().getWindow();
+        viewFactory.closeStage(stage);
     }
 }

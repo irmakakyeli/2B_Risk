@@ -1,4 +1,5 @@
 .root{
-    -fx-background-image: url("resources/Help.png");
+    -fx-background-image: url("resources/Help.jpg");
     -fx-background-size: cover;
+    -fx-font-family:'Nova Flat';
 }

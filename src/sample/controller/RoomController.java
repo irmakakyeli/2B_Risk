@@ -23,6 +23,9 @@ public class RoomController extends BaseController{
 
     @FXML
     void helpBtnAction() {
+
         viewFactory.showHelp();
+        Stage stage = (Stage) roomLabel.getScene().getWindow();
+        stage.close();
     }
 }

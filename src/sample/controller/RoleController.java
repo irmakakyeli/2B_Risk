@@ -18,7 +18,9 @@ public class RoleController extends BaseController {
 
     @FXML
     void helpBtnAction() {
-
+        viewFactory.showHelp();
+        Stage stage = (Stage) roleLabel.getScene().getWindow();
+        viewFactory.closeStage(stage);
     }
 
     @FXML

@@ -31,6 +31,9 @@ public class HostController extends BaseController{
 
     @FXML
     void helpBtnAction() {
+
         viewFactory.showHelp();
+        Stage stage = (Stage) hostLabel.getScene().getWindow();
+        viewFactory.closeStage(stage);
     }
 }
