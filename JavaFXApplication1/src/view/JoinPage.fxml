@@ -12,13 +12,13 @@
       <Button layoutX="1138.0" layoutY="280.0" mnemonicParsing="false" onAction="#forwardBtnAction" opacity="0.0" prefHeight="159.0" prefWidth="142.0" style="-fx-background-radius: 40;" text="FORWARD" />
       <Button layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#helpBtnAction" opacity="0.0" prefHeight="64.0" prefWidth="65.0" style="-fx-background-radius: 100;" text="HELP" />
       
-      <Button layoutX="16.0"  layoutY="50.0" mnemonicParsing="false" onAction="#getUsersBtnAction" opacity="0.0" prefHeight="157.0" prefWidth="134.0" style="-fx-background-radius: 40;" text="GetUsers" />
-      <TextArea fx:id="userList" editable="false" focusTraversable="false" layoutX="336.0" layoutY="40.0" prefHeight="195.0" prefWidth="605.0" wrapText="true"/>
+      <Button layoutX="1050.0"  layoutY="100.0" mnemonicParsing="false" onAction="#getUsersBtnAction" opacity="0.9" prefHeight="157.0" prefWidth="134.0" style="-fx-background-radius: 40;" text="GET USERS" />
+      <TextArea fx:id="userList" editable="true"  layoutX="336.0" layoutY="40.0" opacity="0.65" prefHeight="195.0" prefWidth="605.0" wrapText="true" promptText="Registered Users will be seen here" style="-fx-background-color: #000000; -fx-promt-text-fill: white; -fx-text-fill: black; -fx-font-size: 18;" />
       
       <TextField layoutX="336.0" layoutY="254.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.65" prefHeight="122.0" prefWidth="606.0" promptText="Enter game code here" style="-fx-background-color: #000000; -fx-promt-text-fill: white; -fx-text-fill: white; -fx-font-size: 45;" />
-      <Label fx:id="joinLabel" layoutX="328.0" layoutY="173.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="7.0" style="-fx-background-color: #C70706;" />
-      <Label fx:id="joinLabel1" layoutX="332.0" layoutY="172.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="7.0" prefWidth="64.0" style="-fx-background-color: #C70706;" />
-      <Label fx:id="joinLabel11" layoutX="724.0" layoutY="171.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="217.0" style="-fx-background-color: #C70706;" />
+      <Label fx:id="joinLabel" layoutX="328.0" layoutY="254.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="7.0" style="-fx-background-color: #C70706;" />
+      <Label fx:id="joinLabel1" layoutX="332.0" layoutY="253.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="7.0" prefWidth="64.0" style="-fx-background-color: #C70706;" />
+      <Label fx:id="joinLabel11" layoutX="724.0" layoutY="252.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="217.0" style="-fx-background-color: #C70706;" />
       <Label fx:id="joinLabel111" layoutX="881.0" layoutY="294.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="64.0" style="-fx-background-color: #C70706;" />
       <Label fx:id="joinLabel1111" layoutX="942.0" layoutY="171.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="7.0" style="-fx-background-color: #C70706;" />
       <TextField layoutX="338.0" layoutY="422.0" opacity="0.65" prefHeight="124.0" prefWidth="605.0" promptText="Enter user name here" style="-fx-background-color: #000000; -fx-promt-text-fill: white; -fx-text-fill: white; -fx-font-size: 45;" />
