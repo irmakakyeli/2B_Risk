@@ -33,5 +33,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/GameEngineService"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/ws/client"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-GameEngineService"/>
+    <target name="wsimport-client-GameEngineService_1" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/GameEngineService_1"/>
+        <property name="wsdl-GameEngineService_1" location="xml-resources/web-service-references/GameEngineService_1/wsdl/13.59.31.129_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/GameEngineService_1" destdir="${build.generated.dir}/jax-wsCache/GameEngineService_1" wsdl="${wsdl-GameEngineService_1}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://13.59.31.129:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?wsdl" xnocompile="true" xendorsed="true" package="ws.client">
+            <depends file="${wsdl-GameEngineService_1}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/GameEngineService_1"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/GameEngineService_1">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-GameEngineService_1" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/GameEngineService_1"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/ws/client"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-GameEngineService, wsimport-client-GameEngineService_1"/>
 </project>
