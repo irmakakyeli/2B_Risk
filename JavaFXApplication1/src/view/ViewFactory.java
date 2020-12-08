@@ -21,6 +21,7 @@ import javafx.scene.control.TextArea;
 import org.json.JSONObject;
 import ws.client.GameEngine;
 import ws.client.GameEngineService;
+import ws.client.*;
 
 public class ViewFactory {
     
