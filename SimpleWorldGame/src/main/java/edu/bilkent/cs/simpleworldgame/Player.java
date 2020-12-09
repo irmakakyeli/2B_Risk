@@ -7,6 +7,7 @@ package edu.bilkent.cs.simpleworldgame;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.ConcurrentSkipListSet;
+import edu.bilkent.cs.simpleworldgame.Country;
 /**
  *
  * @author
@@ -41,4 +42,11 @@ public class Player  {
         public void setActive(boolean act_state) {
 		isActive = act_state;
 	}
+        
+        public void attack(int gcontinent, int acountry, int dcountry)
+        {
+            Continent continent = GameEngine.Continents[gcontinent];
+            Country attacking = continent.Countries[acountry];
+            Country defending = continent.Countries[dcountry];
+        }
 }

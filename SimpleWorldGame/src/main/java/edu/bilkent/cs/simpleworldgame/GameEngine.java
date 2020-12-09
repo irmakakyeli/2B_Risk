@@ -34,11 +34,13 @@ public class GameEngine {
     AtomicInteger playerIDgen;
     int num_allowed_games;
     JSONObject config;
+    Continent[] Continents;
 
     public GameEngine() {
         playerIDgen = new AtomicInteger();
         player_map = new ConcurrentHashMap<Integer, Player>();
         gameWorld = new World();
+        Continents = new Continent[7];
         
         //InputStream reader = Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/service-config.json");
         InputStream reader = Thread.currentThread().getContextClassLoader().getResourceAsStream("service-config.json");

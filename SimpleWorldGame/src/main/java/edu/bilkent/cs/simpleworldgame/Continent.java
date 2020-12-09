@@ -21,9 +21,11 @@ public class Continent {
     ConcurrentHashMap<Integer, Region> regionMap;
     String name;
     Integer id;
+    Region[] Countries;
     
     public Continent() {
         regionMap = new ConcurrentHashMap<Integer, Region>();
+        Countries = new Region[];
     }
     
     public void AddRegion(Integer id, Region r) {
