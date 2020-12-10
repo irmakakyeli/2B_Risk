@@ -29,6 +29,10 @@ public class ViewFactory {
     private TextArea userList;
 
     private GameManager gameManager;
+    
+    private Stage currStage;
+            
+    public Stage currentStage;
 
     public ViewFactory(GameManager gameManager) {
         this.gameManager = gameManager;
@@ -37,6 +41,7 @@ public class ViewFactory {
     public void showMainMenu(){
         BaseController baseController = new MainMenuController(gameManager, this, "MainMenu.fxml");
         initializeStage(baseController, "css/style.css");
+        currentStage = currStage;
     }
 
     public void showHelp(){
@@ -49,24 +54,28 @@ public class ViewFactory {
         BaseController baseController = new JoinController(gameManager, this, "JoinPage.fxml");
 
         initializeStage(baseController, "css/join.css");
+        currentStage = currStage;
     }
     
     public void showRole(){
         BaseController baseController = new RoleController(gameManager, this, "RoleChose.fxml");
 
         initializeStage(baseController, "css/role.css");
+        currentStage = currStage;
     }
 
     public void showHostPage(){
         BaseController baseController = new HostController(gameManager, this, "HostPage.fxml");
 
         initializeStage(baseController, "css/host.css");
+        currentStage = currStage;
     }
 
     public void showJoinPage(){
         BaseController baseController = new JoinController(gameManager, this, "JoinPage.fxml");
 
         initializeStage(baseController, "css/join.css");
+        currentStage = currStage;
     }
 
     public void showRoomPage(){
@@ -75,6 +84,7 @@ public class ViewFactory {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
         fxmlLoader.setController(controller);
+        
 
         Parent parent;
 
@@ -91,13 +101,14 @@ public class ViewFactory {
 
         scene.getStylesheets().addAll(this.getClass().getResource("css/room.css").toExternalForm());
         stage.setScene(scene);
-
+        currentStage = stage;
         stage.show();
     }
 
     public void showBoard(){
         BaseController baseController = new BoardController(gameManager, this, "GamePage.fxml");
         initializeStage(baseController, "css/board.css");
+        currentStage = currStage;
     }
 
     public void initializeStage(BaseController controller, String fxmlName){
@@ -118,12 +129,20 @@ public class ViewFactory {
 
         scene.getStylesheets().addAll(this.getClass().getResource(fxmlName).toExternalForm());
         stage.setScene(scene);
-
+        
+        currStage = stage;
+        
         stage.show();
     }
 
     public void closeStage(Stage stage){
+        
         stage.close();
+    }
+    
+    public Stage getCurrentStage() {
+        
+        return currentStage;
     }
     
     void getUsersBtnAction(Stage stage, RoomController controller) {
