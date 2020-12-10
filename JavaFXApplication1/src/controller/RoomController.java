@@ -27,6 +27,14 @@ public class RoomController extends BaseController{
     public TextArea getUserList(){
         return userList;
     }
+    
+    @FXML
+    void backBtnAction() {
+        Stage previousStage = viewFactory.getHostOrJoin();
+        previousStage.show();
+        Stage stage = (Stage) roomLabel.getScene().getWindow();
+        stage.close();
+    }
 
     @FXML
     void forwardBtnAction() {
