@@ -52,5 +52,7 @@ public class Player  {
             Region defending = continent.getCountry(dcountry);
             
             
+            
+            
         }
 }

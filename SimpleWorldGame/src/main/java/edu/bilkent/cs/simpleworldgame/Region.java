@@ -15,8 +15,15 @@ public class Region {
     Integer id;
     String name;
     Integer capacity;
+    boolean isCapital, isSpecial;
+    int cavalryAmount, artilleryAmount, infantaryAmount, totalArmy;
+    Player playerBelongTo;
+    Continent continentBelongTo;
     
-    public Region() {
+    public Region(Continent gcontinent) {
+        isCapital = false;
+        isSpecial = false; 
+        continentBelongTo = gcontinent;
     }
     
     public void setName(String nm) {
@@ -25,7 +32,22 @@ public class Region {
     public void LoadFromJSON(JSONObject jsonObj) {
         id = jsonObj.getInt("id");
         capacity = jsonObj.getInt("capacity");
-        
+    }
+    
+    public void makeCapital()
+    {
+        isCapital = true;
+    }
+    
+    public int totalArmyForce()
+    {
+        totalArmy = infantaryAmount + cavalryAmount*2 +  artilleryAmount * 5;
+        return totalArmy;
+    }
+    
+    public void setPlayer (Player gplayer)
+    {
+        playerBelongTo = gplayer;
     }
     
 }

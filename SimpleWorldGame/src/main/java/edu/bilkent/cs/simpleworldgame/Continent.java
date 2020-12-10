@@ -25,7 +25,7 @@ public class Continent {
     
     public Continent() {
         regionMap = new ConcurrentHashMap<Integer, Region>();
-        Countries = new Region[];
+        Countries = new Region[5];
     }
     
     public void AddRegion(Integer id, Region r) {
