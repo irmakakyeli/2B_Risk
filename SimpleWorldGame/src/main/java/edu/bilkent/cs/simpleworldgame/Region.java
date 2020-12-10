@@ -41,13 +41,18 @@ public class Region {
     
     public int totalArmyForce()
     {
-        totalArmy = infantaryAmount + cavalryAmount*2 +  artilleryAmount * 5;
+        totalArmy = infantaryAmount + cavalryAmount * 2 +  artilleryAmount * 5;
         return totalArmy;
     }
     
     public void setPlayer (Player gplayer)
     {
         playerBelongTo = gplayer;
+    }
+    
+    public void setArmies(int number)
+    {
+        
     }
     
 }

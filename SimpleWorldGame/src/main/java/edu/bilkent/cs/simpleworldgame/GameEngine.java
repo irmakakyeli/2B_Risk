@@ -61,9 +61,6 @@ public class GameEngine {
         }
         //JSONObject worldJson = config.getJSONObject("WORLD");
         //gameWorld.InitializeWorld(worldJson);
-        
-        
-
     }
     
     @WebMethod
@@ -78,8 +75,6 @@ public class GameEngine {
         Player p = (Player) player_map.get(id);  
         p.setActive(true);
         active_player_num++;
-
-
     }
 
     @WebMethod

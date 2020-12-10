@@ -7,7 +7,6 @@ package edu.bilkent.cs.simpleworldgame;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.ConcurrentSkipListSet;
-import edu.bilkent.cs.simpleworldgame.*;
 /**
  *
  * @author
@@ -19,6 +18,7 @@ public class Player  {
 	 AtomicInteger score;
          boolean isActive;
          GameEngine engine;
+         Dice dice;
 	
 	 public Player(Integer pid) {
 		id = pid;
@@ -26,6 +26,7 @@ public class Player  {
 		assigned_Regions = new ConcurrentSkipListSet<Integer>();
 		name = "Player-" + id.toString();
                 engine = new GameEngine();
+                dice = new Dice();
 
 	 }
 
@@ -45,14 +46,53 @@ public class Player  {
 		isActive = act_state;
 	}
         
-        public void attack(int gcontinent, int acountry, int dcountry)
+        public boolean attack(int gcontinent, int acountry, int dcountry)
         {
             Continent continent = engine.getContinent(gcontinent);
             Region attacking = continent.getCountry(acountry);
             Region defending = continent.getCountry(dcountry);
             
+            int army1, army2, result, adv;
+            army1 = attacking.totalArmyForce();
+            army2 = defending.totalArmyForce();
+            boolean done = false;
             
+            if(defending.isCapital)
+                adv = 2;
+            else 
+                adv = 0;
             
+            while(!done)
+            {   
+                result = dice.Roll(army1, army2, adv);
+                if (result > 0)
+                {
+                    army2 -= result; 
+                    if(army2 <= 0)
+                    {
+                        army2 = 0;
+                        done = true;
+                        defending.setArmies(0);
+                    }
+                    else
+                        defending.setArmies(army2);
+                }
+                if (result < 0)
+                {
+                    army1 -= result; 
+                    if(army1 <= 1)
+                    {
+                        army1 = 1;
+                        done = true;
+                        attacking.setArmies(1);
+                    }
+                    else 
+                        attacking.setArmies(army1);
+                }
+            }
             
+            if(army1 > 1)
+                return true;
+            return false;
         }
 }

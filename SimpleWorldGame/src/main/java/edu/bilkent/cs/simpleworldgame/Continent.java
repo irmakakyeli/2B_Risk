@@ -22,10 +22,13 @@ public class Continent {
     String name;
     Integer id;
     Region[] Countries;
+    Region rg;
+    Continent ct;
     
     public Continent() {
         regionMap = new ConcurrentHashMap<Integer, Region>();
         Countries = new Region[5];
+        rg = new Region(ct);
     }
     
     public void AddRegion(Integer id, Region r) {
@@ -45,15 +48,12 @@ public class Continent {
         for (int i = 0; i < regionsArr.length(); i++) {
             try {
                 JSONObject regionObj = (JSONObject) regionsArr.get(i);
-                Region rg = new Region();
                 rg.LoadFromJSON(regionObj);
                 AddRegion(id, rg);
             } catch (JSONException e) {
                 System.out.println(e);
             } 
-            
         }
-        
     }
     
     public JSONObject toJSON() {
