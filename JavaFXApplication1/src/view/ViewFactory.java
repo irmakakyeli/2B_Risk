@@ -32,7 +32,9 @@ public class ViewFactory {
     
     private Stage currStage;
             
-    public Stage currentStage;
+    private Stage currentStage;
+    
+    private Stage hostOrJoin;
 
     public ViewFactory(GameManager gameManager) {
         this.gameManager = gameManager;
@@ -69,6 +71,7 @@ public class ViewFactory {
 
         initializeStage(baseController, "css/host.css");
         currentStage = currStage;
+        hostOrJoin = currStage;
     }
 
     public void showJoinPage(){
@@ -76,6 +79,7 @@ public class ViewFactory {
 
         initializeStage(baseController, "css/join.css");
         currentStage = currStage;
+        hostOrJoin = currStage;
     }
 
     public void showRoomPage(){
@@ -145,6 +149,10 @@ public class ViewFactory {
         return currentStage;
     }
     
+    public Stage getHostOrJoin() {
+        
+        return hostOrJoin;
+    }
     void getUsersBtnAction(Stage stage, RoomController controller) {
         
         GameEngineService service = new GameEngineService();
