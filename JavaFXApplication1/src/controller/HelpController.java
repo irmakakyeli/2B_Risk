@@ -17,7 +17,8 @@ public class HelpController extends BaseController{
 
     @FXML
     void backBtnAction() {
-        viewFactory.showMainMenu();
+        Stage previousStage = viewFactory.getCurrentStage();
+        previousStage.show();
         Stage stage = (Stage) scrollPane.getScene().getWindow();
         viewFactory.closeStage(stage);
     }
