@@ -59,4 +59,9 @@ public class Continent {
     public JSONObject toJSON() {
         return new JSONObject();
     }
+    
+    public Region getCountry(int index)
+    {
+        return Countries[index];
+    }
 }

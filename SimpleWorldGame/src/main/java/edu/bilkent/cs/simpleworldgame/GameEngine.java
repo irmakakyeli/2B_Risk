@@ -106,5 +106,10 @@ public class GameEngine {
                
         return config.toString();
     }
+    
+    public Continent getContinent(int index)
+    {
+        return Continents[index];
+    }
 
 }
