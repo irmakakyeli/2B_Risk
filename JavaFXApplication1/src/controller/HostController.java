@@ -10,6 +10,7 @@ public class HostController extends BaseController{
 
     @FXML
     private Label hostLabel;
+    boolean isOtomatic;
 
     public HostController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
         super(gameManager, viewFactory, fxmlName);
@@ -36,4 +37,23 @@ public class HostController extends BaseController{
         Stage stage = (Stage) hostLabel.getScene().getWindow();
         viewFactory.closeStage(stage);
     }
+    
+    @FXML
+    void toggleBtnOn() {
+        
+         isOtomatic = true;
+    }
+    
+    @FXML
+    void toggleBtnOff() {
+        
+         isOtomatic = false;
+    }
+    
+    public boolean getConfig() {
+        
+        return isOtomatic;
+    }
+    
+    
 }
