@@ -11,6 +11,8 @@ import controller.BoardController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafxapplication1.GameManager;
 
@@ -109,10 +111,20 @@ public class ViewFactory {
         stage.show();
     }
 
-    public void showBoard(){
-        BaseController baseController = new BoardController(gameManager, this, "GamePage.fxml");
-        initializeStage(baseController, "css/board.css");
-        currentStage = currStage;
+   public void showBoard(){
+         BaseController baseController = new BoardController(gameManager, this, "Board.html");
+
+        WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+        webEngine.load( getClass().getResource("Board.html").toString() );
+
+        Scene scene = new Scene(webView,600,600);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        //initializeStage(baseController, "css/board.css");
+        currentStage = stage;
+        stage.show();
     }
 
     public void initializeStage(BaseController controller, String fxmlName){
