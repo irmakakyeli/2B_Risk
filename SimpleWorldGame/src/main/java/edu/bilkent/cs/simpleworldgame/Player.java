@@ -95,4 +95,24 @@ public class Player  {
                 return true;
             return false;
         }
+        
+        public void fortification()
+        {
+            
+        }
+        
+        public void reinforcement()
+        {
+            
+        }
+        
+        public void cartIntegration()
+        {
+            
+        }
+        
+        public void resign()
+        {
+            
+        }
 }

@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.bilkent.cs.simpleworldgame;
-
-import java.util.HashMap;
+package edu.bilkent.cs.simpleworldgame.Attack;
 
 /**
  *
  * @author User
  */
-public class Card {
-    String type;
-    HashMap<String, Integer> deck;
+public class DisadvantageousAttack {
     
-    public String typeDeterminer(){
-        
-    }
 }
