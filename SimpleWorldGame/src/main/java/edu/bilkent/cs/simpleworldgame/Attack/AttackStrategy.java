@@ -5,19 +5,10 @@
  */
 package edu.bilkent.cs.simpleworldgame.Attack;
 
-import edu.bilkent.cs.simpleworldgame.Dice;
+import edu.bilkent.cs.simpleworldgame.Region;
 
-/**
- *
- * @author User
- */
-public class AttackStrategy {
-    Dice dice;
-
-    public boolean AttackStrategy() 
-    {
-        return true;
-    }
+public interface AttackStrategy {
     
+    public boolean attack(Region attacking, Region defending);
     
 }

@@ -12,6 +12,6 @@ package edu.bilkent.cs.simpleworldgame.Distribution;
 public class CreateManuel {
     public Distribution createProduct()
     {
-        
+        return null;
     }
 }

@@ -7,10 +7,9 @@ package edu.bilkent.cs.simpleworldgame;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.ConcurrentSkipListSet;
-/**
- *
- * @author
- */
+
+import edu.bilkent.cs.simpleworldgame.Attack.*;
+
 public class Player  {
 	 Integer id;
 	 String name;
@@ -19,6 +18,7 @@ public class Player  {
          boolean isActive;
          GameEngine engine;
          Dice dice;
+         AttackStrategy strategy;
 	
 	 public Player(Integer pid) {
 		id = pid;
@@ -51,49 +51,24 @@ public class Player  {
             Continent continent = engine.getContinent(gcontinent);
             Region attacking = continent.getCountry(acountry);
             Region defending = continent.getCountry(dcountry);
-            
-            int army1, army2, result, adv;
-            army1 = attacking.totalArmyForce();
-            army2 = defending.totalArmyForce();
-            boolean done = false;
+            int adv;
             
             if(defending.isCapital)
-                adv = 2;
-            else 
-                adv = 0;
-            
-            while(!done)
-            {   
-                result = dice.Roll(army1, army2, adv);
-                if (result > 0)
-                {
-                    army2 -= result; 
-                    if(army2 <= 0)
-                    {
-                        army2 = 0;
-                        done = true;
-                        defending.setArmies(0);
-                    }
-                    else
-                        defending.setArmies(army2);
-                }
-                if (result < 0)
-                {
-                    army1 -= result; 
-                    if(army1 <= 1)
-                    {
-                        army1 = 1;
-                        done = true;
-                        attacking.setArmies(1);
-                    }
-                    else 
-                        attacking.setArmies(army1);
-                }
+            {
+                strategy = new DisadvantageousAttack();
+                return strategy.attack(attacking, defending);
+            } 
+            else if (attacking.isCapital || attacking.isSpecial)
+            {
+                strategy = new AdvantageousAttack();
+                return strategy.attack(attacking, defending);
             }
-            
-            if(army1 > 1)
-                return true;
-            return false;
+            else 
+            {
+                strategy = new NormalAttack();
+                return strategy.attack(attacking, defending);
+            }
+                
         }
         
         public void fortification()

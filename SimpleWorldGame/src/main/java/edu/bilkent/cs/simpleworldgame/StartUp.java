@@ -39,7 +39,7 @@ public class StartUp {
     
     public Region getCapital()
     {
-        
+        return null;
     }
     
 }
