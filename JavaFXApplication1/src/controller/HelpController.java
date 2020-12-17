@@ -3,7 +3,6 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
-import javafxapplication1.GameManager;
 import view.ViewFactory;
 
 public class HelpController extends BaseController{
@@ -11,8 +10,8 @@ public class HelpController extends BaseController{
     @FXML
     private ScrollPane scrollPane;
 
-    public HelpController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
-        super(gameManager, viewFactory, fxmlName);
+    public HelpController( ViewFactory viewFactory, String fxmlName) {
+        super( viewFactory, fxmlName);
     }
 
     @FXML

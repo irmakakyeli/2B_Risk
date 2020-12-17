@@ -1,16 +1,16 @@
 package controller;
 
-import javafxapplication1.GameManager;
+
 import view.ViewFactory;
 
 public abstract class BaseController {
 
-    protected GameManager gameManager;
+ 
     protected ViewFactory viewFactory;
     private String fxmlName;
 
-    public BaseController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
-        this.gameManager = gameManager;
+    public BaseController(ViewFactory viewFactory, String fxmlName) {
+      
         this.viewFactory = viewFactory;
         this.fxmlName = fxmlName;
     }

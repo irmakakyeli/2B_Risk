@@ -3,7 +3,6 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafxapplication1.GameManager;
 import view.ViewFactory;
 
 public class RoleController extends BaseController {
@@ -11,8 +10,8 @@ public class RoleController extends BaseController {
     @FXML
     private Label roleLabel;
 
-    public RoleController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
-        super(gameManager, viewFactory, fxmlName);
+    public RoleController( ViewFactory viewFactory, String fxmlName) {
+        super( viewFactory, fxmlName);
     }
 
 
