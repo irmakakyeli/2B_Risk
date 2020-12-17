@@ -14,6 +14,6 @@ public class DistributionFactory {
     
     public Distribution createProduct()
     {
-        
+        return null;
     }
 }

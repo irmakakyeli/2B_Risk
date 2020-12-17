@@ -13,6 +13,6 @@ public class CreateAutomatic {
     
     public Distribution createProduct()
     {
-        
+        return null;
     }
 }

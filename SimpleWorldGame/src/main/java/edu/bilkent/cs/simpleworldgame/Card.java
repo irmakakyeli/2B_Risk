@@ -16,6 +16,6 @@ public class Card {
     HashMap<String, Integer> deck;
     
     public String typeDeterminer(){
-        
+        return null;
     }
 }
