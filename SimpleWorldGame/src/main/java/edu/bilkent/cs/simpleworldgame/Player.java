@@ -46,12 +46,12 @@ public class Player  {
 		isActive = act_state;
 	}
         
-        public boolean attack(int gcontinent, int acountry, int dcountry)
+        public boolean attack(int gacontinent, int gdcontinent, int acountry, int dcountry)
         {
-            Continent continent = engine.getContinent(gcontinent);
-            Region attacking = continent.getCountry(acountry);
-            Region defending = continent.getCountry(dcountry);
-            int adv;
+            Continent continenta = engine.getContinent(gacontinent);
+            Continent continentd = engine.getContinent(gdcontinent);
+            Region attacking = continenta.getCountry(acountry);
+            Region defending = continentd.getCountry(dcountry);
             
             if(defending.isCapital)
             {
@@ -71,14 +71,32 @@ public class Player  {
                 
         }
         
-        public void fortification()
+        public void fortification(int gicontinent, int gfcontinent, int icountry, int fcountry, int armyNumber)
         {
+            Continent continenta = engine.getContinent(gicontinent);
+            Continent continentd = engine.getContinent(gfcontinent);
+            Region initial = continenta.getCountry(icountry);
+            Region finalregion = continentd.getCountry(fcountry);
+            int army1, army2;
+            army1 = initial.totalArmyForce();
+            army2 = finalregion.totalArmyForce();
+            
+            army1 -= armyNumber;
+            army2 += armyNumber;
+            
+            initial.setArmies(army1);
+            finalregion.setArmies(army2);
             
         }
         
-        public void reinforcement()
+        public void reinforcement(int gcontinent, int gcountry, int armyNumber)
         {
-            
+            Continent continent = engine.getContinent(gcontinent);
+            Region regiontor = continent.getCountry(gcountry);
+            int army;
+            army = regiontor.totalArmyForce();
+            army += armyNumber;
+            regiontor.setArmies(army);
         }
         
         public void cartIntegration()
