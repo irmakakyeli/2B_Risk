@@ -110,7 +110,7 @@ public class ViewFactory {
    public void showBoard(){
         BaseController baseController = new BoardController( this, "GamePage.fxml");
         initializeStage(baseController, "css/board.css");
-        //currentStage = currStage;
+        currentStage = currStage;
     }
 
     public void initializeStage(BaseController controller, String fxmlName){
