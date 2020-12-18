@@ -5,52 +5,52 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@css/board.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="122.0" layoutY="77.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="98.0" prefWidth="100.0" rotate="25.6" styleClass="alaska" stylesheets="@css/board.css" text="alaska" />
-      <Button layoutX="237.0" layoutY="198.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="95.0" prefWidth="97.0" rotate="30.4" styleClass="westernAmerica" text="westernAmerica" />
-      <Button layoutX="218.0" layoutY="333.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="39.0" prefWidth="110.0" rotate="27.9" styleClass="centralAmerica" text="centralAmerica" />
-      <Button layoutX="251.0" layoutY="273.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="46.0" prefWidth="160.0" rotate="-1.8" styleClass="easternUS" text="easternUS" />
-      <Button layoutX="437.0" layoutY="21.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="150.0" prefWidth="116.0" rotate="-7.3" styleClass="greenland" text="greenland" />
-      <Button layoutX="231.0" layoutY="31.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="189.0" prefWidth="198.0" rotate="-19.8" styleClass="northWest" text="northWest" />
-      <Button layoutX="310.0" layoutY="186.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="34.0" prefWidth="132.0" rotate="-5.2" styleClass="centralCanada" text="centralCanada" />
-      <Button layoutX="374.0" layoutY="230.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="74.0" styleClass="easternCanada" text="easternCanada" />
-      <Button layoutX="206.0" layoutY="153.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="148.0" prefWidth="38.0" rotate="0.6" styleClass="westernUS" text="westernUS" />
-      <Button layoutX="273.0" layoutY="588.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="135.0" rotate="99.0" styleClass="argentina" text="argentina" />
-      <Button layoutX="371.0" layoutY="481.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="67.0" prefWidth="114.0" rotate="80.2" styleClass="brazil" text="brazil" />
-      <Button layoutX="281.0" layoutY="472.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="19.0" prefWidth="56.0" rotate="54.2" styleClass="peru" text="peru" />
-      <Button layoutX="319.0" layoutY="441.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="116.0" rotate="-36.4" styleClass="venezuela" text="venezuela" />
-      <Button layoutX="308.0" layoutY="414.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="66.0" rotate="-34.9" styleClass="colombia" text="colombia" />
-      <Button layoutX="331.0" layoutY="511.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="26.0" prefWidth="63.0" rotate="28.7" styleClass="bolivia" text="bolivia" />
-      <Button layoutX="528.0" layoutY="154.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="51.0" prefWidth="63.0" styleClass="uk" text="uk" />
-      <Button layoutX="533.0" layoutY="92.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" styleClass="iceland" text="iceland" />
-      <Button layoutX="578.0" layoutY="199.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="51.0" prefWidth="63.0" rotate="47.6" styleClass="germany" text="germany" />
-      <Button layoutX="575.0" layoutY="104.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="146.0" rotate="115.0" styleClass="skandinavia" text="skandinavia" />
-      <Button layoutX="630.0" layoutY="243.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="51.0" prefWidth="42.0" styleClass="southernEU" text="southernEU" />
-      <Button layoutX="703.0" layoutY="106.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="128.0" prefWidth="86.0" rotate="3.0" styleClass="russia" text="russia" />
-      <Button layoutX="512.0" layoutY="286.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="46.0" prefWidth="56.0" styleClass="spain" text="spain" />
-      <Button layoutX="544.0" layoutY="246.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="63.0" rotate="72.8" styleClass="france" text="france" />
-      <Button layoutX="581.0" layoutY="291.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="26.0" prefWidth="86.0" rotate="47.9" styleClass="italia" text="italia" />
-      <Button layoutX="650.0" layoutY="178.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="60.0" prefWidth="74.0" styleClass="ukraine" text="ukraine" />
-      <Button layoutX="668.0" layoutY="297.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="132.0" rotate="16.2" styleClass="afghanistan" text="afghanistan" />
-      <Button layoutX="842.0" layoutY="267.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="76.0" prefWidth="210.0" styleClass="china" text="china" />
-      <Button layoutX="801.0" layoutY="337.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="76.0" prefWidth="82.0" rotate="55.1" styleClass="india" text="india" />
-      <Button layoutX="978.0" layoutY="184.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="87.0" prefWidth="76.0" rotate="-45.0" styleClass="irkutsk" text="irkutsk" />
-      <Button layoutX="1063.0" layoutY="260.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="71.0" prefWidth="44.0" rotate="70.2" styleClass="japan" text="japan" />
-      <Button layoutX="1042.0" layoutY="77.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="71.0" prefWidth="114.0" styleClass="kamchatka" text="kamchatka" />
-      <Button layoutX="694.0" layoutY="358.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="102.0" rotate="34.4" styleClass="middleEast" text="middleEast" />
-      <Button layoutX="879.0" layoutY="212.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="86.0" styleClass="mongolia" text="mongolia" />
-      <Button layoutX="907.0" layoutY="363.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="80.0" styleClass="sian" text="sian" />
-      <Button layoutX="775.0" layoutY="102.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="97.0" prefWidth="134.0" styleClass="siberia" text="siberia" />
-      <Button layoutX="762.0" layoutY="213.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="97.0" prefWidth="86.0" rotate="31.5" styleClass="ural" text="ural" />
-      <Button layoutX="878.0" layoutY="26.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="173.0" prefWidth="152.0" styleClass="yakutsk" text="yakutsk" />
-      <Button layoutX="630.0" layoutY="464.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="67.0" prefWidth="68.0" styleClass="congo" text="congo" />
-      <Button layoutX="660.0" layoutY="467.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="122.0" rotate="88.8" styleClass="eastAfrica" text="eastAfrica" />
-      <Button layoutX="629.0" layoutY="366.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="86.0" prefWidth="92.0" rotate="-6.8" styleClass="egypt" text="egypt" />
-      <Button layoutX="709.0" layoutY="562.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" rotate="99.8" styleClass="madagaskar" text="madagaskar" />
-      <Button layoutX="501.0" layoutY="352.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="114.0" prefWidth="133.0" rotate="-118.7" styleClass="northAfrica" text="northAfrica" />
-      <Button layoutX="626.0" layoutY="535.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="97.0" prefWidth="76.0" styleClass="southAfrica" text="southAfrica" />
-      <Button layoutX="984.0" layoutY="519.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="64.0" prefWidth="92.0" rotate="78.7" styleClass="easternAustralia" text="easternAustralia" />
-      <Button layoutX="924.0" layoutY="434.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="166.0" rotate="-10.2" styleClass="indonesia" text="indonesia" />
-      <Button layoutX="1079.0" layoutY="565.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="26.0" prefWidth="86.0" rotate="-49.9" styleClass="newGuinea" text="newGuinea" />
-      <Button layoutX="901.0" layoutY="490.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="51.0" prefWidth="114.0" rotate="-66.8" styleClass="westernAustralia" text="westernAustralia" />
+      <Button layoutX="122.0" layoutY="77.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="98.0" prefWidth="100.0" rotate="25.6" styleClass="alaska" stylesheets="@css/board.css" text="Alaska" />
+      <Button layoutX="237.0" layoutY="198.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="95.0" prefWidth="97.0" rotate="30.4" styleClass="westernAmerica" text="Western America" />
+      <Button layoutX="218.0" layoutY="333.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="39.0" prefWidth="110.0" rotate="27.9" styleClass="centralAmerica" text="Central America" />
+      <Button layoutX="251.0" layoutY="273.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="46.0" prefWidth="160.0" rotate="-1.8" styleClass="easternUS" text="Eastern US" />
+      <Button layoutX="437.0" layoutY="21.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="150.0" prefWidth="116.0" rotate="-7.3" styleClass="greenland" text="Greenland" />
+      <Button layoutX="231.0" layoutY="31.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="189.0" prefWidth="198.0" rotate="-19.8" styleClass="northWest" text="North West" />
+      <Button layoutX="310.0" layoutY="186.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="34.0" prefWidth="132.0" rotate="-5.2" styleClass="centralCanada" text="Central Canada" />
+      <Button layoutX="374.0" layoutY="230.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="74.0" styleClass="easternCanada" text="Eastern Canada" />
+      <Button layoutX="206.0" layoutY="153.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="148.0" prefWidth="38.0" rotate="0.6" styleClass="westernUS" text="Western US" />
+      <Button layoutX="273.0" layoutY="588.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="135.0" rotate="99.0" styleClass="argentina" text="Argentina" />
+      <Button layoutX="371.0" layoutY="481.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="67.0" prefWidth="114.0" rotate="80.2" styleClass="brazil" text="Brazil" />
+      <Button layoutX="281.0" layoutY="472.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="19.0" prefWidth="56.0" rotate="54.2" styleClass="peru" text="Peru" />
+      <Button layoutX="319.0" layoutY="441.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="116.0" rotate="-36.4" styleClass="venezuela" text="Venezuela" />
+      <Button layoutX="308.0" layoutY="414.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="66.0" rotate="-34.9" styleClass="colombia" text="Colombia" />
+      <Button layoutX="331.0" layoutY="511.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="26.0" prefWidth="63.0" rotate="28.7" styleClass="bolivia" text="Bolivia" />
+      <Button layoutX="528.0" layoutY="154.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="51.0" prefWidth="63.0" styleClass="uk" text="United Kingdom" />
+      <Button layoutX="533.0" layoutY="92.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" styleClass="iceland" text="Iceland" />
+      <Button layoutX="578.0" layoutY="199.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="51.0" prefWidth="63.0" rotate="47.6" styleClass="germany" text="Germany" />
+      <Button layoutX="575.0" layoutY="104.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="146.0" rotate="115.0" styleClass="skandinavia" text="Skandinavia" />
+      <Button layoutX="630.0" layoutY="243.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="51.0" prefWidth="42.0" styleClass="southernEU" text="Southern Europe" />
+      <Button layoutX="703.0" layoutY="106.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="128.0" prefWidth="86.0" rotate="3.0" styleClass="russia" text="Russia" />
+      <Button layoutX="512.0" layoutY="286.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="46.0" prefWidth="56.0" styleClass="spain" text="Spain" />
+      <Button layoutX="544.0" layoutY="246.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="63.0" rotate="72.8" styleClass="france" text="France" />
+      <Button layoutX="581.0" layoutY="291.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="26.0" prefWidth="86.0" rotate="47.9" styleClass="italia" text="Italia" />
+      <Button layoutX="650.0" layoutY="178.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="60.0" prefWidth="74.0" styleClass="ukraine" text="Ukraine" />
+      <Button layoutX="668.0" layoutY="297.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="132.0" rotate="16.2" styleClass="afghanistan" text="Afghanistan" />
+      <Button layoutX="842.0" layoutY="267.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="76.0" prefWidth="210.0" styleClass="china" text="China" />
+      <Button layoutX="801.0" layoutY="337.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="76.0" prefWidth="82.0" rotate="55.1" styleClass="india" text="India" />
+      <Button layoutX="978.0" layoutY="184.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="87.0" prefWidth="76.0" rotate="-45.0" styleClass="irkutsk" text="Irkutsk" />
+      <Button layoutX="1063.0" layoutY="260.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="71.0" prefWidth="44.0" rotate="70.2" styleClass="japan" text="Japan" />
+      <Button layoutX="1042.0" layoutY="77.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="71.0" prefWidth="114.0" styleClass="kamchatka" text="Kamchatka" />
+      <Button layoutX="694.0" layoutY="358.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="102.0" rotate="34.4" styleClass="middleEast" text="Middle East" />
+      <Button layoutX="879.0" layoutY="212.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="86.0" styleClass="mongolia" text="Mongolia" />
+      <Button layoutX="907.0" layoutY="363.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="80.0" styleClass="sian" text="Sian" />
+      <Button layoutX="775.0" layoutY="102.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="97.0" prefWidth="134.0" styleClass="siberia" text="Siberia" />
+      <Button layoutX="762.0" layoutY="213.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="97.0" prefWidth="86.0" rotate="31.5" styleClass="ural" text="Ural" />
+      <Button layoutX="878.0" layoutY="26.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="173.0" prefWidth="152.0" styleClass="yakutsk" text="Yakutsk" />
+      <Button layoutX="630.0" layoutY="464.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="67.0" prefWidth="68.0" styleClass="congo" text="Congo" />
+      <Button layoutX="660.0" layoutY="467.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="122.0" rotate="88.8" styleClass="eastAfrica" text="East Africa" />
+      <Button layoutX="629.0" layoutY="366.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="86.0" prefWidth="92.0" rotate="-6.8" styleClass="egypt" text="Egypt" />
+      <Button layoutX="709.0" layoutY="562.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" rotate="99.8" styleClass="madagaskar" text="Madagaskar" />
+      <Button layoutX="501.0" layoutY="352.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="114.0" prefWidth="133.0" rotate="-118.7" styleClass="northAfrica" text="North Africa" />
+      <Button layoutX="626.0" layoutY="535.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="97.0" prefWidth="76.0" styleClass="southAfrica" text="South Africa" />
+      <Button layoutX="984.0" layoutY="519.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="64.0" prefWidth="92.0" rotate="78.7" styleClass="easternAustralia" text="Eastern Australia" />
+      <Button layoutX="924.0" layoutY="434.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="166.0" rotate="-10.2" styleClass="indonesia" text="Indonesia" />
+      <Button layoutX="1079.0" layoutY="565.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="26.0" prefWidth="86.0" rotate="-49.9" styleClass="newGuinea" text="New Guinea" />
+      <Button layoutX="901.0" layoutY="490.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="51.0" prefWidth="114.0" rotate="-66.8" styleClass="westernAustralia" text="Western Australia" />
    </children>
 </AnchorPane>
