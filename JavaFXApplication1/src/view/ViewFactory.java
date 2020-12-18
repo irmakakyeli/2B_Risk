@@ -108,19 +108,9 @@ public class ViewFactory {
     }
 
    public void showBoard(){
-         BaseController baseController = new BoardController( this, "Board.html");
-
-        WebView webView = new WebView();
-        WebEngine webEngine = webView.getEngine();
-        webEngine.load( getClass().getResource("Board.html").toString() );
-
-        Scene scene = new Scene(webView,600,600);
-        Stage stage = new Stage();
-
-        stage.setScene(scene);
-        //initializeStage(baseController, "css/board.css");
-        currentStage = stage;
-        stage.show();
+        BaseController baseController = new BoardController( this, "GamePage.fxml");
+        initializeStage(baseController, "css/board.css");
+        //currentStage = currStage;
     }
 
     public void initializeStage(BaseController controller, String fxmlName){
