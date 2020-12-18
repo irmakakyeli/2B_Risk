@@ -14,8 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafxapplication1.GameManager;
-
 import java.io.IOException;
 import java.util.Iterator;
 import javafx.fxml.FXML;
@@ -29,8 +27,6 @@ public class ViewFactory {
     
     @FXML
     private TextArea userList;
-
-    private GameManager gameManager;
     
     private Stage currStage;
             
@@ -38,38 +34,38 @@ public class ViewFactory {
     
     private Stage hostOrJoin;
 
-    public ViewFactory(GameManager gameManager) {
-        this.gameManager = gameManager;
+    public ViewFactory() {
+        
     }
 
     public void showMainMenu(){
-        BaseController baseController = new MainMenuController(gameManager, this, "MainMenu.fxml");
+        BaseController baseController = new MainMenuController( this, "MainMenu.fxml");
         initializeStage(baseController, "css/style.css");
         currentStage = currStage;
     }
 
     public void showHelp(){
-        BaseController baseController = new HelpController(gameManager, this, "Help.fxml");
+        BaseController baseController = new HelpController( this, "Help.fxml");
 
         initializeStage(baseController, "css/help.css");
     }
 
     public void showUsers(){
-        BaseController baseController = new JoinController(gameManager, this, "JoinPage.fxml");
+        BaseController baseController = new JoinController( this, "JoinPage.fxml");
 
         initializeStage(baseController, "css/join.css");
         currentStage = currStage;
     }
     
     public void showRole(){
-        BaseController baseController = new RoleController(gameManager, this, "RoleChose.fxml");
+        BaseController baseController = new RoleController(this, "RoleChose.fxml");
 
         initializeStage(baseController, "css/role.css");
         currentStage = currStage;
     }
 
     public void showHostPage(){
-        BaseController baseController = new HostController(gameManager, this, "HostPage.fxml");
+        BaseController baseController = new HostController(this, "HostPage.fxml");
 
         initializeStage(baseController, "css/host.css");
         currentStage = currStage;
@@ -77,7 +73,7 @@ public class ViewFactory {
     }
 
     public void showJoinPage(){
-        BaseController baseController = new JoinController(gameManager, this, "JoinPage.fxml");
+        BaseController baseController = new JoinController(this, "JoinPage.fxml");
 
         initializeStage(baseController, "css/join.css");
         currentStage = currStage;
@@ -85,7 +81,7 @@ public class ViewFactory {
     }
 
     public void showRoomPage(){
-        RoomController controller = new RoomController(gameManager, this, "RoomPage.fxml");
+        RoomController controller = new RoomController(this, "RoomPage.fxml");
         
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
@@ -112,7 +108,7 @@ public class ViewFactory {
     }
 
    public void showBoard(){
-         BaseController baseController = new BoardController(gameManager, this, "Board.html");
+         BaseController baseController = new BoardController( this, "Board.html");
 
         WebView webView = new WebView();
         WebEngine webEngine = webView.getEngine();

@@ -3,7 +3,6 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafxapplication1.GameManager;
 import view.ViewFactory;
 
 public class HostController extends BaseController{
@@ -12,8 +11,8 @@ public class HostController extends BaseController{
     private Label hostLabel;
     boolean isOtomatic;
 
-    public HostController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
-        super(gameManager, viewFactory, fxmlName);
+    public HostController( ViewFactory viewFactory, String fxmlName) {
+        super( viewFactory, fxmlName);
     }
 
     @FXML

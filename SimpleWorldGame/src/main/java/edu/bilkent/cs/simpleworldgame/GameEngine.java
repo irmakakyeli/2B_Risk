@@ -106,5 +106,11 @@ public class GameEngine {
     {
         return Continents[index];
     }
+    
+   @WebMethod
+    public String regionClicked(String id){
 
+        return id + "yayyyyyyy";
+
+    }
 }

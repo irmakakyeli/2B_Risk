@@ -3,7 +3,6 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafxapplication1.GameManager;
 import view.ViewFactory;
 
 public class MainMenuController extends BaseController{
@@ -11,8 +10,8 @@ public class MainMenuController extends BaseController{
     @FXML
     private Label mainLabel;
 
-    public MainMenuController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
-        super(gameManager, viewFactory, fxmlName);
+    public MainMenuController( ViewFactory viewFactory, String fxmlName) {
+        super(viewFactory, fxmlName);
     }
 
     @FXML
