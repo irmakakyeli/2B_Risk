@@ -9,10 +9,6 @@ package edu.bilkent.cs.simpleworldgame.Distribution;
  *
  * @author User
  */
-public class Distribution {
-    
-    public void distribution()
-    {
-        
-    }
+public interface Distribution {
+    public void distribution();
 }
