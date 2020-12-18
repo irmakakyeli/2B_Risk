@@ -20,10 +20,10 @@ public class BoardController extends BaseController{
 @FXML
     void regionBtnAction(final ActionEvent event) {
         
-        String popUp = "";
-        if("alaska".equals(((Button)event.getSource()).getText()) == true) {
-            popUp = "Alaska";
-        }
+        //String popUp = "";
+        //if("alaska".equals(((Button)event.getSource()).getText()) == true) {
+            //popUp = "Alaska";
+        //}
        
         Stage popupwindow=new Stage();
       
@@ -31,7 +31,7 @@ public class BoardController extends BaseController{
     popupwindow.setTitle("This is a pop up window");
       
       
-    Label label1= new Label(popUp);
+    Label label1= new Label(((Button)event.getSource()).getText());
       
      
     Label label2= new Label("Belongs to: -Player-");
