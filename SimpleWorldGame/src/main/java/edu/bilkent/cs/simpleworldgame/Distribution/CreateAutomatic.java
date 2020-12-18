@@ -9,10 +9,14 @@ package edu.bilkent.cs.simpleworldgame.Distribution;
  *
  * @author User
  */
-public class CreateAutomatic {
+public class CreateAutomatic extends DistributionFactory{
     
-    public Distribution createProduct()
+    
+    
+    @Override
+    public Distribution createProduct(int playerNo, int regionCount)
     {
-        return null;
+        Automatic automatic = new Automatic( playerNo, regionCount);
+        return automatic;
     }
 }

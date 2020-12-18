@@ -12,8 +12,10 @@ package edu.bilkent.cs.simpleworldgame.Distribution;
 public class DistributionFactory {
     
     
-    public Distribution createProduct()
+    public Distribution createProduct(int playerNo, int regionCount)
     {
         return null;
     }
+    
+
 }

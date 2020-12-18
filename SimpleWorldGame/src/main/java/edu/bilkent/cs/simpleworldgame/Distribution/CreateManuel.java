@@ -9,9 +9,11 @@ package edu.bilkent.cs.simpleworldgame.Distribution;
  *
  * @author User
  */
-public class CreateManuel {
-    public Distribution createProduct()
+public class CreateManuel extends DistributionFactory{
+    @Override
+    public Distribution createProduct(int playerNo, int regionCount)
     {
-        return null;
+        Manual manual = new Manual( playerNo, regionCount);
+        return manual;
     }
 }
