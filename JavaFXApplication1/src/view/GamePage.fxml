@@ -11,8 +11,8 @@
       <Button layoutX="251.0" layoutY="273.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="46.0" prefWidth="160.0" rotate="-1.8" styleClass="easternUS" text="Eastern US" />
       <Button layoutX="437.0" layoutY="21.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="150.0" prefWidth="116.0" rotate="-7.3" styleClass="greenland" text="Greenland" />
       <Button layoutX="231.0" layoutY="31.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="189.0" prefWidth="198.0" rotate="-19.8" styleClass="northWest" text="North West" />
-      <Button layoutX="310.0" layoutY="186.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="34.0" prefWidth="132.0" rotate="-5.2" styleClass="centralCanada" text="Central Canada" />
-      <Button layoutX="374.0" layoutY="230.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="74.0" styleClass="easternCanada" text="Eastern Canada" />
+      <Button layoutX="327.0" layoutY="146.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="76.0" prefWidth="116.0" rotate="165.0" styleClass="centralCanada" text="Central Canada" />
+      <Button layoutX="326.0" layoutY="235.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="102.0" rotate="142.0" styleClass="easternCanada" text="Eastern Canada" />
       <Button layoutX="206.0" layoutY="153.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="148.0" prefWidth="38.0" rotate="0.6" styleClass="westernUS" text="Western US" />
       <Button layoutX="273.0" layoutY="588.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="35.0" prefWidth="135.0" rotate="99.0" styleClass="argentina" text="Argentina" />
       <Button layoutX="371.0" layoutY="481.0" mnemonicParsing="false" onAction="#regionBtnAction" opacity="0.0" prefHeight="67.0" prefWidth="114.0" rotate="80.2" styleClass="brazil" text="Brazil" />
