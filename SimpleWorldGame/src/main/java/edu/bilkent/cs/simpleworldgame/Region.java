@@ -7,10 +7,6 @@ package edu.bilkent.cs.simpleworldgame;
 
 import org.json.JSONObject;
 
-/**
- *
- * @author 
- */
 public class Region {
     Integer id;
     String name;
@@ -18,17 +14,21 @@ public class Region {
     boolean isCapital, isSpecial;
     int cavalryAmount, artilleryAmount, infantaryAmount, totalArmy;
     Player playerBelongTo;
-    Continent continentBelongTo;
     
-    public Region(Continent gcontinent) {
+    public Region(String gname) {
+        name = gname;
         isCapital = false;
         isSpecial = false; 
-        continentBelongTo = gcontinent;
     }
     
     public void setName(String nm) {
         name = nm;
     }
+
+    public String getName() {
+        return name;
+    }
+    
     public void LoadFromJSON(JSONObject jsonObj) {
         id = jsonObj.getInt("id");
         capacity = jsonObj.getInt("capacity");
@@ -45,6 +45,11 @@ public class Region {
         return totalArmy;
     }
     
+    public Player getPlayer ()
+    {
+        return playerBelongTo;
+    }
+    
     public void setPlayer (Player gplayer)
     {
         playerBelongTo = gplayer;
@@ -52,7 +57,50 @@ public class Region {
     
     public void setArmies(int number)
     {
-        
+        if(number > totalArmy)
+        {
+            int temp = number - totalArmy;
+            while (temp > 0)
+            {
+                if(temp > 5)
+                {
+                    artilleryAmount++;
+                    temp -= 5;
+                }
+                else if (temp > 2)
+                {
+                    cavalryAmount++;
+                    temp -= 2;
+                }
+                else
+                {
+                    infantaryAmount++;
+                    temp--;
+                }
+            }
+        }
+        else if(number < totalArmy)
+        {
+            int temp = totalArmy - number;
+            while (temp > 0)
+            {
+                if(temp > 5 && artilleryAmount > 0)
+                {
+                    artilleryAmount--;
+                    temp -= 5;
+                }
+                else if (temp > 2 && cavalryAmount > 0)
+                {
+                    cavalryAmount--;
+                    temp -= 2;
+                }
+                else
+                {
+                    infantaryAmount++;
+                    temp--;
+                }
+            }
+        }
     }
     
 }
