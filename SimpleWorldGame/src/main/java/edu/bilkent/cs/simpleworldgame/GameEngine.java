@@ -32,15 +32,13 @@ public class GameEngine {
     AtomicInteger playerIDgen;
     JSONObject config;
     Region[] regions;
-    Player p;
+    Player p, winner;
     boolean gameOver, configuration;
     public String selectedRegion1, selectedRegion2;
     String roomID;
-
     DistributionFactory df;
     Distribution distribution;
 
-    Player winner;
 
 
     public GameEngine() {
@@ -334,7 +332,7 @@ public class GameEngine {
         return -1; // unreachable statement, inş.
     }
     
-        public boolean isDistributionFinished() {
+    public boolean isDistributionFinished() {
         int troopCount;
         int currentTroopCount = 0;
         
@@ -362,7 +360,6 @@ public class GameEngine {
         return currentTroopCount >= troopCount;
     }
 
-    
     public boolean checkGameCode(String code){
         return (roomID.equals(code));
     }
@@ -387,6 +384,10 @@ public class GameEngine {
     
     public String getWinner(){
         return winner.getName();
+    }
+    
+    public boolean nextTurn(){
+      return true;
     }
     
 }
