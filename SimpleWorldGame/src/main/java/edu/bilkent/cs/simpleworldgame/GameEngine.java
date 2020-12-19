@@ -156,17 +156,25 @@ public class GameEngine {
     public boolean attackControl(String n1, String n2){
         Region r1 = findRegion(n1);
         Region r2 = findRegion(n2);
+        boolean didWin;
         if(r1.getPlayer() == p && r1.getPlayer() != p && r1.totalArmyForce() > 1)
         {
             //REGION CONTROL
-            p.attack(n1, n2);
+            didWin = p.attack(r1, r2);
+            
+            if(didWin)
+            {
+                Player temp = r2.playerBelongTo;
+                temp.removeRegion(r2);
+                p.addRegion(r2, r1.totalArmyForce() - 1);
+                r1.setArmies(1);
+            }
             if(p.isWinner) {
                 gameOver = true;
                 winner = p;
             }
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -177,16 +185,26 @@ public class GameEngine {
         if(r1.getPlayer() == p && r1.getPlayer() == p && r1.totalArmyForce() > 1)
         {
             //REGION CONTROL
-            p.reinforcement(n1, n2, army);
+            p.reinforcement(r1, r2, army);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
     
-    public Region getRegion(int index)
-    {
+    public boolean fortificationControl(String n, int army){
+        Region r = findRegion(n);
+        if(r.getPlayer() == p)
+        {
+            //REGION CONTROL
+            p.fortification(r, army);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public Region getRegion(int index){
         return regions[index];
     }
 
@@ -291,21 +309,21 @@ public class GameEngine {
     
     private void updatePlayerList(Distribution dt) { // use only for distribution phase, not gameplay phase.
        dt.distribution();
-       int[][] distribution = dt.getDistribution();
+       int[][] gdistribution = dt.getDistribution();
        
        for (int i = 0; i < regions.length; i++) {
-           int playerIndex = findWhoseRegion(distribution[i]);
+           int playerIndex = findWhoseRegion(gdistribution[i]);
            
-           player_map.get(playerIndex).fortification(regions[i].getName(), distribution[i][playerIndex]);
+           player_map.get(playerIndex).addRegion(regions[i], gdistribution[i][playerIndex]);
        }
-       
-       
     }
+    
     private int findWhoseRegion(int[] region) {
         
         for (int i = 0; i < player_map.size(); i++) {
-            if (region[i] > 0)
+            if (region[i] > 0) {
                 return i;
+            }
         }  
         return -1; // unreachable statement, inş.
     }

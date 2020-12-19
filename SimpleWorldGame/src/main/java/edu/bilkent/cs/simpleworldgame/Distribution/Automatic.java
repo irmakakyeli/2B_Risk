@@ -52,9 +52,9 @@ public class Automatic implements Distribution{
                     for (int a = 0; a < playerNo; a++) {
                         troopCountInRegion += this.distribution[randomRegionIndex % regionCount][a];
                     }
-                    if (troopCountInRegion == 1)
+                    if (troopCountInRegion == 1) {
                         troopCountInRegion = 0;
-                    else {
+                    } else {
                         randomRegionIndex++;
                     }
 
