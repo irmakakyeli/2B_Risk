@@ -1,0 +1,35 @@
+.root{
+    -fx-background-image: url("resources/Board.jpeg");
+    -fx-background-size: cover;
+}
+.passBtn{
+    -fx-background-image: url("resources/arrowForAction.png");
+    -fx-background-size: 50, 50;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.help{
+    -fx-background-image: url("resources/help-icon.png");
+    -fx-background-size: cover;
+    -fx-background-size: 50, 50;
+}
+
+.icon{
+    -fx-background-image: url("resources/witch.png");
+    -fx-background-size: cover;
+}
+
+.cardsBtn1{
+    -fx-background-image: url("resources/card1.jpg");
+    -fx-background-size: cover;
+}
+
+.cardsBtn2{
+    -fx-background-image: url("resources/card2.jpg");
+    -fx-background-size: cover;
+}
+
+.number{
+    -fx-text-alignment: center;
+}

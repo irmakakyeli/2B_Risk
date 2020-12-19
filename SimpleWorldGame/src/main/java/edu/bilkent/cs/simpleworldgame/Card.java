@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package edu.bilkent.cs.simpleworldgame;
+
+import java.util.HashMap;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author User
+ */
+public class Card {
+    String type;
+    HashMap<String, Integer> deck;
+    ArrayList<String> deck2;
+    int cavalryCount, infantryCount, knightCount;
+  
+    
+    public Card(int totalCardsOfOneKind){
+        int cavalryCount = totalCardsOfOneKind;
+        int infantryCount  = totalCardsOfOneKind;
+        int knightCount  = totalCardsOfOneKind;
+        typeDeterminer();
+    }
+    
+    
+    private String typeDeterminer(){
+        double randomNumber = Math.random()*2;//create random double between 0-2
+        int randomInt = (int)randomNumber; // turn the random double to int between 0-2
+        String soldierType;
+        deck2 = new ArrayList();
+        deck2.add("cavalry");
+        deck2.add("infantry");
+        deck2.add("knight");
+        deck = new HashMap<String, Integer>();
+        deck.put("cavalry  " , cavalryCount);
+        deck.put("infantry ", infantryCount);
+        deck.put("knight", knightCount);
+        
+        soldierType = deck2.get(randomInt);
+        int newSoldierCount;
+        newSoldierCount = deck.get(soldierType);
+        newSoldierCount--;
+        deck.put(soldierType, newSoldierCount);
+        
+        
+                
+        
+       
+        
+        
+        
+        return  soldierType; 
+    }
+}

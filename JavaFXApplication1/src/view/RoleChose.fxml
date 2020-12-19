@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@css/role.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="498.0" layoutY="340.0" mnemonicParsing="false" onAction="#hostBtnAction" opacity="0.0" prefHeight="115.0" prefWidth="283.0" style="-fx-background-radius: 100;" text="HOST" />
+      <Button layoutX="498.0" layoutY="484.0" mnemonicParsing="false" onAction="#joinBtnAction" opacity="0.0" prefHeight="115.0" prefWidth="283.0" style="-fx-background-radius: 100;" text="JOIN" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#helpBtnAction" opacity="0.0" prefHeight="67.0" prefWidth="73.0" style="-fx-background-radius: 100;" text="HELP" />
+      <Label fx:id="roleLabel" layoutX="429.0" layoutY="39.0" />
+   </children>
+</AnchorPane>
