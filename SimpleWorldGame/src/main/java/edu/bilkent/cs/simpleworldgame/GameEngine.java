@@ -33,11 +33,13 @@ public class GameEngine {
     boolean gameOver, configuration;
     public String selectedRegion1, selectedRegion2;
     String roomID;
+    Player winner;
 
     public GameEngine() {
         playerIDgen = new AtomicInteger();
         player_map = new ConcurrentHashMap<Integer, Player>();
         regions = new Region[47];
+        winner = null;
        
         /*regions[0] = new Region("Alaska");
         regions[1] = new Region("WesternAmerica");
@@ -152,6 +154,7 @@ public class GameEngine {
             p.attack(n1, n2);
             if(p.isWinner) {
                 gameOver = true;
+                winner = p;
             }
             return true;
         }
@@ -291,6 +294,10 @@ public class GameEngine {
     
     public boolean resignRequest(){
         return p.resign();
+    }
+    
+    public String getWinner(){
+        return winner.getName();
     }
 }
     
