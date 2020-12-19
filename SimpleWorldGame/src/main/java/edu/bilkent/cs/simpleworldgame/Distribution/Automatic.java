@@ -85,4 +85,11 @@ public class Automatic implements Distribution{
                 troopCount--;
             }
         }
+        
+        
+        public int[][] getDistribution() {
+            return distribution;
+            
+        }
+        
     }

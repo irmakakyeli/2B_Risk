@@ -11,4 +11,5 @@ package edu.bilkent.cs.simpleworldgame.Distribution;
  */
 public interface Distribution {
     public void distribution();
+    public int[][] getDistribution();
 }

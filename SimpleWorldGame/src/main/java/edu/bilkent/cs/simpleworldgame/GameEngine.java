@@ -5,6 +5,8 @@
  */
 package edu.bilkent.cs.simpleworldgame;
 
+import edu.bilkent.cs.simpleworldgame.Distribution.*;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -21,6 +23,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONTokener;
 
+
 @WebService
 @SOAPBinding(style = Style.DOCUMENT)
 public class GameEngine {
@@ -33,6 +36,8 @@ public class GameEngine {
     boolean gameOver, configuration;
     public String selectedRegion1, selectedRegion2;
     String roomID;
+    DistributionFactory df;
+    Distribution distribution;
 
     public GameEngine() {
         playerIDgen = new AtomicInteger();
@@ -269,6 +274,34 @@ public class GameEngine {
     
     public void setConfiguration(boolean con){
         configuration = con;
+        
+        if (con) {
+            df = new CreateAutomatic();
+            distribution = df.createProduct(player_map.size(), regions.length);
+        }
+        
+        updatePlayerList(distribution);
+    }
+    
+    private void updatePlayerList(Distribution dt) { // use only for distribution phase, not gameplay phase.
+       dt.distribution();
+       int[][] distribution = dt.getDistribution();
+       
+       for (int i = 0; i < regions.length; i++) {
+           int playerIndex = findWhoseRegion(distribution[i]);
+           
+           player_map.get(playerIndex).fortification(regions[i].getName(), distribution[i][playerIndex]);
+       }
+       
+       
+    }
+    private int findWhoseRegion(int[] region) {
+        
+        for (int i = 0; i < player_map.size(); i++) {
+            if (region[i] > 0)
+                return i;
+        }  
+        return -1; // unreachable statement, inş.
     }
     
     public boolean checkGameCode(String code){
