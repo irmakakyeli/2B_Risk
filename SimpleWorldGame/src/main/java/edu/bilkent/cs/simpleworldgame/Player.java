@@ -15,7 +15,7 @@ public class Player  {
 	 String name;
          ConcurrentSkipListSet assigned_Regions;
 	 AtomicInteger score;
-         boolean isActive;
+         boolean isActive, isWinner;
          GameEngine engine;
          Dice dice;
          AttackStrategy strategy;
@@ -46,37 +46,43 @@ public class Player  {
 		isActive = act_state;
 	}
         
-        public boolean attack(int gacontinent, int gdcontinent, int acountry, int dcountry)
+        public boolean attack(String nmattack, String nmdef)
         {
-            Continent continenta = engine.getContinent(gacontinent);
-            Continent continentd = engine.getContinent(gdcontinent);
-            Region attacking = continenta.getCountry(acountry);
-            Region defending = continentd.getCountry(dcountry);
-            
+            Region attacking, defending;
+            attacking = engine.findRegion(nmattack);
+            defending = engine.findRegion(nmdef);
             if(defending.isCapital)
             {
                 strategy = new DisadvantageousAttack();
+                if(assigned_Regions.size() == 47) {
+                    isWinner = true;
+                }
                 return strategy.attack(attacking, defending);
             } 
             else if (attacking.isCapital || attacking.isSpecial)
             {
                 strategy = new AdvantageousAttack();
+                if(assigned_Regions.size() == 47) {
+                    isWinner = true;
+                }
                 return strategy.attack(attacking, defending);
             }
             else 
             {
                 strategy = new NormalAttack();
+                if(assigned_Regions.size() == 47) {
+                    isWinner = true;
+                }
                 return strategy.attack(attacking, defending);
-            }
-                
+            }      
         }
         
-        public void fortification(int gicontinent, int gfcontinent, int icountry, int fcountry, int armyNumber)
+        public void reinforcement ( String nminitial, String nmfinalregion, int armyNumber)
         {
-            Continent continenta = engine.getContinent(gicontinent);
-            Continent continentd = engine.getContinent(gfcontinent);
-            Region initial = continenta.getCountry(icountry);
-            Region finalregion = continentd.getCountry(fcountry);
+            Region initial, finalregion;
+            initial = engine.findRegion(nminitial);
+            finalregion = engine.findRegion(nmfinalregion);
+            
             int army1, army2;
             army1 = initial.totalArmyForce();
             army2 = finalregion.totalArmyForce();
@@ -89,14 +95,13 @@ public class Player  {
             
         }
         
-        public void reinforcement(int gcontinent, int gcountry, int armyNumber)
+        public void fortification(String nmcountry, int armyNumber)
         {
-            Continent continent = engine.getContinent(gcontinent);
-            Region regiontor = continent.getCountry(gcountry);
+            Region gcountry = engine.findRegion(nmcountry);
             int army;
-            army = regiontor.totalArmyForce();
+            army = gcountry.totalArmyForce();
             army += armyNumber;
-            regiontor.setArmies(army);
+            gcountry.setArmies(army);
         }
         
         public void cartIntegration()
@@ -104,8 +109,8 @@ public class Player  {
             
         }
         
-        public void resign()
+        public boolean resign()
         {
-            
+           return true;
         }
 }

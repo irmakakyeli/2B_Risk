@@ -41,4 +41,8 @@ public class Manual implements Distribution{
     {
         
     }
+    
+    public int[][] getDistribution() {
+        return null;
+    }
 }
