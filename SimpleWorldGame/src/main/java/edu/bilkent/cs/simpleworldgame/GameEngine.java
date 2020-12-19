@@ -25,20 +25,21 @@ import org.json.JSONTokener;
 @SOAPBinding(style = Style.DOCUMENT)
 public class GameEngine {
     ConcurrentHashMap<Integer, Player> player_map;
-    int active_player_num = 0;
+    int active_player_num = 0, playerNumber = 3;
     AtomicInteger playerIDgen;
-    int num_allowed_games;
     JSONObject config;
     Region[] regions;
     Player p;
-    boolean gameOver;
+    boolean gameOver, configuration;
+    public String selectedRegion1, selectedRegion2;
+    String roomID;
 
     public GameEngine() {
         playerIDgen = new AtomicInteger();
         player_map = new ConcurrentHashMap<Integer, Player>();
         regions = new Region[47];
        
-        regions[0] = new Region("Alaska");
+        /*regions[0] = new Region("Alaska");
         regions[1] = new Region("WesternAmerica");
         regions[2] = new Region("CentralAmerica");
         regions[3] = new Region("EasternUS");
@@ -84,7 +85,7 @@ public class GameEngine {
         regions[43] = new Region("EasternAustralia");
         regions[44] = new Region("Indonesia");
         regions[45] = new Region("NewGuinea");
-        regions[46] = new Region("WesternAustralia");
+        regions[46] = new Region("WesternAustralia");*/
         
         gameOver = false;
         
@@ -95,12 +96,11 @@ public class GameEngine {
 
         config = new JSONObject(parser);
         System.out.println(config.toString());
-        num_allowed_games = config.getInt("ALLOWED_GAME_NUM");
         JSONArray players = config.getJSONArray("PLAYERS");
         Iterator playerIt = players.iterator();
         while (playerIt.hasNext()) {
             JSONObject ply = (JSONObject) playerIt.next();
-            Player p = new Player(playerIDgen.incrementAndGet());
+            p = new Player(playerIDgen.incrementAndGet());
             p.setName(ply.getString("name"));
             player_map.put(p.getId(), p);
 
@@ -199,6 +199,98 @@ public class GameEngine {
             }
         }
         return null;
+    }
+    
+    private String tellRegion(int x, int y) {
+        for(int i = 0; i < getRegions().length; i++) {
+            if( contains(regions[i].getArea(), x, y) ) {
+                return regions[i].getName();
+            }
+        }
+        return null;
+    }
+
+    private boolean contains(Map<Integer, Integer> area, int x, int y) {
+        for (Map.Entry<Integer, Integer> entry : area.entrySet()) {
+            if(entry.getKey() == x && entry.getValue() == y) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void setSelectedRegion(String region){
+        if (getSelectedRegion1() == null) {
+            setSelectedRegion1(region);
+        } else if (region.equals(getSelectedRegion1())){
+            setSelectedRegion1(null);
+        }
+        else if (getSelectedRegion2() == null) {
+            setSelectedRegion2(region);
+
+        }
+        else if (region.equals(getSelectedRegion2())){
+            setSelectedRegion2(null);
+        }
+    }
+
+    public String getSelectedRegion1(){
+        return selectedRegion1;
+    }
+
+    public String getSelectedRegion2(){
+        return selectedRegion2;
+    }
+
+    public void setSelectedRegion1(String r){
+        selectedRegion1 = r;
+    }
+
+    public void setSelectedRegion2(String r){
+        selectedRegion2 = r;
+    }
+    
+    public void setUserName(String nm){
+        p.setName(nm);
+    }
+    
+    public String getUserName(){
+        return p.getName();
+    }
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public boolean getConfiguration(){
+        return configuration;
+    }
+    
+    public void setConfiguration(boolean con){
+        configuration = con;
+    }
+    
+    public boolean checkGameCode(String code){
+        return (roomID.equals(code));
+    }
+    
+    public boolean isRoomFull(){
+        return player_map.size() == playerNumber;
+    }
+    
+    public int getSoldier(String nm){
+        Region r = findRegion(nm);
+        return r.totalArmyForce();
+    }
+    
+    public void setSoldier(String nm, int army){
+        Region r = findRegion(nm);
+        r.setArmies(army);
+    }
+    
+    public boolean resignRequest(){
+        return p.resign();
     }
 }
     

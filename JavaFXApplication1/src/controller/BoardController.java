@@ -153,7 +153,7 @@ public class BoardController extends BaseController{
 
             @Override
             public void handle(ActionEvent event) {
-                game.activatePLayer().integrate(); 
+                game.activatePlayer().integrate(); 
             }
         });
 

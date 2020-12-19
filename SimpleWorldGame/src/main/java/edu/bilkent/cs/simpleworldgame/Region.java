@@ -5,6 +5,8 @@
  */
 package edu.bilkent.cs.simpleworldgame;
 
+import java.awt.geom.Area;
+import java.util.Map;
 import org.json.JSONObject;
 
 public class Region {
@@ -14,11 +16,14 @@ public class Region {
     boolean isCapital, isSpecial;
     int cavalryAmount, artilleryAmount, infantaryAmount, totalArmy;
     Player playerBelongTo;
+    Map<Integer, Integer> area;
     
-    public Region(String gname) {
+    
+    public Region(String gname, Map<Integer, Integer> garea) {
         name = gname;
         isCapital = false;
         isSpecial = false; 
+        area = garea;
     }
     
     public void setName(String nm) {
@@ -101,6 +106,10 @@ public class Region {
                 }
             }
         }
+    }
+
+    public Map<Integer, Integer> getArea(){
+        return area;
     }
     
 }

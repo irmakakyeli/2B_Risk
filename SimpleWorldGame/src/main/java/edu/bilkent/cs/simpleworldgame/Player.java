@@ -103,8 +103,8 @@ public class Player  {
             
         }
         
-        public void resign()
+        public boolean resign()
         {
-            
+           return true;
         }
 }
