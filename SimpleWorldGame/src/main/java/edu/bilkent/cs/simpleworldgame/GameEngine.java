@@ -149,7 +149,7 @@ public class GameEngine {
         if(r1.getPlayer() == p && r1.getPlayer() != p && r1.totalArmyForce() > 1)
         {
             //REGION CONTROL
-            p.attack(r1, r2);
+            p.attack(n1, n2);
             if(p.isWinner) {
                 gameOver = true;
             }
@@ -160,13 +160,13 @@ public class GameEngine {
         }
     }
     
-    public boolean fortificationControl(String n1, String n2, int army){
+    public boolean reinforcementControl(String n1, String n2, int army){
         Region r1 = findRegion(n1);
         Region r2 = findRegion(n2);
         if(r1.getPlayer() == p && r1.getPlayer() == p && r1.totalArmyForce() > 1)
         {
             //REGION CONTROL
-            p.fortification(r1, r2, army);
+            p.reinforcement(n1, n2, army);
             return true;
         }
         else {
@@ -191,7 +191,7 @@ public class GameEngine {
         
     }
     
-    private Region findRegion(String name){
+    public Region findRegion(String name){
         for (int i = 0; i < 47; i++)
         {
             if(regions[i].getName().equals(name)) {

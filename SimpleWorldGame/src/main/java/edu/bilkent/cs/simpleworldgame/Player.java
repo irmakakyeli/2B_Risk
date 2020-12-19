@@ -46,9 +46,11 @@ public class Player  {
 		isActive = act_state;
 	}
         
-        public boolean attack(Region attacking, Region defending)
+        public boolean attack(String nmattack, String nmdef)
         {
-            
+            Region attacking, defending;
+            attacking = engine.findRegion(nmattack);
+            defending = engine.findRegion(nmdef);
             if(defending.isCapital)
             {
                 strategy = new DisadvantageousAttack();
@@ -75,8 +77,11 @@ public class Player  {
             }      
         }
         
-        public void fortification( Region initial, Region finalregion, int armyNumber)
+        public void reinforcement ( String nminitial, String nmfinalregion, int armyNumber)
         {
+            Region initial, finalregion;
+            initial = engine.findRegion(nminitial);
+            finalregion = engine.findRegion(nmfinalregion);
             
             int army1, army2;
             army1 = initial.totalArmyForce();
@@ -90,8 +95,9 @@ public class Player  {
             
         }
         
-        public void reinforcement(Region gcountry, int armyNumber)
+        public void fortification(String nmcountry, int armyNumber)
         {
+            Region gcountry = engine.findRegion(nmcountry);
             int army;
             army = gcountry.totalArmyForce();
             army += armyNumber;
