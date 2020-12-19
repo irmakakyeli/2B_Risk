@@ -9,24 +9,21 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 import edu.bilkent.cs.simpleworldgame.Attack.*;
+import java.util.Iterator;
 
 public class Player  {
 	Integer id;
 	String name;
-        ConcurrentSkipListSet assigned_Regions;
+        ConcurrentSkipListSet<Region> assigned_Regions;
 	AtomicInteger score;
         boolean isActive, isWinner;
-        GameEngine engine;
-        Dice dice;
         AttackStrategy strategy;
 	
 	public Player(Integer pid) {
             id = pid;
             isActive = false;
-            assigned_Regions = new ConcurrentSkipListSet<Integer>();
+            assigned_Regions = new ConcurrentSkipListSet<Region>();
             name = "Player-" + id.toString();
-            engine = new GameEngine();
-            dice = new Dice();
 	}
 
 	public String getName() {
@@ -111,6 +108,12 @@ public class Player  {
         
         public boolean resign()
         {
+            while(!assigned_Regions.isEmpty()){
+                Region r = assigned_Regions.first();
+                r.setArmies(1);
+                r.setPlayer(null);
+                assigned_Regions.remove(r);
+            }
            return true;
         }
 }

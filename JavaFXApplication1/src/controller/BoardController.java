@@ -293,8 +293,9 @@ public class BoardController extends BaseController{
                 break;
             }
         }
-        if(i != 47) 
-        labels[index].setText(game.getCurrentPlayer().getCountry(region).getTotalArmyForce()); // TODO -- get army number
+        if(i != 47) {
+            labels[index].setText(game.getCurrentPlayer().getCountry(region).getTotalArmyForce()); // TODO -- get army number
+        }
     }
         
     private String getRidOfBlanks(String region) {

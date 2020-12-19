@@ -115,8 +115,6 @@ public class GameEngine {
             player_map.put(p.getId(), p);
 
         }
-        //JSONObject worldJson = config.getJSONObject("WORLD");
-        //gameWorld.InitializeWorld(worldJson);
     }
     
     @WebMethod
