@@ -15,15 +15,13 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 
-
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import org.json.JSONObject; 
+import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONTokener;
-
 
 @WebService
 @SOAPBinding(style = Style.DOCUMENT)
@@ -36,95 +34,101 @@ public class GameEngine {
     Player p, winner;
     boolean gameOver, configuration, onceInTurn;
     public String selectedRegion1, selectedRegion2;
-    String roomID;
+
+    int roomID;
+
     DistributionFactory df;
     Distribution distribution;
+    String distributionMethod;
+    int hostPlayerId;
+    boolean isGameActive = false;
+    boolean isGameSetup = false;
 
     public GameEngine() {
         playerIDgen = new AtomicInteger();
         player_map = new ConcurrentHashMap<Integer, Player>();
         regions = new Region[47];
         winner = null;
+
         onceInTurn = true;
-       
-        /*regions[0] = new Region("Alaska");
-        regions[1] = new Region("WesternAmerica");
-        regions[2] = new Region("CentralAmerica");
-        regions[3] = new Region("EasternUS");
-        regions[4] = new Region("Greenland");
-        regions[5] = new Region("NorthWest");
-        regions[6] = new Region("CentralCanada");
-        regions[7] = new Region("EasternCanada");
-        regions[8] = new Region("WesternUS");
-        regions[9] = new Region("Argentina");
-        regions[10] = new Region("Brazil");
-        regions[11] = new Region("Peru");
-        regions[12] = new Region("Venezuela");
-        regions[13] = new Region("Colombia");
-        regions[14] = new Region("Bolivia");
-        regions[15] = new Region("UnitedKingdom");
-        regions[16] = new Region("Iceland");
-        regions[17] = new Region("Germany");
-        regions[18] = new Region("Skandinavia");
-        regions[19] = new Region("SouthernEurope");
-        regions[20] = new Region("Russia");
-        regions[21] = new Region("Spain");
-        regions[22] = new Region("France");
-        regions[23] = new Region("Italia");
-        regions[24] = new Region("Ukraine");
-        regions[25] = new Region("Afghanistan");
-        regions[26] = new Region("China");
-        regions[27] = new Region("India");
-        regions[28] = new Region("Irkutsk");
-        regions[29] = new Region("Japan");
-        regions[30] = new Region("Kamchatka");
-        regions[31] = new Region("MiddleEast");
-        regions[32] = new Region("Mongolia");
-        regions[33] = new Region("Sian");
-        regions[34] = new Region("Siberia");
-        regions[35] = new Region("Ural");
-        regions[36] = new Region("Yakutsk");
-        regions[37] = new Region("Congo");
-        regions[38] = new Region("EastAfrica");
-        regions[39] = new Region("Egypt");
-        regions[40] = new Region("Madagaskar");
-        regions[41] = new Region("NorthAfrica");
-        regions[42] = new Region("SouthAfrica");
-        regions[43] = new Region("EasternAustralia");
-        regions[44] = new Region("Indonesia");
-        regions[45] = new Region("NewGuinea");
-        regions[46] = new Region("WesternAustralia");*/
-        
+
+        regions[0] = new Region("Alaska", 0);
+        regions[1] = new Region("WesternAmerica", 1);
+        regions[2] = new Region("CentralAmerica", 2);
+        regions[3] = new Region("EasternUS", 3);
+        regions[4] = new Region("Greenland", 4);
+        regions[5] = new Region("NorthWest", 5);
+        regions[6] = new Region("CentralCanada", 6);
+        regions[7] = new Region("EasternCanada", 7);
+        regions[8] = new Region("WesternUS", 8);
+        regions[9] = new Region("Argentina", 9);
+        regions[10] = new Region("Brazil", 10);
+        regions[11] = new Region("Peru", 11);
+        regions[12] = new Region("Venezuela", 12);
+        regions[13] = new Region("Colombia", 13);
+        regions[14] = new Region("Bolivia", 14);
+        regions[15] = new Region("UnitedKingdom", 15);
+        regions[16] = new Region("Iceland", 16);
+        regions[17] = new Region("Germany", 17);
+        regions[18] = new Region("Skandinavia", 18);
+        regions[19] = new Region("SouthernEurope", 19);
+        regions[20] = new Region("Russia", 20);
+        regions[21] = new Region("Spain", 21);
+        regions[22] = new Region("France", 22);
+        regions[23] = new Region("Italia", 23);
+        regions[24] = new Region("Ukraine", 24);
+        regions[25] = new Region("Afghanistan", 25);
+        regions[26] = new Region("China", 26);
+        regions[27] = new Region("India", 27);
+        regions[28] = new Region("Irkutsk", 28);
+        regions[29] = new Region("Japan", 29);
+        regions[30] = new Region("Kamchatka", 30);
+        regions[31] = new Region("MiddleEast", 31);
+        regions[32] = new Region("Mongolia", 32);
+        regions[33] = new Region("Sian", 33);
+        regions[34] = new Region("Siberia", 34);
+        regions[35] = new Region("Ural", 35);
+        regions[36] = new Region("Yakutsk", 36);
+        regions[37] = new Region("Congo", 37);
+        regions[38] = new Region("EastAfrica", 38);
+        regions[39] = new Region("Egypt", 39);
+        regions[40] = new Region("Madagaskar", 40);
+        regions[41] = new Region("NorthAfrica", 41);
+        regions[42] = new Region("SouthAfrica", 42);
+        regions[43] = new Region("EasternAustralia", 43);
+        regions[44] = new Region("Indonesia", 44);
+        regions[45] = new Region("NewGuinea", 45);
+        regions[46] = new Region("WesternAustralia", 46);
+
         gameOver = false;
-        
-        //InputStream reader = Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/service-config.json");
+
+        // InputStream reader =
+        // Thread.currentThread().getContextClassLoader().getResourceAsStream("META-INF/service-config.json");
         InputStream reader = Thread.currentThread().getContextClassLoader().getResourceAsStream("service-config.json");
-        //Read JSON file
+        // Read JSON file
         JSONTokener parser = new JSONTokener(reader);
 
-        config = new JSONObject(parser);
-        System.out.println(config.toString());
-        JSONArray players = config.getJSONArray("PLAYERS");
-        Iterator playerIt = players.iterator();
-        while (playerIt.hasNext()) {
-            JSONObject ply = (JSONObject) playerIt.next();
-            p = new Player(playerIDgen.incrementAndGet());
-            p.setName(ply.getString("name"));
-            player_map.put(p.getId(), p);
+        /*
+         * config = new JSONObject(parser); System.out.println(config.toString());
+         * JSONArray players = config.getJSONArray("PLAYERS"); Iterator playerIt =
+         * players.iterator(); while (playerIt.hasNext()) { JSONObject ply =
+         * (JSONObject) playerIt.next(); p = new Player(playerIDgen.incrementAndGet());
+         * p.setName(ply.getString("name")); player_map.put(p.getId(), p); }
+         */
+        // JSONObject worldJson = config.getJSONObject("WORLD");
+        // gameWorld.InitializeWorld(worldJson);
 
-        }
     }
-    
-    @WebMethod
-    public void registerPlayer(String name) {
-        Player p1 = new Player(playerIDgen.incrementAndGet());
-        p1.setName(name);
-        player_map.put(p1.getId(), p1);
-    }
-    
+
+    /*
+     * @WebMethod public void registerPlayer(String name) { Player p1 = new
+     * Player(playerIDgen.incrementAndGet()); p1.setName(name);
+     * player_map.put(p1.getId(), p1); }
+     */
+
     @WebMethod
     public Player activatePlayer(Integer id) {
-        p = (Player) player_map.get(id);  
+        p = (Player) player_map.get(id);
         p.setActive(true);
         active_player_num++;
         return p;
@@ -133,39 +137,46 @@ public class GameEngine {
     @WebMethod
     public String getPlayers() {
         JSONObject JS_ParentObj = new JSONObject();
-        for (Map.Entry<Integer, Player> entry : player_map.entrySet()) 
-        {   JSONObject JS_PlayerObj = new JSONObject();
-            String key = entry.getKey().toString(); 
-            Player value = entry.getValue(); 
-            JS_PlayerObj.put("name",value.name);
-            JS_PlayerObj.put("isActive",Boolean.toString(value.isActive));
+        for (Map.Entry<Integer, Player> entry : player_map.entrySet()) {
+            JSONObject JS_PlayerObj = new JSONObject();
+            String key = entry.getKey().toString();
+            Player value = entry.getValue();
+            JS_PlayerObj.put("name", value.name);
+            JS_PlayerObj.put("isActive", Boolean.toString(value.isActive));
             JS_ParentObj.put(key, JS_PlayerObj);
         }
         return JS_ParentObj.toString();
     }
-    
+
     @WebMethod
-    public String getWorld() {      
+    public String getWorld() {
         return config.toString();
     }
-    
-    public boolean attackControl(String n1, String n2){
-        Region r1 = findRegion(n1);
-        Region r2 = findRegion(n2);
+
+    @WebMethod
+    public boolean attackControl(Integer playerId, String attackerRegionId, String defenderRegionId) {
+        if (gameOver)
+            return false;
+        // Region attackerRegion = findRegion(attackerRegionId);
+        // Region defenderRegion = findRegion(defenderRegionId);
+        Region attackerRegion = regions[Integer.parseInt(attackerRegionId)];
+        Region defenderRegion = regions[Integer.parseInt(defenderRegionId)];
+        Player p = player_map.get(playerId);
         boolean didWin;
-        if(r1.getPlayer() == p && r1.getPlayer() != p && r1.totalArmyForce() > 1)
-        {
-            //REGION CONTROL
-            didWin = p.attack(r1, r2, onceInTurn);
+        if (attackerRegion.getPlayer() == playerId && defenderRegion.getPlayer() != playerId
+                && attackerRegion.totalArmyForce() > 1) {
+            // REGION CONTROL
+
             onceInTurn = false;
-            if(didWin)
-            {
-                Player temp = r2.playerBelongTo;
-                temp.removeRegion(r2);
-                p.addRegion(r2, r1.totalArmyForce() - 1);
-                r1.setArmies(1);
+            didWin = p.attack(attackerRegion, defenderRegion, onceInTurn);
+
+            if (didWin) {
+                Integer loserPlayerId = defenderRegion.getPlayer();
+                player_map.get(loserPlayerId).removeRegion(defenderRegion);
+                p.addRegion(defenderRegion, attackerRegion.totalArmyForce() - 1);
+                attackerRegion.setArmies(1);
             }
-            if(p.isWinner) {
+            if (p.isWinner) {
                 gameOver = true;
                 winner = p;
             }
@@ -174,225 +185,372 @@ public class GameEngine {
             return false;
         }
     }
-    
-    public boolean reinforcementControl(String n1, String n2, int army){
+
+    @WebMethod
+    public boolean distributeRegions(String distributionMethod, int numberOfPlayers) {
+        try {
+            if (distributionMethod.toUpperCase() == "AUTO") {
+                Automatic distributor = new Automatic(numberOfPlayers, regions.length);
+                distributor.distribution();
+                int[][] dist = distributor.getDistribution();
+                int r_size = dist.length;
+                for (int i = 0; i < r_size; i++) {
+                    Region reg = regions[i];
+                    int playerId = 0;
+                    int troopCount = 0;
+                    int p_size = dist[0].length;
+                    for (int j = 0; j < p_size; j++) {
+                        if (dist[i][j] != 0) {
+                            playerId = j;
+                            troopCount = dist[i][j];
+                        }
+                    }
+
+                    Player pl = player_map.get(playerId);
+                    pl.addRegion(reg, troopCount);
+                    reg.setPlayer(pl.getId());
+                }
+
+                return true;
+            } else {
+                // TODO Manual: Will be completed when the information to be taken from the
+                // cllients has been specified
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Error in distributeRegions method      " + e.getMessage());
+        }
+        return false;
+    }
+
+    @WebMethod
+    public String setupGame(String hostPlayerName, int numberOfPlayers, String distMethod) {
+        if (isGameSetup) {
+            return "ERROR";
+        } else {
+            isGameSetup = true;
+            distributionMethod = distMethod;
+
+            int id = playerIDgen.getAndIncrement();
+            p = new Player(id);
+            p.setName(hostPlayerName);
+            player_map.put(id, p);
+            roomID = 1; // Since there will only be one room for now
+            playerNumber = numberOfPlayers;
+            active_player_num++;
+            return "{HOST_PLAYER_ID: " + id + ", ROOM_ID: " + roomID + "}"; // To be converted to a JSON oject in the
+                                                                            // client
+        }
+    }
+
+    @WebMethod
+    public boolean reinforcementControl(Integer playerId, String n1, String n2, int army) {
         Region r1 = findRegion(n1);
         Region r2 = findRegion(n2);
-        if(r1.getPlayer() == p && r1.getPlayer() == p && r1.totalArmyForce() > 1)
-        {
-            //REGION CONTROL
+        p = player_map.get(playerId);
+        if (r1.getPlayer() == playerId && r2.getPlayer() == playerId && r1.totalArmyForce() > 1) {
+            // REGION CONTROL
             p.reinforcement(r1, r2, army);
             return true;
         } else {
             return false;
         }
     }
-    
-    public int integration(){
+
+    public int integration() {
         return p.cartIntegration();
     }
-    
-    public boolean fortificationControl(String n, int army){
+
+    public boolean fortificationControl(String n, int army) {
         Region r = findRegion(n);
-        if(r.getPlayer() == p)
-        {
+        if (r.getPlayer() == p) {
             p.fortification(r, army);
             return true;
         } else {
             return false;
         }
     }
-    
-    public Region getRegion(int index){
+
+    @WebMethod
+    public int joinGame(int roomId, String hostPlayerName) {
+        if (active_player_num >= playerNumber) {
+            return -1;
+        }
+        if (isGameSetup == false) {
+            return -1;
+        } else {
+            int id = playerIDgen.getAndIncrement();
+            p = new Player(id);
+            p.setName(hostPlayerName);
+            player_map.put(id, p);
+            active_player_num++;
+
+            // Check if we have reached the number of players specified by the host
+            if (active_player_num == playerNumber) {
+                distributeRegions(distributionMethod, playerNumber);
+                isGameActive = true;
+            }
+
+            return id;
+        }
+    }
+
+    @WebMethod
+    public boolean fortificationControl(Integer playerId, Integer regionId, int army) {
+        Region r = regions[regionId];
+        if (r.getPlayer() == playerId) {
+            // REGION CONTROL
+            Player p = player_map.get(playerId);
+        }
+    }
+
+    @WebMethod
+    public Region getRegion(int index) {
         return regions[index];
     }
 
+    @WebMethod
     public boolean isGameOver() {
         return gameOver;
     }
 
-    public Region[] getRegions() {
-        return regions;
+    @WebMethod
+    public boolean isGameActive() {
+        return isGameActive;
     }
-    
-    public Region findRegion(String name){
-        for (int i = 0; i < 47; i++)
-        {
-            if(regions[i].getName().equals(name)) {
+
+    @WebMethod
+    public String getRegions() {
+        JSONArray JS_RegionArray = new JSONArray();
+        for (int i = 0; i < 47; i++) {
+            JSONObject JS_PlayerObj = new JSONObject();
+            String id = regions[i].getId().toString();
+            String name = regions[i].getName();
+            JS_PlayerObj.put("ID", id);
+            JS_PlayerObj.put("NAME", name);
+            JS_RegionArray.put(JS_PlayerObj);
+        }
+        return JS_RegionArray.toString();
+    }
+
+    @WebMethod
+    public void handOutCard() {
+
+    }
+
+    @WebMethod
+    public Region findRegion(String name) {
+        for (int i = 0; i < 47; i++) {
+            if (regions[i].getName().equals(name)) {
                 return regions[i];
             }
         }
         return null;
     }
-    
-    private String tellRegion(int x, int y) {
-        for(int i = 0; i < getRegions().length; i++) {
-            if( contains(regions[i].getArea(), x, y) ) {
-                return regions[i].getName();
-            }
-        }
-        return null;
-    }
 
+    /*
+     * private String tellRegion(int x, int y) { for(int i = 0; i <
+     * getRegions().length(); i++) { if( contains(regions[i].getArea(), x, y) ) {
+     * return regions[i].getName(); } } return null; }
+     */
+
+    @WebMethod
     private boolean contains(Map<Integer, Integer> area, int x, int y) {
         for (Map.Entry<Integer, Integer> entry : area.entrySet()) {
-            if(entry.getKey() == x && entry.getValue() == y) {
+            if (entry.getKey() == x && entry.getValue() == y) {
                 return true;
             }
         }
         return false;
     }
 
-    public void setSelectedRegion(String region){
+    @WebMethod
+    public void setSelectedRegion(String region) {
         if (getSelectedRegion1() == null) {
             setSelectedRegion1(region);
-        } else if (region.equals(getSelectedRegion1())){
+        } else if (region.equals(getSelectedRegion1())) {
             setSelectedRegion1(null);
-        }
-        else if (getSelectedRegion2() == null) {
+        } else if (getSelectedRegion2() == null) {
             setSelectedRegion2(region);
 
-        }
-        else if (region.equals(getSelectedRegion2())){
+        } else if (region.equals(getSelectedRegion2())) {
             setSelectedRegion2(null);
         }
     }
 
-    public String getSelectedRegion1(){
+    @WebMethod
+    public String getSelectedRegion1() {
         return selectedRegion1;
     }
 
-    public String getSelectedRegion2(){
+    @WebMethod
+    public String getSelectedRegion2() {
         return selectedRegion2;
     }
 
-    public void setSelectedRegion1(String r){
+    @WebMethod
+    public void setSelectedRegion1(String r) {
         selectedRegion1 = r;
     }
 
-    public void setSelectedRegion2(String r){
+    @WebMethod
+    public void setSelectedRegion2(String r) {
         selectedRegion2 = r;
     }
-    
-    public void setUserName(String nm){
+
+    @WebMethod
+    public void setUserName(String nm) {
         p.setName(nm);
     }
-    
-    public String getUserName(){
+
+    @WebMethod
+    public String getUserName() {
         return p.getName();
     }
 
-    public String getRoomID() {
+    @WebMethod
+    public int getRoomID() {
         return roomID;
     }
 
-    public boolean getConfiguration(){
+    @WebMethod
+    public boolean getConfiguration() {
         return configuration;
     }
-    
-    public void setConfiguration(boolean con){
+
+    @WebMethod
+    public void setConfiguration(boolean con) {
         configuration = con;
-        
+
         if (con) {
             df = new CreateAutomatic();
             distribution = df.createProduct(player_map.size(), regions.length);
-         distribution.distribution();
-        }
-        else{
+            distribution.distribution();
+        } else {
             df = new CreateManuel();
             distribution = df.createProduct(player_map.size(), regions.length);
             distribution.distribution();
         }
-        
+
         updatePlayerList(distribution);
     }
-    
+
+    @WebMethod
     private void updatePlayerList(Distribution dt) { // use only for distribution phase, not gameplay phase.
-       
-       int[][] distribution = dt.getDistribution();
-       
-       for (int i = 0; i < regions.length; i++) {
-           int playerIndex = findWhoseRegion(distribution[i]);
-           
-           player_map.get(playerIndex).addRegion(regions[i], distribution[i][playerIndex]);
-       }
+
+        int[][] distribution = dt.getDistribution();
+
+        for (int i = 0; i < regions.length; i++) {
+            int playerIndex = findWhoseRegion(distribution[i]);
+
+            player_map.get(playerIndex).addRegion(regions[i], distribution[i][playerIndex]);
+        }
     }
-    
-    private int findWhoseRegion(int[] region) {// use only for distribution phase, not gameplay phase.
-        
+
+    @WebMethod
+    public String getGameStatistics() {
+        JSONArray JS_RegionArray = new JSONArray();
+        for (int i = 0; i < 47; i++) {
+            JSONObject JS_PlayerObj = new JSONObject();
+            String id = regions[i].getId().toString();
+            String name = regions[i].getName();
+            JS_PlayerObj.put("ID", id);
+            JS_PlayerObj.put("NAME", name);
+            JS_PlayerObj.put("CAVALRY_AMOUNT", regions[i].getCavalryAmount());
+            JS_PlayerObj.put("ARTILLERY_AMOUNT", regions[i].getArtilleryAmount());
+            JS_PlayerObj.put("INFANTRY_AMOUNT", regions[i].getInfantryAmount());
+            JS_PlayerObj.put("TOTAL_ARMY_FORCE", regions[i].totalArmyForce());
+            JS_PlayerObj.put("PLAYER_BELONG_TO", regions[i].playerBelongTo);
+            JS_RegionArray.put(JS_PlayerObj);
+        }
+        return JS_RegionArray.toString();
+    }
+
+    @WebMethod
+    public int findWhoseRegion(int[] region) { // use only for distribution phase, not gameplay phase.
         for (int i = 0; i < player_map.size(); i++) {
             if (region[i] > 0) {
                 return i;
             }
-        }  
+        }
         return -1; // unreachable statement, inş.
     }
-    
+
     public boolean isDistributionFinished() {
-       int troopCount;
-       int currentTroopCount = 0;
-       
-       switch (player_map.size()) {
-               case 3:
-                   troopCount = 35 * player_map.size();
-                   break;
-               case 4:
-                   troopCount = 30 * player_map.size();
-                   break;
-               case 5:
-                   troopCount = 25 * player_map.size();
-                   break;
-               case 6:
-                   troopCount = 20 * player_map.size();
-                   break;
-               default:
-                   troopCount = 120;
-            }
-        
+        int troopCount;
+        int currentTroopCount = 0;
+
+        switch (player_map.size()) {
+            case 3:
+                troopCount = 35 * player_map.size();
+                break;
+            case 4:
+                troopCount = 30 * player_map.size();
+                break;
+            case 5:
+                troopCount = 25 * player_map.size();
+                break;
+            case 6:
+                troopCount = 20 * player_map.size();
+                break;
+            default:
+                troopCount = 120;
+        }
+
         for (int i = 0; i < regions.length; i++) {
             currentTroopCount += regions[i].totalArmy;
         }
-        
+
         return currentTroopCount >= troopCount;
     }
-    
-    public boolean checkGameCode(String code){
-        return (roomID.equals(code));
-    }
-    
-    public boolean isRoomFull(){
+
+    /*
+     * @WebMethod public boolean checkGameCode(String code){ return
+     * (roomID.equals(code)); }
+     */
+
+    @WebMethod
+    public boolean isRoomFull() {
         return player_map.size() == playerNumber;
     }
-    
-    public int getSoldier(String nm){
+
+    @WebMethod
+    public int getSoldier(String nm) {
         Region r = findRegion(nm);
         return r.totalArmyForce();
     }
-    
-    public void setSoldier(String nm, int army){
+
+    @WebMethod
+    public void setSoldier(String nm, int army) {
         Region r = findRegion(nm);
         r.setArmies(army);
     }
-    
-    public boolean resignRequest(){
+
+    @WebMethod
+    public boolean resignRequest() {
         return p.resign();
     }
-    
-    public String getWinner(){
+
+    @WebMethod
+    public String getWinner() {
         return winner.getName();
     }
-    
-    public boolean nextTurn(){
+
+    public boolean nextTurn() {
         onceInTurn = true;
-      return true;
+        return true;
     }
-    
-    public HashMap getCards(){
+
+    public HashMap getCards() {
         return p.getHand();
     }
-    
-    public int getSoldierWaiting(){
+
+    public int getSoldierWaiting() {
         return p.armyToGain();
     }
+
+    public void resetGame() {
+
+    }
+
 }
-    
