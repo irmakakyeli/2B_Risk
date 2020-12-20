@@ -7,26 +7,28 @@ package edu.bilkent.cs.simpleworldgame;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.Iterator;
+import java.util.HashMap;
 
 import edu.bilkent.cs.simpleworldgame.Attack.*;
 
 public class Player  {
 	Integer id;
 	String name;
-        ConcurrentSkipListSet assigned_Regions;
+        ConcurrentSkipListSet<Region> assigned_Regions;
 	AtomicInteger score;
         boolean isActive, isWinner;
-        GameEngine engine;
-        Dice dice;
         AttackStrategy strategy;
-	
+	Card card;
+        HashMap<String,Integer> hand; //player's hand
+            
 	public Player(Integer pid) {
             id = pid;
             isActive = false;
-            assigned_Regions = new ConcurrentSkipListSet<Integer>();
+            assigned_Regions = new ConcurrentSkipListSet<Region>();
             name = "Player-" + id.toString();
-            engine = new GameEngine();
-            dice = new Dice();
+            hand = new HashMap<>();//init empty hand as a hashmap,
+            card = new Card(20);
 	}
 
 	public String getName() {
@@ -46,13 +48,18 @@ public class Player  {
 	}
         
         public boolean attack(Region attacking, Region defending){
+            boolean getTheRegion;
             if(defending.isCapital)
             {
                 strategy = new DisadvantageousAttack();
                 if(assigned_Regions.size() == 47) {
                     isWinner = true;
                 }
-                return strategy.attack(attacking, defending);
+                getTheRegion = strategy.attack(attacking, defending);
+                if(getTheRegion){
+                    hand.put(card.getRandomCardName() , hand.size());
+                }
+                return getTheRegion;
             } 
             else if (attacking.isCapital || attacking.isSpecial)
             {
@@ -60,7 +67,11 @@ public class Player  {
                 if(assigned_Regions.size() == 47) {
                     isWinner = true;
                 }
-                return strategy.attack(attacking, defending);
+                getTheRegion = strategy.attack(attacking, defending);
+                if(getTheRegion){
+                    hand.put(card.getRandomCardName() , hand.size());
+                }
+                return getTheRegion;
             }
             else 
             {
@@ -68,7 +79,11 @@ public class Player  {
                 if(assigned_Regions.size() == 47) {
                     isWinner = true;
                 }
-                return strategy.attack(attacking, defending);
+                getTheRegion = strategy.attack(attacking, defending);
+                if(getTheRegion){
+                    hand.put(card.getRandomCardName(), hand.size());
+                }
+                return getTheRegion;
             }      
         }
         
@@ -104,13 +119,24 @@ public class Player  {
             assigned_Regions.add(gcountry);
         }
         
-        public void cartIntegration()
+        public int cartIntegration()
         {
+            int bonus = 0;
+            if(hand.get("Artillery")== 3){
+                bonus = 3;
+            }
+            return bonus;
             
         }
         
         public boolean resign()
         {
+           while(!assigned_Regions.isEmpty()){
+                Region r = assigned_Regions.first();
+                r.setArmies(1);
+                r.setPlayer(null);
+                assigned_Regions.remove(r);
+            }
            return true;
         }
 }

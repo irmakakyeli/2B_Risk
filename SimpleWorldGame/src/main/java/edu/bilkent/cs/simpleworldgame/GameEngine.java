@@ -32,16 +32,12 @@ public class GameEngine {
     AtomicInteger playerIDgen;
     JSONObject config;
     Region[] regions;
-    Player p;
+    Player p, winner;
     boolean gameOver, configuration;
     public String selectedRegion1, selectedRegion2;
     String roomID;
-
     DistributionFactory df;
     Distribution distribution;
-
-    Player winner;
-
 
     public GameEngine() {
         playerIDgen = new AtomicInteger();
@@ -115,8 +111,6 @@ public class GameEngine {
             player_map.put(p.getId(), p);
 
         }
-        //JSONObject worldJson = config.getJSONObject("WORLD");
-        //gameWorld.InitializeWorld(worldJson);
     }
     
     @WebMethod
@@ -302,23 +296,29 @@ public class GameEngine {
         if (con) {
             df = new CreateAutomatic();
             distribution = df.createProduct(player_map.size(), regions.length);
+         distribution.distribution();
+        }
+        else{
+            df = new CreateManuel();
+            distribution = df.createProduct(player_map.size(), regions.length);
+            distribution.distribution();
         }
         
         updatePlayerList(distribution);
     }
     
     private void updatePlayerList(Distribution dt) { // use only for distribution phase, not gameplay phase.
-       dt.distribution();
-       int[][] gdistribution = dt.getDistribution();
+       
+       int[][] distribution = dt.getDistribution();
        
        for (int i = 0; i < regions.length; i++) {
-           int playerIndex = findWhoseRegion(gdistribution[i]);
+           int playerIndex = findWhoseRegion(distribution[i]);
            
-           player_map.get(playerIndex).addRegion(regions[i], gdistribution[i][playerIndex]);
+           player_map.get(playerIndex).addRegion(regions[i], distribution[i][playerIndex]);
        }
     }
     
-    private int findWhoseRegion(int[] region) {
+    private int findWhoseRegion(int[] region) {// use only for distribution phase, not gameplay phase.
         
         for (int i = 0; i < player_map.size(); i++) {
             if (region[i] > 0) {
@@ -326,6 +326,34 @@ public class GameEngine {
             }
         }  
         return -1; // unreachable statement, inş.
+    }
+    
+    public boolean isDistributionFinished() {
+       int troopCount;
+       int currentTroopCount = 0;
+       
+       switch (player_map.size()) {
+               case 3:
+                   troopCount = 35 * player_map.size();
+                   break;
+               case 4:
+                   troopCount = 30 * player_map.size();
+                   break;
+               case 5:
+                   troopCount = 25 * player_map.size();
+                   break;
+               case 6:
+                   troopCount = 20 * player_map.size();
+                   break;
+               default:
+                   troopCount = 120;
+            }
+        
+        for (int i = 0; i < regions.length; i++) {
+            currentTroopCount += regions[i].totalArmy;
+        }
+        
+        return currentTroopCount >= troopCount;
     }
     
     public boolean checkGameCode(String code){
@@ -352,6 +380,10 @@ public class GameEngine {
     
     public String getWinner(){
         return winner.getName();
+    }
+    
+    public boolean nextTurn(){
+      return true;
     }
 }
     
