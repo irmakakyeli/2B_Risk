@@ -91,7 +91,7 @@ public class Player  {
         }
         
         public void removeRegion(SimpleRegion gcountry){
-            assigned_Regions.remove(gcountry);
+            assigned_Regions.remove(gcountry.getId());
             gcountry.setPlayer(null);
             gcountry.setArmies(0);
         }

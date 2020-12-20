@@ -9,6 +9,8 @@ import java.util.Set;
 import org.json.JSONObject; 
 import org.json.JSONArray;
 import org.json.JSONException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -21,10 +23,35 @@ public class ServiceTest {
      */
     public static void main(String[] args) {
         GameEngine gmEngine = new GameEngine();
+        // This map holds the associations between region names and ids.
         Map<String, Integer> clientRegionMap = new HashMap<String, Integer>();
         
+        
+        class MyTimerTask extends TimerTask  {
+            GameEngine pEngine;
+
+            public MyTimerTask(GameEngine pEngine) {
+                this.pEngine = pEngine;
+            }
+
+            @Override
+            public void run() {
+                if(pEngine.isGameActive()){
+                        String currentGameStats = pEngine.getGameStatistics();
+                        System.out.println(currentGameStats);
+                }  
+            }
+        }
+ 
+
+        
+        
         //gmEngine.registerPlayer("asd");
+        
+        // Get all the regions from the server        
         String allRegions = gmEngine.getRegions();
+        // Now we will populate clientRegionMap using the regions obtained from the server
+        // each client should use this map to get the region id when a user attacks or fortifies or reinforces.
         JSONArray regions = new JSONArray(allRegions);   
         String list = "";
         String line = "";
@@ -43,6 +70,11 @@ public class ServiceTest {
         }
         
         String setupInfo = gmEngine.setupGame("Yusuf",4, "AUTO");
+        
+        MyTimerTask timert = new MyTimerTask(gmEngine);
+        Timer timer = new Timer();
+        timer.schedule(timert, 0, 4000); 
+        
         if(setupInfo != "ERROR"){
             JSONObject json =  new JSONObject(setupInfo);
             int hostId = json.getInt("HOST_PLAYER_ID");
@@ -51,10 +83,27 @@ public class ServiceTest {
             int player2Id = gmEngine.joinGame(roomId, "Fatma");
             int player3Id = gmEngine.joinGame(roomId, "Mehmet");
             
-            Integer id = player1Id;
-            gmEngine.attackControl(id, clientRegionMap.get("Brazil").toString(), clientRegionMap.get("Peru").toString());
-        }            
-        
+            Integer firstAttackerPlayerId = player1Id;
+            Integer secondAttackerPlayerId = player2Id;
+            Integer thirdAttackerPlayerId = player3Id;
+            // Now Ayse attacks the region Peru(NOTE: Actually we don't know wether Ayse has Brazil but this should not be an issue in actual GUI)
+            System.out.println("Ayse is attacking to Peru from Brazil");
+            gmEngine.attackControl(firstAttackerPlayerId, clientRegionMap.get("Brazil").toString(), clientRegionMap.get("Peru").toString());
+            
+            gmEngine.attackControl(secondAttackerPlayerId, clientRegionMap.get("Alaska").toString(), clientRegionMap.get("NorthWest").toString());
+            
+            gmEngine.attackControl(thirdAttackerPlayerId, clientRegionMap.get("Spain").toString(), clientRegionMap.get("France").toString());
+            
+            
+            
+            
+            if(gmEngine.isGameOver()){
+                System.out.println("Game Over");
+            } else {
+                System.out.println("Game ON");
+            }
+        }                    
+              
     }
     
 }

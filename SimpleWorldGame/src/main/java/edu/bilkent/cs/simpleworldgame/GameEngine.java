@@ -170,15 +170,15 @@ public class GameEngine {
         SimpleRegion defenderRegion = regions[Integer.parseInt(defenderRegionId)];
         Player p = player_map.get(playerId);
         boolean didWin;
-        if(attackerRegion.getPlayer().getId() == playerId && defenderRegion.getPlayer().getId() != playerId && attackerRegion.totalArmyForce() > 1)
+        if(attackerRegion.getPlayer() == playerId && defenderRegion.getPlayer() != playerId && attackerRegion.totalArmyForce() > 1)
         {
             //REGION CONTROL
             didWin = p.attack(attackerRegion, defenderRegion);
             
             if(didWin)
             {
-                Player temp = defenderRegion.playerBelongTo;
-                temp.removeRegion(defenderRegion);
+                Integer loserPlayerId = defenderRegion.getPlayer();
+                player_map.get(loserPlayerId).removeRegion(defenderRegion);                
                 p.addRegion(defenderRegion, attackerRegion.totalArmyForce() - 1);
                 attackerRegion.setArmies(1);
             }
@@ -214,7 +214,7 @@ public class GameEngine {
                     
                     Player pl = player_map.get(playerId);                    
                     pl.addRegion(reg, troopCount);
-                    reg.setPlayer(pl);
+                    reg.setPlayer(pl.getId());
                 }
                 
                 return true;
@@ -252,7 +252,7 @@ public class GameEngine {
         SimpleRegion r1 = findRegion(n1);
         SimpleRegion r2 = findRegion(n2);
         p = player_map.get(playerId);
-        if(r1.getPlayer().getId() == playerId && r2.getPlayer().getId() == playerId && r1.totalArmyForce() > 1)
+        if(r1.getPlayer() == playerId && r2.getPlayer() == playerId && r1.totalArmyForce() > 1)
         {
             //REGION CONTROL
             p.reinforcement(r1, r2, army);
@@ -270,7 +270,7 @@ public class GameEngine {
         if(isGameSetup == false){
             return -1;
         } else {
-            int id = playerIDgen.incrementAndGet();
+            int id = playerIDgen.getAndIncrement();
             p = new Player(id);
             p.setName(hostPlayerName);
             player_map.put(id, p);
@@ -287,11 +287,12 @@ public class GameEngine {
     }
     
     @WebMethod
-    public boolean fortificationControl(String n, int army){
-        SimpleRegion r = findRegion(n);
-        if(r.getPlayer() == p)
+    public boolean fortificationControl(Integer playerId, Integer regionId, int army){
+        SimpleRegion r = regions[regionId];
+        if(r.getPlayer() == playerId)
         {
             //REGION CONTROL
+            Player p = player_map.get(playerId);
             p.fortification(r, army);
             return true;
         } else {
@@ -309,6 +310,11 @@ public class GameEngine {
         return gameOver;
     }
 
+    @WebMethod
+    public boolean isGameActive() {
+        return isGameActive;
+    }
+    
     @WebMethod
     public String getRegions() {
         JSONArray JS_RegionArray = new JSONArray();
@@ -447,7 +453,26 @@ public class GameEngine {
     }
 
     @WebMethod
-    private int findWhoseRegion(int[] region) { // use only for distribution phase, not gameplay phase.
+    public String getGameStatistics(){
+        JSONArray JS_RegionArray = new JSONArray();
+        for (int i = 0; i < 47; i++) 
+        {   JSONObject JS_PlayerObj = new JSONObject();
+            String id = regions[i].getId().toString();
+            String name = regions[i].getName();
+            JS_PlayerObj.put("ID", id);
+            JS_PlayerObj.put("NAME", name);            
+            JS_PlayerObj.put("CAVALRY_AMOUNT", regions[i].getCavalryAmount());
+            JS_PlayerObj.put("ARTILLERY_AMOUNT", regions[i].getArtilleryAmount());
+            JS_PlayerObj.put("INFANTRY_AMOUNT", regions[i].getInfantryAmount());
+            JS_PlayerObj.put("TOTAL_ARMY_FORCE", regions[i].totalArmyForce());
+            JS_PlayerObj.put("PLAYER_BELONG_TO", regions[i].playerBelongTo);
+            JS_RegionArray.put(JS_PlayerObj);
+        }
+        return JS_RegionArray.toString();
+    }
+    
+    @WebMethod
+    public int findWhoseRegion(int[] region) { // use only for distribution phase, not gameplay phase.
 
         
         for (int i = 0; i < player_map.size(); i++) {
