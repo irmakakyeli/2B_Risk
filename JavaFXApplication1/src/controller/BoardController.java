@@ -3,10 +3,7 @@ import static controller.Mod.ATTACK;
 import static controller.Mod.FORTIFICATION;
 import static controller.Mod.REINFORCEMENT;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,7 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -22,11 +18,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import view.ViewFactory;
-import ws.client.*;
+import ws.client.GameEngine;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Popup;
-
 
 
 enum Mod {
@@ -39,13 +32,8 @@ public class BoardController extends BaseController{
     public BoardController( ViewFactory viewFactory, String fxmlName) {
         super( viewFactory, fxmlName);
         initialize();
+        
     }
-
-    @FXML
-    private ImageView confetti, crown, wreath, shadow;
-
-    @FXML
-    private Label winnerName, playerTurn;
 
     @FXML
     private Button passBtn;
@@ -54,13 +42,13 @@ public class BoardController extends BaseController{
     private Rectangle rect;
     
     @FXML
-    private Rectangle rect2, barRect;
+    private Rectangle rect2;
 
     @FXML
     private Circle circle;
 
     @FXML
-    private Button cardsBtn1, cardBtn2;
+    private Button cardsBtn;
     
     @FXML
     private Button decreaseBtn, increaseBtn;
@@ -70,46 +58,9 @@ public class BoardController extends BaseController{
 
     @FXML
     private ImageView iw;
-    
-    @FXML
-    Button ok2;
-    
-    @FXML
-    private ImageView tick;
-
-    @FXML
-    private Circle winnerCircle;
-
-    @FXML
-    private ImageView minion;
-
-    @FXML
-    private Label victory;
-    
-     @FXML
-    private ImageView whiteFlag;
-     
-      @FXML
-    private Rectangle rectangle;
-
-    @FXML
-    private Label label;
-
-    @FXML
-    private Button no, yes;
-    
-    @FXML
-    private ImageView attack;
-
-    @FXML
-    private ImageView reinfo;
-
-    @FXML
-    private ImageView fortific;
 
 
     Mod action = FORTIFICATION;
-    boolean act = false;
     
     @FXML
     private Label Alaska, WesternAmerica,CentralAmerica, EasternUS, Greenland, NorthWest,
@@ -121,9 +72,6 @@ public class BoardController extends BaseController{
    
     GameEngine game; // TODO
     Label[] labels;
-    VBox layout= new VBox(10);
-    Scene scene1= new Scene(layout, 300, 250);
-    Stage popupwindow=new Stage();
     
     private void initialize(){
         
@@ -131,28 +79,7 @@ public class BoardController extends BaseController{
         decreaseBtn.setOpacity(0.0);
         increaseBtn.setOpacity(0.0);
         number.setOpacity(0.0);
-        File file = new File("css/resources/arrowForAmount.png");
-        Image image = new Image(file.toURI().toString());
-        iw.setImage(image);
         iw.setOpacity(0.0);
-
-        confetti.setVisible(false);
-        crown.setVisible(false);
-        wreath.setVisible(false);
-        shadow.setVisible(false);
-        winnerName.setVisible(false);
-        tick.setVisible(false);
-        minion.setVisible(false);
-        victory.setVisible(false);
-        winnerCircle.setVisible(false);
-        ok2.setVisible(false);
-        ok2.setDisable(true);
-        
-        rect.setOpacity(0.0);
-        circle.setOpacity(0.0);
-        barRect.setOpacity(0.0);
-        passBtn.setVisible(false);
-        passBtn.setDisable(true);
 
         labels = new Label[47];
         labels[0] = Alaska;
@@ -202,7 +129,6 @@ public class BoardController extends BaseController{
         labels[44] = Indonesia;
         labels[45] = NewGuinea;
         labels[46] = WesternAustralia;
-
     }
 
     @FXML
@@ -211,7 +137,6 @@ public class BoardController extends BaseController{
         Stage stage = (Stage) passBtn.getScene().getWindow();
         viewFactory.closeStage(stage);
     }
-
     @FXML
     void cardsBtnAction(ActionEvent event) {
 
@@ -228,7 +153,7 @@ public class BoardController extends BaseController{
 
             @Override
             public void handle(ActionEvent event) {
-                game.activatePLayer().integrate(); 
+                game.activatePlayer().integrate(); 
             }
         });
 
@@ -248,25 +173,23 @@ public class BoardController extends BaseController{
         popupwindow.setScene(scene1);
         popupwindow.showAndWait();
     }
+    
 
     @FXML
     void playBtnAction(ActionEvent event) {
 
         switch(action){
             case FORTIFICATION:
-                fortific.setVisible(true);
                 rect.setHeight(rect.getHeight() + 35);
                 circle.setCenterY(circle.getCenterY() + 35);
                 action = ATTACK;
                 break;
             case ATTACK:
-                attack.setVisible(true);
                 rect.setHeight(rect.getHeight() + 35);
                 circle.setCenterY(circle.getCenterY() + 35);
                 action = REINFORCEMENT;
                 break;
             case REINFORCEMENT:
-                reinfo.setVisible(true);
                 rect.setHeight(rect.getHeight() - 70);
                 circle.setCenterY(circle.getCenterY() - 70);
                 action = FORTIFICATION;         
@@ -275,11 +198,10 @@ public class BoardController extends BaseController{
 
     }
      
-   @FXML
-    void RegionBtnAction(MouseEvent event) throws IOException{
+    @FXML
+    void imagePaneMouseClicked(MouseEvent event) throws IOException{
 
-        //String region = game.tellRegion((int) event.getX(), (int) event.getY());
-        String region = ((Button)event.getSource()).getText();
+        String region = game.tellRegion((int) event.getX(), (int) event.getY());
 
         if(region == null)
             return;
@@ -289,32 +211,31 @@ public class BoardController extends BaseController{
         switch(action){
             case FORTIFICATION:
                 if (game.getSelectedRegion1() != null) {
-                    if(game.IsDistributionOver())
-                        changeTheVisibility();
-                    if(act || ! game.IsDistributionOver()) {
-                        if(game.IsDistributionOver())
-                            game.getCurrentPlayer().fortification(game.getSelectedRegion1(), number.getText());
-                        else
-                            game.getCurrentPlayer().fortification(game.getSelectedRegion1(), 1);
-                        updateMap(game.getSelectedRegion1());
-                        updateMap(game.getSelectedRegion2());
-                        game.setSelectedRegion1(null);
-                        game.setSelectedRegion2(null);
-                        if(game.IsDistributionOver())
-                            changeTheVisibility();
-                        act = false;
-                    }
+                    rect2.setOpacity(1.0);
+                    number.setOpacity(1.0);
+                    iw.setOpacity(1.0);
 
-                    if(game.IsDistributionOver()){
-                        rect.setOpacity(1.0);
-                        circle.setOpacity(1.0);
-                        barRect.setOpacity(1.0);
-                        passBtn.setVisible(true);
-                        passBtn.setDisable(false);
-                    }
-                    fortific.setVisible(false);
+                    increaseBtn.setDisable(false);
+                    increaseBtn.setVisible(true);
+
+                    decreaseBtn.setDisable(false);
+                    decreaseBtn.setVisible(true);
+                    //TODO: LABELDAN SAYI AL GAMEENGİNE E GÖNDER
+                    game.getCurrentPlayer().fortification(game.getSelectedRegion1());
+                    updateMap(game.getSelectedRegion1());
+                    updateMap(game.getSelectedRegion2());
+                    game.setSelectedRegion1(null);
+                    game.setSelectedRegion2(null);
+                    rect2.setOpacity(0.0);
+                    number.setOpacity(0.0);
+                    iw.setOpacity(0.0);
+
+                    increaseBtn.setDisable(true);
+                    increaseBtn.setVisible(false);
+
+                    decreaseBtn.setDisable(true);
+                    decreaseBtn.setVisible(false);
                 }
-                
                 break;
             case ATTACK:
                 if (game.getSelectedRegion1() != null && game.getSelectedRegion2() != null) {
@@ -323,70 +244,58 @@ public class BoardController extends BaseController{
                     updateMap(game.getSelectedRegion2());
                     game.setSelectedRegion1(null);
                     game.setSelectedRegion2(null);
-                    attack.setVisible(false);
-                    if( game.isGameOver())
-                        finishTheGame();
+                    game.isGameFinished(); // TODO
                 }
                 break;
             case REINFORCEMENT:
                 if (game.getSelectedRegion1() != null && game.getSelectedRegion2() != null) {
-                    changeTheVisibility();
-                    if(act) {
-                        game.getCurrentPlayer().reinforcement(game.getSelectedRegion1(),
-                                game.getSelectedRegion2(), number.getText());
-                        updateMap(game.getSelectedRegion1());
-                        updateMap(game.getSelectedRegion2());
-                        game.setSelectedRegion1(null);
-                        game.setSelectedRegion2(null);
-                        game.changeCurrentPlayer();
-                        changeTheVisibility();
-                        showPlayerChange();
-                        act = false;
-                    }
-                    reinfo.setVisible(false);
+                    rect2.setOpacity(1.0);
+                    number.setOpacity(1.0);
+                    iw.setOpacity(1.0);
+
+                    increaseBtn.setDisable(false);
+                    increaseBtn.setVisible(true);
+
+                    decreaseBtn.setDisable(false);
+                    decreaseBtn.setVisible(true);
+                    //TODO: LABELDAN SAYI AL GAMEENGİNE E GÖNDER
+                    game.getCurrentPlayer().reinforcement(game.getSelectedRegion1(), game.getSelectedRegion2());
+                    updateMap(game.getSelectedRegion1());
+                    updateMap(game.getSelectedRegion2());
+                    game.setSelectedRegion1(null);
+                    game.setSelectedRegion2(null);
+                    game.changeCurrentPlayer(); // TODO
+                    rect2.setOpacity(0.0);
+                    number.setOpacity(0.0);
+                    iw.setOpacity(0.0);
+
+                    increaseBtn.setDisable(true);
+                    increaseBtn.setVisible(false);
+
+                    decreaseBtn.setDisable(true);
+                    decreaseBtn.setVisible(false);
                 }
                 break;
+            }
         }
-    }
 
-    public void showPlayerChange(){
-        playerTurn.setText(game.getCurrentPlayer() + " is playing");
-    }
-
-    public void finishTheGame(){
-
-        confetti.setVisible(true);
-        crown.setVisible(true);
-        wreath.setVisible(true);
-        shadow.setVisible(true);
-        winnerName.setVisible(true);
-        tick.setVisible(true);
-        minion.setVisible(true);
-        victory.setVisible(true);
-        winnerCircle.setVisible(true);
-        ok2.setVisible(true);
-        ok2.setDisable(false);
-
-        // Close the stage
-        Stage stage = (Stage) number.getScene().getWindow();
-        viewFactory.showMainMenu();
-    }
+    
 
     private void updateMap(String region) {
         // TODO
     }
 
     private void updateLabel(String region) {
-        int index = 0;
-        int i = 0;
+        int index, i;
         for( i = 0; i < 47; i++) {
             if(labels[i].equals(getRidOfBlanks(region))) {
                 index = i;
                 break;
             }
         }
-        if(i != 47) 
-        labels[index].setText(game.getArmyOf(region));
+        if(i != 47) {
+            labels[index].setText(game.getCurrentPlayer().getCountry(region).getTotalArmyForce()); // TODO -- get army number
+        }
     }
         
     private String getRidOfBlanks(String region) {
@@ -401,19 +310,8 @@ public class BoardController extends BaseController{
     
     @FXML
     void increaseBtnAction() {
-
-        int compare = 0;
-
-        if(action == Mod.REINFORCEMENT)
-            compare = game.getSoldierOfRegion2();
-
-        if(action == Mod.FORTIFICATION)
-            compare = game.getSoldierWaiting();
-
-        if(Integer.parseInt(number.getText()) < compare) {
-            int i = Integer.parseInt(number.getText()) + 1;
-            number.setText(String.valueOf(i));
-        }
+        int i = Integer.parseInt(number.getText()) + 1;
+        number.setText(String.valueOf(i));
     }
 
     @FXML
@@ -423,121 +321,8 @@ public class BoardController extends BaseController{
            number.setText(String.valueOf(i));
         }
     }
-
-    @FXML
-    void okBtnAction() {
-        act = true;
-    }
-
-    @FXML
-    void resignBtnAction() {
-       
-       label.setText("Are you sure to resign?");
-       makeAppear();
-    }
-
-    private void changeTheVisibility(){
-        if(rect2.getOpacity() > 0)
-            rect2.setOpacity(1.0);
-        else
-            rect2.setOpacity(0.0);
-
-        if(number.getOpacity() > 0)
-            number.setOpacity(1.0);
-        else
-            number.setOpacity(0.0);
-
-        if(iw.getOpacity() > 0)
-            iw.setOpacity(1.0);
-        else
-            iw.setOpacity(0.0);
-
-        if(increaseBtn.isVisible())
-            increaseBtn.setVisible(false);
-        else
-            increaseBtn.setVisible(true);
-
-        if(decreaseBtn.isVisible())
-            decreaseBtn.setVisible(false);
-        else
-            decreaseBtn.setVisible(true);
-
-        if(increaseBtn.isDisable())
-            increaseBtn.setDisable(false);
-        else
-            increaseBtn.setDisable(true);
-
-        if(decreaseBtn.isDisable())
-            decreaseBtn.setDisable(false);
-        else
-            decreaseBtn.setDisable(true);
-    }
-    
-     @FXML
-    void ok2BtnAction(ActionEvent event) {
-        
-        viewFactory.showMainMenu();
-        Stage stage = (Stage) number.getScene().getWindow();
-        viewFactory.closeStage(stage);
-    } 
-    
-    @FXML
-    void noBtnAction(ActionEvent event) {
-        
-       rectangle.setVisible(false);
-        label.setVisible(false);
-        no.setVisible(false);
-        no.setDisable(true);
-         yes.setVisible(false);
-        yes.setDisable(true);
-    }
-    
-     @FXML
-    void yesBtnAction(ActionEvent event) {
-        
-        // Aler the resign for the database
-        game.resignRequest(true);
-       viewFactory.showMainMenu();
-        Stage stage = (Stage) number.getScene().getWindow();
-        viewFactory.closeStage(stage);
-    }
-   
-    
-    void makeAppear() {
-        rectangle.setVisible(true);
-        label.setVisible(true);
-        no.setVisible(true);
-        no.setDisable(false);
-        yes.setVisible(true);
-        yes.setDisable(false);
-        
-    }
-
-    @FXML
-    void mouseEnteredRegion(final ActionEvent event) {
-        
-    popupwindow.initModality(Modality.APPLICATION_MODAL);
-    //popupwindow.setTitle("This is a pop up window");
-      
-    Label label1= new Label(((Button)event.getSource()).getText());
-     
-    Label label2= new Label("Belongs to: -Player-");
-    
-    //TODO: Capital
-    Label label3 = new Label("");
-    layout.getChildren().addAll(label1, label2, label3);
-      
-    layout.setAlignment(Pos.CENTER);
-       
-    popupwindow.setScene(scene1);
-      
-    popupwindow.showAndWait();
-        
-    }
-    
-     @FXML
-    void mouseExitedRegion(final ActionEvent event) {
-    
-         popupwindow.close();
-    }
 }
+
+
+
+
