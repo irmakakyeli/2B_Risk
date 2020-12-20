@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 import edu.bilkent.cs.simpleworldgame.Attack.*;
 import java.util.Iterator;
+import java.util.HashMap;
 
 public class Player  {
 	Integer id;
@@ -18,12 +19,14 @@ public class Player  {
 	AtomicInteger score;
         boolean isActive, isWinner;
         AttackStrategy strategy;
+        HashMap<String,Integer> hand; //player's hand
 	
 	public Player(Integer pid) {
             id = pid;
             isActive = false;
             assigned_Regions = new ConcurrentSkipListSet<Region>();
             name = "Player-" + id.toString();
+            hand = new HashMap();//init empty hand as a hashmap
 	}
 
 	public String getName() {
@@ -66,8 +69,13 @@ public class Player  {
                     isWinner = true;
                 }
                 return strategy.attack(attacking, defending);
-            }      
+            } 
+            
+           
+            
         }
+        
+        
         
         public void reinforcement ( Region initial, Region finalregion, int armyNumber){
             int army1, army2;
@@ -101,8 +109,13 @@ public class Player  {
             assigned_Regions.add(gcountry);
         }
         
-        public void cartIntegration()
+        public int cartIntegration()
         {
+            int bonus = 0;
+            if(hand.get("Artillery")== 3){
+                bonus = 3;
+            }
+            return bonus;
             
         }
         
