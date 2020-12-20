@@ -63,7 +63,7 @@ public class Card {
         deck.put("Artillery", artilleryCount);
     }
     
-    String getRandomCardName(){
+    String getRandomCardName(){ 
         String name = "none";
         cardNames = new ArrayList();
         cardNames.add("Cavalry");
@@ -73,14 +73,18 @@ public class Card {
         int randomInt = (int)randomNumber; // turn the random double to int between 0-2
         name = cardNames.get(randomInt); // we have the name to be returned
         
+        if(deck.get(name)!= 0){//check if card has run out
         int newSoldierCount;
         newSoldierCount = deck.get(name);//decrement the
         newSoldierCount--;              // amount of the card by 1 
         deck.put(name, newSoldierCount);// that has the generated name 
         
-        
-        
-        
+       
         return name;
+        }
+        else
+            return "none";
+
     }
+    
 }

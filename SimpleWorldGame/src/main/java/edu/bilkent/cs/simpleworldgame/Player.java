@@ -21,6 +21,7 @@ public class Player  {
         AttackStrategy strategy;
 	Card card;
         HashMap<String,Integer> hand; //player's hand
+        int cCount, aCount, iCount; //soldier cards count
             
 	public Player(Integer pid) {
             id = pid;
@@ -28,6 +29,9 @@ public class Player  {
             assigned_Regions = new ConcurrentSkipListSet<Region>();
             name = "Player-" + id.toString();
             hand = new HashMap<>();//init empty hand as a hashmap,
+            hand.put("Infantry", 0);
+            hand.put("Artillery", 0);
+            hand.put("Cavalry", 0);
             card = new Card(20);
 	}
 
@@ -57,7 +61,12 @@ public class Player  {
                 }
                 getTheRegion = strategy.attack(attacking, defending);
                 if(getTheRegion){
-                    hand.put(card.getRandomCardName() , hand.size());
+                    if(card.getRandomCardName() == "Infantry")
+                    hand.put(card.getRandomCardName() ,iCount );
+                    else if(card.getRandomCardName() == "Artillery")
+                    hand.put(card.getRandomCardName() ,aCount );
+                    else if(card.getRandomCardName() == "Cavalry")
+                    hand.put(card.getRandomCardName() ,cCount );
                 }
                 return getTheRegion;
             } 
@@ -145,4 +154,12 @@ public class Player  {
             }
            return true;
         }
+        
+        public HashMap getHand(){
+            return hand;
+        }
+        
+        
+        
+        
 }
