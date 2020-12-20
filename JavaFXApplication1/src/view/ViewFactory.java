@@ -81,30 +81,9 @@ public class ViewFactory {
     }
 
     public void showRoomPage(){
-        RoomController controller = new RoomController(this, "RoomPage.fxml");
-        
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
-        fxmlLoader.setController(controller);
-        
-
-        Parent parent;
-
-        try{
-            parent = fxmlLoader.load();
-        } catch (IOException exception){
-            exception.printStackTrace();
-            return;
-        }
-
-        Scene scene = new Scene(parent);
-        Stage stage = new Stage();
-        getUsersBtnAction(stage, controller);
-
-        scene.getStylesheets().addAll(this.getClass().getResource("css/room.css").toExternalForm());
-        stage.setScene(scene);
-        currentStage = stage;
-        stage.show();
+        BaseController baseController = new RoomController(this, "RoomPage.fxml");
+        initializeStage(baseController, "css/room.css");
+        currentStage = currStage;
     }
 
    public void showBoard(){
@@ -151,29 +130,6 @@ public class ViewFactory {
         
         return hostOrJoin;
     }
-    void getUsersBtnAction(Stage stage, RoomController controller) {
-        
-        GameEngineService service = new GameEngineService();
-        final GameEngine gmEngine = service.getGameEnginePort();
-        controller.getUserList().clear();
-        String response = gmEngine.getPLayers();
-
-        JSONObject json =  new JSONObject(response);
-        Iterator<String> keys = json.keys();
-        String list = "";
-        while (keys.hasNext()) {
-            String key = keys.next();
-            String user = json.get(key).toString();
-            user = retrieveName(user);
-            list += key + " - " + user + "\n";
-
-        }
-
-        controller.getUserList().setText(list);
-        //viewFactory.showUsers();
-        System.out.println(list);
-        //viewFactory.closeStage(stage);
-    }
     
     public String retrieveName(String input){
         String userName = "";
@@ -183,5 +139,4 @@ public class ViewFactory {
 
         return userName;
     }
-    
 }
