@@ -17,6 +17,7 @@ import javax.jws.soap.SOAPBinding.Style;
 
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import org.json.JSONObject; 
@@ -384,6 +385,10 @@ public class GameEngine {
     public boolean nextTurn(){
         onceInTurn = true;
       return true;
+    }
+    
+    public HashMap getCards(){
+        return p.getHand();
     }
 }
     
