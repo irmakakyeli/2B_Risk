@@ -2,7 +2,6 @@ ws\guiclient\stubs\GameEngineService.class
 ws\guiclient\controller\RoomController.class
 ws\guiclient\MainGUI.class
 edu\bilkent\cs\simpleworldgame\Attack\DisadvantageousAttack.class
-edu\bilkent\cs\simpleworldgame\GameEngine.class
 edu\bilkent\cs\simpleworldgame\Distribution\Automatic.class
 ws\guiclient\stubs\GetPLayers.class
 edu\bilkent\cs\simpleworldgame\Attack\NormalAttack.class
@@ -19,7 +18,6 @@ ws\guiclient\stubs\GetWorld.class
 ws\guiclient\stubs\GetPLayersResponse.class
 ws\guiclient\controller\HelpController.class
 edu\bilkent\cs\simpleworldgame\Dice.class
-edu\bilkent\cs\simpleworldgame\StartUp.class
 ws\guiclient\stubs\ActivatePLayer.class
 ws\guiclient\stubs\GameEngine.class
 ws\guiclient\stubs\ObjectFactory.class

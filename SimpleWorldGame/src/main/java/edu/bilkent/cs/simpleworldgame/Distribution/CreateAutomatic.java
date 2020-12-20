@@ -16,7 +16,7 @@ public class CreateAutomatic extends DistributionFactory{
     @Override
     public Distribution createProduct(int playerNo, int regionCount)
     {
-        Automatic automatic = new Automatic( playerNo, regionCount);
-        return automatic;
+        //Automatic automatic = new Automatic( playerNo, regionCount);
+        return null;
     }
 }
