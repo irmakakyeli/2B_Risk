@@ -19,6 +19,7 @@ public class Player  {
 	AtomicInteger score;
         boolean isActive, isWinner;
         AttackStrategy strategy;
+        Card card;
         HashMap<String,Integer> hand; //player's hand
 	
 	public Player(Integer pid) {
@@ -26,7 +27,8 @@ public class Player  {
             isActive = false;
             assigned_Regions = new ConcurrentSkipListSet<Region>();
             name = "Player-" + id.toString();
-            hand = new HashMap();//init empty hand as a hashmap
+            hand = new HashMap<>();//init empty hand as a hashmap,
+            card = new Card(20);
 	}
 
 	public String getName() {
@@ -46,13 +48,18 @@ public class Player  {
 	}
         
         public boolean attack(Region attacking, Region defending){
+            boolean getTheRegion;
             if(defending.isCapital)
             {
                 strategy = new DisadvantageousAttack();
                 if(assigned_Regions.size() == 47) {
                     isWinner = true;
                 }
-                return strategy.attack(attacking, defending);
+                getTheRegion = strategy.attack(attacking, defending);
+                if(getTheRegion){
+                    hand.put(card.getCardName() , hand.size());
+                }
+                return getTheRegion; 
             } 
             else if (attacking.isCapital || attacking.isSpecial)
             {
@@ -60,7 +67,11 @@ public class Player  {
                 if(assigned_Regions.size() == 47) {
                     isWinner = true;
                 }
-                return strategy.attack(attacking, defending);
+                getTheRegion = strategy.attack(attacking, defending);
+                if(getTheRegion){
+                    hand.put(card.getCardName() , hand.size());
+                }
+                return getTheRegion;
             }
             else 
             {
@@ -68,14 +79,13 @@ public class Player  {
                 if(assigned_Regions.size() == 47) {
                     isWinner = true;
                 }
-                return strategy.attack(attacking, defending);
+                getTheRegion = strategy.attack(attacking, defending);
+                if(getTheRegion){
+                    hand.put(card.getCardName() , hand.size());
+                }
+                return getTheRegion;
             } 
-            
-           
-            
         }
-        
-        
         
         public void reinforcement ( Region initial, Region finalregion, int armyNumber){
             int army1, army2;
