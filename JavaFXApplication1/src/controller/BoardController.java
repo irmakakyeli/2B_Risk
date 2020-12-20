@@ -22,10 +22,14 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import view.ViewFactory;
-import ws.client.*;
+import edu.bilkent.cs.simpleworldgame.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Popup;
+import edu.bilkent.cs.simpleworldgame.*;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 
@@ -90,13 +94,13 @@ public class BoardController extends BaseController{
     private ImageView whiteFlag;
      
       @FXML
-    private Rectangle rectangle;
+    private Rectangle rectangle, rectangle2;
 
     @FXML
-    private Label label;
+    private Label label, label2;
 
     @FXML
-    private Button no, yes;
+    private Button no, yes, integrate, x;
     
     @FXML
     private ImageView attack;
@@ -106,6 +110,11 @@ public class BoardController extends BaseController{
 
     @FXML
     private ImageView fortific;
+    
+     @FXML
+    private Rectangle card1, card2, card3, card4, card5;
+    
+    
 
 
     Mod action = FORTIFICATION;
@@ -124,9 +133,27 @@ public class BoardController extends BaseController{
     VBox layout= new VBox(10);
     Scene scene1= new Scene(layout, 300, 250);
     Stage popupwindow=new Stage();
+   
+    private Rectangle[] cards;
     
     private void initialize(){
-        
+        cards[0] = card1;
+        cards[1] = card2;
+        cards[2] = card3;
+        cards[3] = card4;
+        cards[4] = card5;
+
+        card1.setVisible(false);
+        card2.setVisible(false);
+        card3.setVisible(false);
+        card4.setVisible(false);
+        card5.setVisible(false);
+        rectangle2.setVisible(false);
+        label2.setVisible(false);
+        x.setVisible(false);
+        integrate.setVisible(false);
+        x.setDisable(true);
+        integrate.setDisable(true);
         rect2.setOpacity(0.0);
         decreaseBtn.setOpacity(0.0);
         increaseBtn.setOpacity(0.0);
@@ -212,41 +239,49 @@ public class BoardController extends BaseController{
         viewFactory.closeStage(stage);
     }
 
-    @FXML
-    void cardsBtnAction(ActionEvent event) {
+   @FXML
+    void cardsBtnAction() {
+        rectangle2.setVisible(true);
+        label2.setVisible(true);
+        integrate.setVisible(true);
+        integrate.setDisable(false);
+        label2.setText("CARDS");
+        x.setVisible(true);
+        x.setDisable(false);
 
-        Stage popupwindow=new Stage();
-        popupwindow.initModality(Modality.APPLICATION_MODAL);
-        popupwindow.setTitle("CardList");
 
-        Label cardsTitle= new Label("CARDS");
-
-        Button integrate = new Button("INTEGRATE");
-        integrate.setStyle(" -fx-background-color:  #b80000;");
-        integrate.setStyle("-fx-background-radius:  100;");
-        integrate.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                game.activatePLayer().integrate(); 
+        int count = 0;
+        Iterator it= game.getCards().entrySet().iterator();
+        while (it.hasNext()) { 
+            Map.Entry game.getCards()= (Map.Entry)it.next(); 
+            int value = ((int) game.getCards().getValue() ); 
+            String key = game.getCards().getKey();
+            if (value > 0) {
+                cards[count].setVisible(true);
+                count++;
             }
-        });
+        }
+    }
+    @FXML
+    void integrateBtnAction(ActionEvent event) {
+        game.integration();
+        cardsBtnAction();
+    }
 
-        integrate.setLayoutX(250);
-        integrate.setLayoutY(220);
+    @FXML
+    void xBtnAction(ActionEvent event) {
+        rectangle2.setVisible(false);
+        label2.setVisible(false);
+        integrate.setVisible(false);
+        integrate.setDisable(true);
+        x.setVisible(false);
+        x.setDisable(true);
 
-        VBox layout= new VBox(100);
-
-        // TODO -- get cards and show them
-
-        layout.getChildren().addAll(cardsTitle, integrate);
-        layout.setAlignment(Pos.CENTER);
-
-        Scene scene1= new Scene(layout, 300, 250);
-        scene1.setFill(Color.TRANSPARENT);
-
-        popupwindow.setScene(scene1);
-        popupwindow.showAndWait();
+        card1.setVisible(false);
+        card2.setVisible(false);
+        card3.setVisible(false);
+        card4.setVisible(false);
+        card5.setVisible(false);
     }
 
     @FXML
@@ -374,6 +409,25 @@ public class BoardController extends BaseController{
 
     private void updateMap(String region) {
         // TODO
+        class MyTimerTask extends TimerTask  {
+            GameEngine pEngine;
+
+            public MyTimerTask(GameEngine pEngine) {
+                this.pEngine = pEngine;
+            }
+
+            @Override
+            public void run() {
+                if(pEngine.isGameActive()){
+                        String currentGameStats = pEngine.getGameStatistics();
+                        System.out.println(currentGameStats);
+                }  
+            }
+        }
+        
+        MyTimerTask timert = new MyTimerTask(game);
+        Timer timer = new Timer();
+        timer.schedule(timert, 0, 4000); 
     }
 
     private void updateLabel(String region) {
@@ -540,4 +594,6 @@ public class BoardController extends BaseController{
     
          popupwindow.close();
     }
+    
+
 }
