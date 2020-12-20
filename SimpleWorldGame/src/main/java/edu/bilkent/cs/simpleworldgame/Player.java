@@ -47,7 +47,7 @@ public class Player  {
 		isActive = act_state;
 	}
         
-        public boolean attack(Region attacking, Region defending){
+        public boolean attack(Region attacking, Region defending, boolean once){
             boolean getTheRegion;
             if(defending.isCapital)
             {
@@ -56,7 +56,7 @@ public class Player  {
                     isWinner = true;
                 }
                 getTheRegion = strategy.attack(attacking, defending);
-                if(getTheRegion){
+                if(getTheRegion && once){
                     hand.put(card.getRandomCardName() , hand.size());
                 }
                 return getTheRegion;
@@ -68,7 +68,7 @@ public class Player  {
                     isWinner = true;
                 }
                 getTheRegion = strategy.attack(attacking, defending);
-                if(getTheRegion){
+                if(getTheRegion && once){
                     hand.put(card.getRandomCardName() , hand.size());
                 }
                 return getTheRegion;
@@ -80,7 +80,7 @@ public class Player  {
                     isWinner = true;
                 }
                 getTheRegion = strategy.attack(attacking, defending);
-                if(getTheRegion){
+                if(getTheRegion && once){
                     hand.put(card.getRandomCardName(), hand.size());
                 }
                 return getTheRegion;
