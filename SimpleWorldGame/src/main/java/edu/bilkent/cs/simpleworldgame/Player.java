@@ -16,7 +16,7 @@ import edu.bilkent.cs.simpleworldgame.Attack.*;
 public class Player {
     Integer id;
     String name;
-    ConcurrentSkipListSet<Integer> assigned_Regions;
+    ConcurrentSkipListSet<Region> assigned_Regions;
     AtomicInteger score;
     boolean isActive, isWinner;
     AttackStrategy strategy;
@@ -157,7 +157,7 @@ public class Player {
     public void addRegion(Region gcountry, int armyNumber) {
         gcountry.setArmies(armyNumber);
         // gcountry.setPlayer(this);
-        assigned_Regions.add(gcountry.getId());
+        assigned_Regions.add(gcountry);
     }
 
     public int cartIntegration() {
