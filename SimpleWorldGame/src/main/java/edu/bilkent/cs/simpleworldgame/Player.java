@@ -123,7 +123,13 @@ public class Player  {
         {
             int bonus = 0;
             if(hand.get("Artillery")== 3){
+                bonus = 4;
+            }
+            if(hand.get("Infantry")== 3){
                 bonus = 3;
+            }
+            if(hand.get("Cavalry")== 3){
+                bonus = 5;
             }
             return bonus;
             
