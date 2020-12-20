@@ -15,19 +15,22 @@ import java.util.ArrayList;
 public class Card {
     String type;
     HashMap<String, Integer> deck;
-    ArrayList<String> deck2;
-    int cavalryCount, infantryCount, knightCount;
+    ArrayList<String> cardNames;
+    int cavalryCount, infantryCount,artilleryCount;
   
     
     public Card(int totalCardsOfOneKind){
         int cavalryCount = totalCardsOfOneKind;
         int infantryCount  = totalCardsOfOneKind;
-        int knightCount  = totalCardsOfOneKind;
-        typeDeterminer();
+        int artilleryCount  = totalCardsOfOneKind;
+        createDeck();
+        
+        //typeDeterminer();
     }
     
     
-    private String typeDeterminer(){
+
+    /*private void typeDeterminer(){
         double randomNumber = Math.random()*2;//create random double between 0-2
         int randomInt = (int)randomNumber; // turn the random double to int between 0-2
         String soldierType;
@@ -49,10 +52,35 @@ public class Card {
         
                 
         
-       
+        nameOfCard =  soldierType; 
+        
+    }*/
+    
+    private void createDeck( ){
+        deck = new HashMap<String, Integer>();
+        deck.put("Cavalry  " , cavalryCount);
+        deck.put("Infantry ", infantryCount);
+        deck.put("Artillery", artilleryCount);
+    }
+    
+    String getRandomCardName(){
+        String name = "none";
+        cardNames = new ArrayList();
+        cardNames.add("Cavalry");
+        cardNames.add("Infantry");
+        cardNames.add("Artillery");
+        double randomNumber = Math.random()*2;//create random double between 0-2
+        int randomInt = (int)randomNumber; // turn the random double to int between 0-2
+        name = cardNames.get(randomInt); // we have the name to be returned
+        
+        int newSoldierCount;
+        newSoldierCount = deck.get(name);//decrement the
+        newSoldierCount--;              // amount of the card by 1 
+        deck.put(name, newSoldierCount);// that has the generated name 
         
         
         
-        return  soldierType; 
+        
+        return name;
     }
 }
