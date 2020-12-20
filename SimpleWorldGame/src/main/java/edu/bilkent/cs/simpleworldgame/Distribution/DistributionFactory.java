@@ -9,7 +9,7 @@ package edu.bilkent.cs.simpleworldgame.Distribution;
  *
  * @author User
  */
-public abstract class DistributionFactory {
+public class DistributionFactory {
     
     
     public Distribution createProduct(int playerNo, int regionCount)
