@@ -33,7 +33,7 @@ public class GameEngine {
     JSONObject config;
     Region[] regions;
     Player p, winner;
-    boolean gameOver, configuration;
+    boolean gameOver, configuration, onceInTurn;
     public String selectedRegion1, selectedRegion2;
     String roomID;
     DistributionFactory df;
@@ -44,6 +44,7 @@ public class GameEngine {
         player_map = new ConcurrentHashMap<Integer, Player>();
         regions = new Region[47];
         winner = null;
+        onceInTurn = true;
        
         /*regions[0] = new Region("Alaska");
         regions[1] = new Region("WesternAmerica");
@@ -154,8 +155,8 @@ public class GameEngine {
         if(r1.getPlayer() == p && r1.getPlayer() != p && r1.totalArmyForce() > 1)
         {
             //REGION CONTROL
-            didWin = p.attack(r1, r2);
-            
+            didWin = p.attack(r1, r2, onceInTurn);
+            onceInTurn = false;
             if(didWin)
             {
                 Player temp = r2.playerBelongTo;
@@ -186,11 +187,14 @@ public class GameEngine {
         }
     }
     
+    public int integration(){
+        return p.cartIntegration();
+    }
+    
     public boolean fortificationControl(String n, int army){
         Region r = findRegion(n);
         if(r.getPlayer() == p)
         {
-            //REGION CONTROL
             p.fortification(r, army);
             return true;
         } else {
@@ -208,10 +212,6 @@ public class GameEngine {
 
     public Region[] getRegions() {
         return regions;
-    }
-    
-    public void handOutCard(){
-        
     }
     
     public Region findRegion(String name){
@@ -239,7 +239,6 @@ public class GameEngine {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -383,6 +382,7 @@ public class GameEngine {
     }
     
     public boolean nextTurn(){
+        onceInTurn = true;
       return true;
     }
 }
