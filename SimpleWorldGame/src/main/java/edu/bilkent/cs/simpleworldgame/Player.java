@@ -43,7 +43,7 @@ public class Player  {
 		isActive = act_state;
 	}
         
-        public boolean attack(SimpleRegion attacking, SimpleRegion defending){
+        public boolean attack(Region attacking, Region defending){
             if(defending.isCapital)
             {
                 strategy = new DisadvantageousAttack();
@@ -70,7 +70,7 @@ public class Player  {
             }      
         }
         
-        public void reinforcement ( SimpleRegion initial, SimpleRegion finalregion, int armyNumber){
+        public void reinforcement ( Region initial, Region finalregion, int armyNumber){
             int army1, army2;
             army1 = initial.totalArmyForce();
             army2 = finalregion.totalArmyForce();
@@ -83,20 +83,20 @@ public class Player  {
             
         }
         
-        public void fortification(SimpleRegion gcountry, int armyNumber){
+        public void fortification(Region gcountry, int armyNumber){
             int army;
             army = gcountry.totalArmyForce();
             army += armyNumber;
             gcountry.setArmies(army);
         }
         
-        public void removeRegion(SimpleRegion gcountry){
+        public void removeRegion(Region gcountry){
             assigned_Regions.remove(gcountry.getId());
             gcountry.setPlayer(null);
             gcountry.setArmies(0);
         }
         
-        public void addRegion(SimpleRegion gcountry, int armyNumber){
+        public void addRegion(Region gcountry, int armyNumber){
             gcountry.setArmies(armyNumber);
             //gcountry.setPlayer(this);
             assigned_Regions.add(gcountry.getId());

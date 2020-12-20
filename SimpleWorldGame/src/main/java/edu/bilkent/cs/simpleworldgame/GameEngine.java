@@ -32,7 +32,7 @@ public class GameEngine {
     int active_player_num = 0, playerNumber = 3;
     AtomicInteger playerIDgen;
     JSONObject config;
-    SimpleRegion[] regions;
+    Region[] regions;
     Player p;
     boolean gameOver, configuration;
     public String selectedRegion1, selectedRegion2;
@@ -50,59 +50,59 @@ public class GameEngine {
     public GameEngine() {
         playerIDgen = new AtomicInteger();
         player_map = new ConcurrentHashMap<Integer, Player>();
-        regions = new SimpleRegion[47];
+        regions = new Region[47];
         winner = null;
         
         /*Map<Integer, Integer> area = new HashMap<Integer, Integer>();
         area.put(1,2);*/
        
-        regions[0] = new SimpleRegion("Alaska", 0);
-        regions[1] = new SimpleRegion("WesternAmerica", 1);
-        regions[2] = new SimpleRegion("CentralAmerica", 2);
-        regions[3] = new SimpleRegion("EasternUS", 3);
-        regions[4] = new SimpleRegion("Greenland", 4);
-        regions[5] = new SimpleRegion("NorthWest", 5);
-        regions[6] = new SimpleRegion("CentralCanada", 6);
-        regions[7] = new SimpleRegion("EasternCanada", 7);
-        regions[8] = new SimpleRegion("WesternUS", 8);
-        regions[9] = new SimpleRegion("Argentina", 9);
-        regions[10] = new SimpleRegion("Brazil", 10);
-        regions[11] = new SimpleRegion("Peru", 11);
-        regions[12] = new SimpleRegion("Venezuela", 12);
-        regions[13] = new SimpleRegion("Colombia", 13);
-        regions[14] = new SimpleRegion("Bolivia", 14);
-        regions[15] = new SimpleRegion("UnitedKingdom", 15);
-        regions[16] = new SimpleRegion("Iceland", 16);
-        regions[17] = new SimpleRegion("Germany", 17);
-        regions[18] = new SimpleRegion("Skandinavia", 18);
-        regions[19] = new SimpleRegion("SouthernEurope", 19);
-        regions[20] = new SimpleRegion("Russia", 20);
-        regions[21] = new SimpleRegion("Spain", 21);
-        regions[22] = new SimpleRegion("France", 22);
-        regions[23] = new SimpleRegion("Italia", 23);
-        regions[24] = new SimpleRegion("Ukraine", 24);
-        regions[25] = new SimpleRegion("Afghanistan", 25);
-        regions[26] = new SimpleRegion("China", 26);
-        regions[27] = new SimpleRegion("India", 27);
-        regions[28] = new SimpleRegion("Irkutsk", 28);
-        regions[29] = new SimpleRegion("Japan", 29);
-        regions[30] = new SimpleRegion("Kamchatka", 30);
-        regions[31] = new SimpleRegion("MiddleEast", 31);
-        regions[32] = new SimpleRegion("Mongolia", 32);
-        regions[33] = new SimpleRegion("Sian", 33);
-        regions[34] = new SimpleRegion("Siberia", 34);
-        regions[35] = new SimpleRegion("Ural", 35);
-        regions[36] = new SimpleRegion("Yakutsk", 36);
-        regions[37] = new SimpleRegion("Congo", 37);
-        regions[38] = new SimpleRegion("EastAfrica", 38);
-        regions[39] = new SimpleRegion("Egypt", 39);
-        regions[40] = new SimpleRegion("Madagaskar", 40);
-        regions[41] = new SimpleRegion("NorthAfrica", 41);
-        regions[42] = new SimpleRegion("SouthAfrica", 42);
-        regions[43] = new SimpleRegion("EasternAustralia", 43);
-        regions[44] = new SimpleRegion("Indonesia", 44);
-        regions[45] = new SimpleRegion("NewGuinea", 45);
-        regions[46] = new SimpleRegion("WesternAustralia", 46);
+        regions[0] = new Region("Alaska", 0);
+        regions[1] = new Region("WesternAmerica", 1);
+        regions[2] = new Region("CentralAmerica", 2);
+        regions[3] = new Region("EasternUS", 3);
+        regions[4] = new Region("Greenland", 4);
+        regions[5] = new Region("NorthWest", 5);
+        regions[6] = new Region("CentralCanada", 6);
+        regions[7] = new Region("EasternCanada", 7);
+        regions[8] = new Region("WesternUS", 8);
+        regions[9] = new Region("Argentina", 9);
+        regions[10] = new Region("Brazil", 10);
+        regions[11] = new Region("Peru", 11);
+        regions[12] = new Region("Venezuela", 12);
+        regions[13] = new Region("Colombia", 13);
+        regions[14] = new Region("Bolivia", 14);
+        regions[15] = new Region("UnitedKingdom", 15);
+        regions[16] = new Region("Iceland", 16);
+        regions[17] = new Region("Germany", 17);
+        regions[18] = new Region("Skandinavia", 18);
+        regions[19] = new Region("SouthernEurope", 19);
+        regions[20] = new Region("Russia", 20);
+        regions[21] = new Region("Spain", 21);
+        regions[22] = new Region("France", 22);
+        regions[23] = new Region("Italia", 23);
+        regions[24] = new Region("Ukraine", 24);
+        regions[25] = new Region("Afghanistan", 25);
+        regions[26] = new Region("China", 26);
+        regions[27] = new Region("India", 27);
+        regions[28] = new Region("Irkutsk", 28);
+        regions[29] = new Region("Japan", 29);
+        regions[30] = new Region("Kamchatka", 30);
+        regions[31] = new Region("MiddleEast", 31);
+        regions[32] = new Region("Mongolia", 32);
+        regions[33] = new Region("Sian", 33);
+        regions[34] = new Region("Siberia", 34);
+        regions[35] = new Region("Ural", 35);
+        regions[36] = new Region("Yakutsk", 36);
+        regions[37] = new Region("Congo", 37);
+        regions[38] = new Region("EastAfrica", 38);
+        regions[39] = new Region("Egypt", 39);
+        regions[40] = new Region("Madagaskar", 40);
+        regions[41] = new Region("NorthAfrica", 41);
+        regions[42] = new Region("SouthAfrica", 42);
+        regions[43] = new Region("EasternAustralia", 43);
+        regions[44] = new Region("Indonesia", 44);
+        regions[45] = new Region("NewGuinea", 45);
+        regions[46] = new Region("WesternAustralia", 46);
         
         gameOver = false;
         
@@ -164,10 +164,10 @@ public class GameEngine {
     public boolean attackControl(Integer playerId, String attackerRegionId, String defenderRegionId){
         if(gameOver)
             return false;
-        //SimpleRegion attackerRegion = findRegion(attackerRegionId);
-        //SimpleRegion defenderRegion = findRegion(defenderRegionId);
-        SimpleRegion attackerRegion = regions[Integer.parseInt(attackerRegionId)];
-        SimpleRegion defenderRegion = regions[Integer.parseInt(defenderRegionId)];
+        //Region attackerRegion = findRegion(attackerRegionId);
+        //Region defenderRegion = findRegion(defenderRegionId);
+        Region attackerRegion = regions[Integer.parseInt(attackerRegionId)];
+        Region defenderRegion = regions[Integer.parseInt(defenderRegionId)];
         Player p = player_map.get(playerId);
         boolean didWin;
         if(attackerRegion.getPlayer() == playerId && defenderRegion.getPlayer() != playerId && attackerRegion.totalArmyForce() > 1)
@@ -201,7 +201,7 @@ public class GameEngine {
                 int[][] dist = distributor.getDistribution();
                 int r_size = dist.length;
                 for(int i = 0; i < r_size; i++){
-                    SimpleRegion reg = regions[i];
+                    Region reg = regions[i];
                     int playerId = 0;
                     int troopCount = 0;
                     int p_size = dist[0].length;
@@ -249,8 +249,8 @@ public class GameEngine {
     
     @WebMethod
     public boolean reinforcementControl(Integer playerId, String n1, String n2, int army){
-        SimpleRegion r1 = findRegion(n1);
-        SimpleRegion r2 = findRegion(n2);
+        Region r1 = findRegion(n1);
+        Region r2 = findRegion(n2);
         p = player_map.get(playerId);
         if(r1.getPlayer() == playerId && r2.getPlayer() == playerId && r1.totalArmyForce() > 1)
         {
@@ -288,7 +288,7 @@ public class GameEngine {
     
     @WebMethod
     public boolean fortificationControl(Integer playerId, Integer regionId, int army){
-        SimpleRegion r = regions[regionId];
+        Region r = regions[regionId];
         if(r.getPlayer() == playerId)
         {
             //REGION CONTROL
@@ -301,7 +301,7 @@ public class GameEngine {
     }
     
     @WebMethod
-    public SimpleRegion getRegion(int index){
+    public Region getRegion(int index){
         return regions[index];
     }
 
@@ -335,7 +335,7 @@ public class GameEngine {
     }
     
     @WebMethod
-    public SimpleRegion findRegion(String name){
+    public Region findRegion(String name){
         for (int i = 0; i < 47; i++)
         {
             if(regions[i].getName().equals(name)) {
@@ -523,13 +523,13 @@ public class GameEngine {
     
     @WebMethod
     public int getSoldier(String nm){
-        SimpleRegion r = findRegion(nm);
+        Region r = findRegion(nm);
         return r.totalArmyForce();
     }
     
     @WebMethod
     public void setSoldier(String nm, int army){
-        SimpleRegion r = findRegion(nm);
+        Region r = findRegion(nm);
         r.setArmies(army);
     }
     
@@ -541,6 +541,10 @@ public class GameEngine {
     @WebMethod
     public String getWinner(){
         return winner.getName();
+    }
+    
+    public void resetGame(){
+        
     }
     
 }

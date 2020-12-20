@@ -10,7 +10,7 @@ package edu.bilkent.cs.simpleworldgame.Distribution;
  * @author User
  */
 import edu.bilkent.cs.simpleworldgame.Player;
-import edu.bilkent.cs.simpleworldgame.SimpleRegion;
+import edu.bilkent.cs.simpleworldgame.Region;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 public class Automatic implements Distribution{

@@ -7,7 +7,7 @@ package edu.bilkent.cs.simpleworldgame.Attack;
 
 import edu.bilkent.cs.simpleworldgame.Dice;
 import edu.bilkent.cs.simpleworldgame.Region;
-import edu.bilkent.cs.simpleworldgame.SimpleRegion;
+import edu.bilkent.cs.simpleworldgame.Region;
 
 
 public class AdvantageousAttack implements AttackStrategy{
@@ -20,7 +20,7 @@ public class AdvantageousAttack implements AttackStrategy{
     }
     
     @Override
-    public boolean attack(SimpleRegion attacking, SimpleRegion defending)
+    public boolean attack(Region attacking, Region defending)
     {
         int result1, result2, result;
         int army1, army2;
