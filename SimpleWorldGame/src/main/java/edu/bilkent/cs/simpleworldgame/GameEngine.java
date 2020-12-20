@@ -390,5 +390,9 @@ public class GameEngine {
     public HashMap getCards(){
         return p.getHand();
     }
+    
+    public int getSoldierWaiting(){
+        return p.armyToGain();
+    }
 }
     

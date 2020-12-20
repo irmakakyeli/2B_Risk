@@ -194,7 +194,7 @@ public class Player  {
             return hand;
         }
         
-        
-        
-        
+        public int armyToGain(){
+            return assigned_Regions.size()/3;
+        } 
 }
