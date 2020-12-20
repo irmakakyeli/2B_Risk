@@ -61,17 +61,21 @@ public class Player  {
                 }
                 getTheRegion = strategy.attack(attacking, defending);
 
-                if(getTheRegion){
-                    if(card.getRandomCardName() == "Infantry")
-                    hand.put(card.getRandomCardName() ,iCount );
-                    else if(card.getRandomCardName() == "Artillery")
-                    hand.put(card.getRandomCardName() ,aCount );
-                    else if(card.getRandomCardName() == "Cavalry")
-                    hand.put(card.getRandomCardName() ,cCount );
-
                 if(getTheRegion && once){
-                    hand.put(card.getRandomCardName() , hand.size());
-
+                    if(null != card.getRandomCardName())
+                    switch (card.getRandomCardName()) {
+                        case "Infantry":
+                            hand.put(card.getRandomCardName() ,iCount++ );
+                            break;
+                        case "Artillery":
+                            hand.put(card.getRandomCardName() ,aCount++ );
+                            break;
+                        case "Cavalry":
+                            hand.put(card.getRandomCardName() ,cCount++ );
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 return getTheRegion;
             } 
@@ -83,7 +87,20 @@ public class Player  {
                 }
                 getTheRegion = strategy.attack(attacking, defending);
                 if(getTheRegion && once){
-                    hand.put(card.getRandomCardName() , hand.size());
+                    if(null != card.getRandomCardName())
+                    switch (card.getRandomCardName()) {
+                        case "Infantry":
+                            hand.put(card.getRandomCardName() ,iCount++ );
+                            break;
+                        case "Artillery":
+                            hand.put(card.getRandomCardName() ,aCount++ );
+                            break;
+                        case "Cavalry":
+                            hand.put(card.getRandomCardName() ,cCount++ );
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 return getTheRegion;
             }
@@ -95,7 +112,20 @@ public class Player  {
                 }
                 getTheRegion = strategy.attack(attacking, defending);
                 if(getTheRegion && once){
-                    hand.put(card.getRandomCardName(), hand.size());
+                    if(null != card.getRandomCardName())
+                    switch (card.getRandomCardName()) {
+                        case "Infantry":
+                            hand.put(card.getRandomCardName() ,iCount++ );
+                            break;
+                        case "Artillery":
+                            hand.put(card.getRandomCardName() ,aCount++ );
+                            break;
+                        case "Cavalry":
+                            hand.put(card.getRandomCardName() ,cCount++ );
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 return getTheRegion;
             }      
