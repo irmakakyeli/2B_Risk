@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONTokener;
@@ -257,13 +258,15 @@ public class GameEngine {
         }
     }
 
+    @WebMethod
     public int integration() {
         return p.cartIntegration();
     }
 
+    @WebMethod
     public boolean fortificationControl(String n, int army) {
         Region r = findRegion(n);
-        if (r.getPlayer() == p) {
+        if (Objects.equals(r.getPlayer(), p.getId())) {
             p.fortification(r, army);
             return true;
         } else {
@@ -298,10 +301,12 @@ public class GameEngine {
     @WebMethod
     public boolean fortificationControl(Integer playerId, Integer regionId, int army) {
         Region r = regions[regionId];
-        if (r.getPlayer() == playerId) {
+        if (Objects.equals(r.getPlayer(), playerId)) {
             // REGION CONTROL
             Player p = player_map.get(playerId);
+            return true;
         }
+        return false;
     }
 
     @WebMethod
@@ -476,6 +481,7 @@ public class GameEngine {
         return -1; // unreachable statement, inş.
     }
 
+    @WebMethod
     public boolean isDistributionFinished() {
         int troopCount;
         int currentTroopCount = 0;
@@ -536,15 +542,18 @@ public class GameEngine {
         return winner.getName();
     }
 
+    @WebMethod
     public boolean nextTurn() {
         onceInTurn = true;
         return true;
     }
 
+    @WebMethod
     public HashMap getCards() {
         return p.getHand();
     }
 
+    @WebMethod
     public int getSoldierWaiting() {
         return p.armyToGain();
     }
