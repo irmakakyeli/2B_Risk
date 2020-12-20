@@ -33,39 +33,40 @@ public class ViewFactory {
     private Stage currentStage;
     
     private Stage hostOrJoin;
-
+    
+    private GameEngine game;
     public ViewFactory() {
         
     }
 
     public void showMainMenu(){
-        BaseController baseController = new MainMenuController( this, "MainMenu.fxml");
+        BaseController baseController = new MainMenuController(game, this, "MainMenu.fxml");
         initializeStage(baseController, "css/style.css");
         currentStage = currStage;
     }
 
     public void showHelp(){
-        BaseController baseController = new HelpController( this, "Help.fxml");
+        BaseController baseController = new HelpController( game, this, "Help.fxml");
 
         initializeStage(baseController, "css/help.css");
     }
 
     public void showUsers(){
-        BaseController baseController = new JoinController( this, "JoinPage.fxml");
+        BaseController baseController = new JoinController(game,  this, "JoinPage.fxml");
 
         initializeStage(baseController, "css/join.css");
         currentStage = currStage;
     }
     
     public void showRole(){
-        BaseController baseController = new RoleController(this, "RoleChose.fxml");
+        BaseController baseController = new RoleController(game, this, "RoleChose.fxml");
 
         initializeStage(baseController, "css/role.css");
         currentStage = currStage;
     }
 
     public void showHostPage(){
-        BaseController baseController = new HostController(this, "HostPage.fxml");
+        BaseController baseController = new HostController(game, this, "HostPage.fxml");
 
         initializeStage(baseController, "css/host.css");
         currentStage = currStage;
@@ -73,7 +74,7 @@ public class ViewFactory {
     }
 
     public void showJoinPage(){
-        BaseController baseController = new JoinController(this, "JoinPage.fxml");
+        BaseController baseController = new JoinController(game, this, "JoinPage.fxml");
 
         initializeStage(baseController, "css/join.css");
         currentStage = currStage;
@@ -81,13 +82,13 @@ public class ViewFactory {
     }
 
     public void showRoomPage(){
-        BaseController baseController = new RoomController(this, "RoomPage.fxml");
+        BaseController baseController = new RoomController(game, this, "RoomPage.fxml");
         initializeStage(baseController, "css/room.css");
         currentStage = currStage;
     }
 
    public void showBoard(){
-        BaseController baseController = new BoardController( this, "GamePage.fxml");
+        BaseController baseController = new BoardController(game, this, "GamePage.fxml");
         initializeStage(baseController, "css/board.css");
         currentStage = currStage;
     }

@@ -4,15 +4,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import view.ViewFactory;
+import ws.client.GameEngine;
 
 public class HelpController extends BaseController{
 
     @FXML
     private ScrollPane scrollPane;
 
-    public HelpController( ViewFactory viewFactory, String fxmlName) {
-        super( viewFactory, fxmlName);
+    public HelpController( GameEngine game,  ViewFactory viewFactory, String fxmlName) {
+        super( game, viewFactory, fxmlName);
     }
+
 
     @FXML
     void backBtnAction() {

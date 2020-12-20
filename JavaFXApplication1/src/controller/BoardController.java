@@ -23,10 +23,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import view.ViewFactory;
 import edu.bilkent.cs.simpleworldgame.*;
+import java.util.Iterator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Popup;
-import edu.bilkent.cs.simpleworldgame.*;
+import ws.client.GameEngine;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -40,10 +41,11 @@ enum Mod {
 }
 
 public class BoardController extends BaseController{
-    public BoardController( ViewFactory viewFactory, String fxmlName) {
-        super( viewFactory, fxmlName);
+    public BoardController( GameEngine game, ViewFactory viewFactory, String fxmlName) {
+        super(game, viewFactory, fxmlName);
         initialize();
     }
+
 
     @FXML
     private ImageView confetti, crown, wreath, shadow;
@@ -90,10 +92,10 @@ public class BoardController extends BaseController{
     @FXML
     private Label victory;
     
-     @FXML
+    @FXML
     private ImageView whiteFlag;
      
-      @FXML
+    @FXML
     private Rectangle rectangle, rectangle2;
 
     @FXML
@@ -113,9 +115,6 @@ public class BoardController extends BaseController{
     
      @FXML
     private Rectangle card1, card2, card3, card4, card5;
-    
-    
-
 
     Mod action = FORTIFICATION;
     boolean act = false;
@@ -128,7 +127,7 @@ public class BoardController extends BaseController{
             EastAfrica, Egypt, Madagaskar, NorthAfrica,SouthAfrica, EasternAustralia, Indonesia,NewGuinea,WesternAustralia;
 
    
-    GameEngine game; // TODO
+    
     Label[] labels;
     VBox layout= new VBox(10);
     Scene scene1= new Scene(layout, 300, 250);
@@ -251,15 +250,18 @@ public class BoardController extends BaseController{
 
 
         int count = 0;
-        Iterator it= game.getCards().entrySet().iterator();
-        while (it.hasNext()) { 
-            Map.Entry game.getCards()= (Map.Entry)it.next(); 
-            int value = ((int) game.getCards().getValue() ); 
-            String key = game.getCards().getKey();
+        for (Map.Entry<String, Integer> entry : game.getCards().entrySet()) {
+            String key = entry.getKey();
+            int value = (int) entry.getValue();
             if (value > 0) {
                 cards[count].setVisible(true);
+                Label l = new Label("key");
+                l.setStyle("-fx-font-weight: bold");
+                l.setLayoutX(cards[count].getX() + 5);
+                l.setLayoutY(cards[count].getY() + 5);
                 count++;
             }
+
         }
     }
     @FXML

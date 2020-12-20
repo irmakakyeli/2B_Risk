@@ -339,11 +339,6 @@ public class GameEngine {
     }
 
     @WebMethod
-    public void handOutCard() {
-
-    }
-
-    @WebMethod
     public Region findRegion(String name) {
         for (int i = 0; i < 47; i++) {
             if (regions[i].getName().equals(name)) {
@@ -510,10 +505,19 @@ public class GameEngine {
         return currentTroopCount >= troopCount;
     }
 
-    /*
-     * @WebMethod public boolean checkGameCode(String code){ return
-     * (roomID.equals(code)); }
-     */
+    @WebMethod 
+    public boolean checkGameCode(String code)
+    { 
+        return (Integer.toString(roomID).equals(code)); 
+    }
+    
+    @WebMethod 
+    public String getGameCode()
+    { 
+        String s;
+        s = Integer.toString(roomID);
+        return s;
+    }
 
     @WebMethod
     public boolean isRoomFull() {

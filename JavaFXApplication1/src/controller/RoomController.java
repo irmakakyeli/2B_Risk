@@ -12,10 +12,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import view.ViewFactory;
+import ws.client.GameEngine;
 
 public class RoomController extends BaseController{
-    public RoomController( ViewFactory viewFactory, String fxmlName) {
-        super( viewFactory, fxmlName);
+    public RoomController(  GameEngine game, ViewFactory viewFactory, String fxmlName) {
+        super( game, viewFactory, fxmlName);
 
         roomLabel.setText(game.getGameCode());
         user1.setText(game.getUserList[0]);

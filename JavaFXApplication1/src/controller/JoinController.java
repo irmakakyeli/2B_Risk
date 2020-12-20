@@ -36,9 +36,10 @@ public class JoinController extends BaseController{
     @FXML
     private Button ok;
 
-    public JoinController( ViewFactory viewFactory, String fxmlName) {
-        super( viewFactory, fxmlName);
+    public JoinController(  GameEngine game, ViewFactory viewFactory, String fxmlName) {
+        super( game, viewFactory, fxmlName);
     }
+
     
     
     @FXML
@@ -49,10 +50,11 @@ public class JoinController extends BaseController{
     }
 
     int isNameValid(String name){
-        if(name.length() > 14 )
+        if(name.length() > 14 ) {
             return 0;
-        else if(name.length() <= 0)
+        } else if(name.length() <= 0) {
             return -1;
+        }
         return 1;
     }
 

@@ -4,16 +4,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import view.ViewFactory;
+import ws.client.GameEngine;
 
 public class RoleController extends BaseController {
 
     @FXML
     private Label roleLabel;
 
-    public RoleController( ViewFactory viewFactory, String fxmlName) {
-        super( viewFactory, fxmlName);
+    public RoleController( GameEngine game,  ViewFactory viewFactory, String fxmlName) {
+        super( game, viewFactory, fxmlName);
     }
-
 
     @FXML
     void helpBtnAction() {

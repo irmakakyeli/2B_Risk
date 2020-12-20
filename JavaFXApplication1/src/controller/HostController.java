@@ -11,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import view.ViewFactory;
+import ws.client.GameEngine;
 
 public class HostController extends BaseController{
 
@@ -29,9 +30,10 @@ public class HostController extends BaseController{
     @FXML
     private Button ok;
 
-    public HostController( ViewFactory viewFactory, String fxmlName) {
-        super( viewFactory, fxmlName);
+    public HostController(  GameEngine game, ViewFactory viewFactory, String fxmlName) {
+        super(game, viewFactory, fxmlName);
     }
+
 
     @FXML
     void backBtnAction() {
@@ -62,8 +64,7 @@ public class HostController extends BaseController{
             label.setText("Please enter a user name!");
             makeAppear();
         }
-
-        else if {
+        else {
         game.setUserName(userName.getText());
 
         // Show the game code
