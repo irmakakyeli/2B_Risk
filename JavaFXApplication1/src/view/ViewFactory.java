@@ -33,39 +33,40 @@ public class ViewFactory {
     private Stage currentStage;
     
     private Stage hostOrJoin;
-
+    
+    private GameEngine game;
     public ViewFactory() {
         
     }
 
     public void showMainMenu(){
-        BaseController baseController = new MainMenuController( this, "MainMenu.fxml");
+        BaseController baseController = new MainMenuController(game, this, "MainMenu.fxml");
         initializeStage(baseController, "css/style.css");
         currentStage = currStage;
     }
 
     public void showHelp(){
-        BaseController baseController = new HelpController( this, "Help.fxml");
+        BaseController baseController = new HelpController( game, this, "Help.fxml");
 
         initializeStage(baseController, "css/help.css");
     }
 
     public void showUsers(){
-        BaseController baseController = new JoinController( this, "JoinPage.fxml");
+        BaseController baseController = new JoinController(game,  this, "JoinPage.fxml");
 
         initializeStage(baseController, "css/join.css");
         currentStage = currStage;
     }
     
     public void showRole(){
-        BaseController baseController = new RoleController(this, "RoleChose.fxml");
+        BaseController baseController = new RoleController(game, this, "RoleChose.fxml");
 
         initializeStage(baseController, "css/role.css");
         currentStage = currStage;
     }
 
     public void showHostPage(){
-        BaseController baseController = new HostController(this, "HostPage.fxml");
+        BaseController baseController = new HostController(game, this, "HostPage.fxml");
 
         initializeStage(baseController, "css/host.css");
         currentStage = currStage;
@@ -73,7 +74,7 @@ public class ViewFactory {
     }
 
     public void showJoinPage(){
-        BaseController baseController = new JoinController(this, "JoinPage.fxml");
+        BaseController baseController = new JoinController(game, this, "JoinPage.fxml");
 
         initializeStage(baseController, "css/join.css");
         currentStage = currStage;
@@ -81,34 +82,13 @@ public class ViewFactory {
     }
 
     public void showRoomPage(){
-        RoomController controller = new RoomController(this, "RoomPage.fxml");
-        
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
-        fxmlLoader.setController(controller);
-        
-
-        Parent parent;
-
-        try{
-            parent = fxmlLoader.load();
-        } catch (IOException exception){
-            exception.printStackTrace();
-            return;
-        }
-
-        Scene scene = new Scene(parent);
-        Stage stage = new Stage();
-        getUsersBtnAction(stage, controller);
-
-        scene.getStylesheets().addAll(this.getClass().getResource("css/room.css").toExternalForm());
-        stage.setScene(scene);
-        currentStage = stage;
-        stage.show();
+        BaseController baseController = new RoomController(game, this, "RoomPage.fxml");
+        initializeStage(baseController, "css/room.css");
+        currentStage = currStage;
     }
 
    public void showBoard(){
-        BaseController baseController = new BoardController( this, "GamePage.fxml");
+        BaseController baseController = new BoardController(game, this, "GamePage.fxml");
         initializeStage(baseController, "css/board.css");
         currentStage = currStage;
     }
@@ -151,29 +131,6 @@ public class ViewFactory {
         
         return hostOrJoin;
     }
-    void getUsersBtnAction(Stage stage, RoomController controller) {
-        
-        GameEngineService service = new GameEngineService();
-        final GameEngine gmEngine = service.getGameEnginePort();
-        controller.getUserList().clear();
-        String response = gmEngine.getPLayers();
-
-        JSONObject json =  new JSONObject(response);
-        Iterator<String> keys = json.keys();
-        String list = "";
-        while (keys.hasNext()) {
-            String key = keys.next();
-            String user = json.get(key).toString();
-            user = retrieveName(user);
-            list += key + " - " + user + "\n";
-
-        }
-
-        controller.getUserList().setText(list);
-        //viewFactory.showUsers();
-        System.out.println(list);
-        //viewFactory.closeStage(stage);
-    }
     
     public String retrieveName(String input){
         String userName = "";
@@ -183,5 +140,4 @@ public class ViewFactory {
 
         return userName;
     }
-    
 }

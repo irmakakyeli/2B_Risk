@@ -14,16 +14,15 @@ public class Region {
     String name;
     Integer capacity;
     boolean isCapital, isSpecial;
-    int cavalryAmount, artilleryAmount, infantaryAmount, totalArmy;
+    public int cavalryAmount, artilleryAmount, infantryAmount, totalArmy;
     Player playerBelongTo;
-    Map<Integer, Integer> area;
     
     
-    public Region(String gname, Map<Integer, Integer> garea) {
+    public Region(String gname, Integer rid) {
+        id = rid;
         name = gname;
         isCapital = false;
         isSpecial = false; 
-        area = garea;
     }
     
     public void setName(String nm) {
@@ -32,6 +31,10 @@ public class Region {
 
     public String getName() {
         return name;
+    }
+    
+    public Integer getId(){
+        return id;
     }
     
     public void LoadFromJSON(JSONObject jsonObj) {
@@ -46,8 +49,20 @@ public class Region {
     
     public int totalArmyForce()
     {
-        totalArmy = infantaryAmount + cavalryAmount * 2 +  artilleryAmount * 5;
+        totalArmy = infantryAmount + cavalryAmount * 2 +  artilleryAmount * 5;
         return totalArmy;
+    }
+    
+    public int getCavalryAmount(){
+        return cavalryAmount;
+    }
+    
+    public int getInfantryAmount(){
+        return infantryAmount;
+    }
+    
+    public int getArtilleryAmount(){
+        return artilleryAmount;
     }
     
     public Player getPlayer ()
@@ -79,7 +94,7 @@ public class Region {
                 }
                 else
                 {
-                    infantaryAmount++;
+                    infantryAmount++;
                     temp--;
                 }
             }
@@ -101,15 +116,10 @@ public class Region {
                 }
                 else
                 {
-                    infantaryAmount++;
+                    infantryAmount++;
                     temp--;
                 }
             }
         }
     }
-
-    public Map<Integer, Integer> getArea(){
-        return area;
-    }
-    
 }

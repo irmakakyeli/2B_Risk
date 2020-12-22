@@ -4,14 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import view.ViewFactory;
+import ws.client.GameEngine;
 
 public class MainMenuController extends BaseController{
 
     @FXML
     private Label mainLabel;
 
-    public MainMenuController( ViewFactory viewFactory, String fxmlName) {
-        super(viewFactory, fxmlName);
+    public MainMenuController(  GameEngine game, ViewFactory viewFactory, String fxmlName) {
+        super(game, viewFactory, fxmlName);
     }
 
     @FXML

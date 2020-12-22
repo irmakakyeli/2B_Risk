@@ -6,6 +6,7 @@
 package edu.bilkent.cs.simpleworldgame.Attack;
 
 import edu.bilkent.cs.simpleworldgame.Region;
+import edu.bilkent.cs.simpleworldgame.Region;
 
 public interface AttackStrategy {
     

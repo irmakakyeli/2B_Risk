@@ -7,6 +7,7 @@ package edu.bilkent.cs.simpleworldgame.Attack;
 
 import edu.bilkent.cs.simpleworldgame.Dice;
 import edu.bilkent.cs.simpleworldgame.Region;
+import edu.bilkent.cs.simpleworldgame.Region;
 
 public class NormalAttack implements AttackStrategy{
 
