@@ -149,14 +149,14 @@ public class Player {
     }
 
     public void removeRegion(Region gcountry) {
-        assigned_Regions.remove(gcountry.getId());
+        assigned_Regions.remove(gcountry);
         gcountry.setPlayer(null);
         gcountry.setArmies(0);
     }
 
     public void addRegion(Region gcountry, int armyNumber) {
         gcountry.setArmies(armyNumber);
-        // gcountry.setPlayer(this);
+        gcountry.setPlayer(this);
         assigned_Regions.add(gcountry);
     }
 
@@ -192,4 +192,17 @@ public class Player {
     public int armyToGain() {
         return assigned_Regions.size() / 3;
     }
+
+    public int getCavalryAmount() {
+        return cCount;
+    }
+    
+    public int getArtilleryAmount(){
+        return aCount;
+    }
+    
+    public int getInfantryAmount(){
+        return iCount;
+    }
+    
 }

@@ -266,7 +266,7 @@ public class BoardController extends BaseController{
     }
     @FXML
     void integrateBtnAction(ActionEvent event) {
-        game.integration();
+        game.integration(); //int döndürüyor o inti çekip kullanmak lazım
         cardsBtnAction();
     }
 
@@ -318,31 +318,35 @@ public class BoardController extends BaseController{
         //String region = game.tellRegion((int) event.getX(), (int) event.getY());
         String region = ((Button)event.getSource()).getText();
 
-        if(region == null)
+        if(region == null) {
             return;
+        }
 
         game.setSelectedRegion(region);
 
         switch(action){
             case FORTIFICATION:
                 if (game.getSelectedRegion1() != null) {
-                    if(game.IsDistributionOver())
+                    if(game.isDistributionFinished()) {
                         changeTheVisibility();
-                    if(act || ! game.IsDistributionOver()) {
-                        if(game.IsDistributionOver())
+                    }
+                    if(act || ! game.isDistributionFinished()) {
+                        if(game.isDistributionFinished()) {
                             game.getCurrentPlayer().fortification(game.getSelectedRegion1(), number.getText());
-                        else
+                        } else {
                             game.getCurrentPlayer().fortification(game.getSelectedRegion1(), 1);
+                        }
                         updateMap(game.getSelectedRegion1());
                         updateMap(game.getSelectedRegion2());
                         game.setSelectedRegion1(null);
                         game.setSelectedRegion2(null);
-                        if(game.IsDistributionOver())
+                        if(game.isDistributionFinished()) {
                             changeTheVisibility();
+                        }
                         act = false;
                     }
 
-                    if(game.IsDistributionOver()){
+                    if(game.isDistributionFinished()){
                         rect.setOpacity(1.0);
                         circle.setOpacity(1.0);
                         barRect.setOpacity(1.0);
@@ -361,8 +365,9 @@ public class BoardController extends BaseController{
                     game.setSelectedRegion1(null);
                     game.setSelectedRegion2(null);
                     attack.setVisible(false);
-                    if( game.isGameOver())
+                    if( game.isGameOver()) {
                         finishTheGame();
+                    }
                 }
                 break;
             case REINFORCEMENT:
@@ -441,15 +446,17 @@ public class BoardController extends BaseController{
                 break;
             }
         }
-        if(i != 47) 
-        labels[index].setText(game.getArmyOf(region));
+        if(i != 47) {
+            labels[index].setText(game.getArmyOf(region));
+        }
     }
         
     private String getRidOfBlanks(String region) {
         String r = "";
         for(int i = 0; i < region.length(); i++){
-            if(region.charAt(i) == ' ')
+            if(region.charAt(i) == ' ') {
                 continue;
+            }
             r += region.charAt(i);
         }
         return r;
@@ -460,11 +467,13 @@ public class BoardController extends BaseController{
 
         int compare = 0;
 
-        if(action == Mod.REINFORCEMENT)
-            compare = game.getSoldierOfRegion2();
+        if(action == Mod.REINFORCEMENT) {
+            compare = game.getArmyOfRegion(game.getSelectedRegion2());
+        }
 
-        if(action == Mod.FORTIFICATION)
+        if(action == Mod.FORTIFICATION) {
             compare = game.getSoldierWaiting();
+        }
 
         if(Integer.parseInt(number.getText()) < compare) {
             int i = Integer.parseInt(number.getText()) + 1;
@@ -493,40 +502,47 @@ public class BoardController extends BaseController{
     }
 
     private void changeTheVisibility(){
-        if(rect2.getOpacity() > 0)
+        if(rect2.getOpacity() > 0) {
             rect2.setOpacity(1.0);
-        else
+        } else {
             rect2.setOpacity(0.0);
+        }
 
-        if(number.getOpacity() > 0)
+        if(number.getOpacity() > 0) {
             number.setOpacity(1.0);
-        else
+        } else {
             number.setOpacity(0.0);
+        }
 
-        if(iw.getOpacity() > 0)
+        if(iw.getOpacity() > 0) {
             iw.setOpacity(1.0);
-        else
+        } else {
             iw.setOpacity(0.0);
+        }
 
-        if(increaseBtn.isVisible())
+        if(increaseBtn.isVisible()) {
             increaseBtn.setVisible(false);
-        else
+        } else {
             increaseBtn.setVisible(true);
+        }
 
-        if(decreaseBtn.isVisible())
+        if(decreaseBtn.isVisible()) {
             decreaseBtn.setVisible(false);
-        else
+        } else {
             decreaseBtn.setVisible(true);
+        }
 
-        if(increaseBtn.isDisable())
+        if(increaseBtn.isDisable()) {
             increaseBtn.setDisable(false);
-        else
+        } else {
             increaseBtn.setDisable(true);
+        }
 
-        if(decreaseBtn.isDisable())
+        if(decreaseBtn.isDisable()) {
             decreaseBtn.setDisable(false);
-        else
+        } else {
             decreaseBtn.setDisable(true);
+        }
     }
     
      @FXML
@@ -552,7 +568,7 @@ public class BoardController extends BaseController{
     void yesBtnAction(ActionEvent event) {
         
         // Aler the resign for the database
-        game.resignRequest(true);
+        game.resignRequest();
        viewFactory.showMainMenu();
         Stage stage = (Stage) number.getScene().getWindow();
         viewFactory.closeStage(stage);

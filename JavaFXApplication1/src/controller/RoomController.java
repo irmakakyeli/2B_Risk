@@ -19,12 +19,12 @@ public class RoomController extends BaseController{
         super( game, viewFactory, fxmlName);
 
         roomLabel.setText(game.getGameCode());
-        user1.setText(game.getUserList[0]);
-        user2.setText(game.getUserList[1]);
-        user3.setText(game.getUserList[2]);
-        user4.setText(game.getUserList[3]);
-        user5.setText(game.getUserList[4]);
-        user6.setText(game.getUserList[5]);
+        user1.setText(game.getUser(0));
+        user2.setText(game.getUser(1));
+        user3.setText(game.getUser(2));
+        user4.setText(game.getUser(3));
+        user5.setText(game.getUser(4));
+        user6.setText(game.getUser(5));
     }
 
     @FXML

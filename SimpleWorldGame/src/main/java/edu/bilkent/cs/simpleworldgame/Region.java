@@ -15,7 +15,7 @@ public class Region {
     Integer capacity;
     boolean isCapital, isSpecial;
     public int cavalryAmount, artilleryAmount, infantryAmount, totalArmy;
-    Integer playerBelongTo;
+    Player playerBelongTo;
     
     
     public Region(String gname, Integer rid) {
@@ -65,12 +65,12 @@ public class Region {
         return artilleryAmount;
     }
     
-    public Integer getPlayer ()
+    public Player getPlayer ()
     {
         return playerBelongTo;
     }
     
-    public void setPlayer (Integer gplayer)
+    public void setPlayer (Player gplayer)
     {
         playerBelongTo = gplayer;
     }

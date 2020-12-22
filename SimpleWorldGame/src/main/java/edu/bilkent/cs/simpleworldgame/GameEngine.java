@@ -48,11 +48,10 @@ public class GameEngine {
     public GameEngine() {
         playerIDgen = new AtomicInteger();
         player_map = new ConcurrentHashMap<Integer, Player>();
-        regions = new Region[47];
         winner = null;
-
         onceInTurn = true;
-
+        
+        regions = new Region[47];
         regions[0] = new Region("Alaska", 0);
         regions[1] = new Region("WesternAmerica", 1);
         regions[2] = new Region("CentralAmerica", 2);
@@ -155,16 +154,11 @@ public class GameEngine {
     }
 
     @WebMethod
-    public boolean attackControl(Integer playerId, String attackerRegionId, String defenderRegionId) {
-        if (gameOver)
-            return false;
-        // Region attackerRegion = findRegion(attackerRegionId);
-        // Region defenderRegion = findRegion(defenderRegionId);
-        Region attackerRegion = regions[Integer.parseInt(attackerRegionId)];
-        Region defenderRegion = regions[Integer.parseInt(defenderRegionId)];
-        Player p = player_map.get(playerId);
+    public boolean attackControl (String n1, String n2){
+        Region attackerRegion = findRegion(n1);
+        Region defenderRegion = findRegion(n2);
         boolean didWin;
-        if (attackerRegion.getPlayer() == playerId && defenderRegion.getPlayer() != playerId
+        if (attackerRegion.getPlayer() == p && defenderRegion.getPlayer() != p
                 && attackerRegion.totalArmyForce() > 1) {
             // REGION CONTROL
 
@@ -172,8 +166,8 @@ public class GameEngine {
             didWin = p.attack(attackerRegion, defenderRegion, onceInTurn);
 
             if (didWin) {
-                Integer loserPlayerId = defenderRegion.getPlayer();
-                player_map.get(loserPlayerId).removeRegion(defenderRegion);
+                Player loserPlayer = defenderRegion.getPlayer();
+                loserPlayer.removeRegion(defenderRegion);
                 p.addRegion(defenderRegion, attackerRegion.totalArmyForce() - 1);
                 attackerRegion.setArmies(1);
             }
@@ -209,7 +203,7 @@ public class GameEngine {
 
                     Player pl = player_map.get(playerId);
                     pl.addRegion(reg, troopCount);
-                    reg.setPlayer(pl.getId());
+                    reg.setPlayer(pl);
                 }
 
                 return true;
@@ -245,11 +239,10 @@ public class GameEngine {
     }
 
     @WebMethod
-    public boolean reinforcementControl(Integer playerId, String n1, String n2, int army) {
+    public boolean reinforcementControl(String n1, String n2, int army) {
         Region r1 = findRegion(n1);
         Region r2 = findRegion(n2);
-        p = player_map.get(playerId);
-        if (r1.getPlayer() == playerId && r2.getPlayer() == playerId && r1.totalArmyForce() > 1) {
+        if (r1.getPlayer() == p && r2.getPlayer() == p && r1.totalArmyForce() > 1) {
             // REGION CONTROL
             p.reinforcement(r1, r2, army);
             return true;
@@ -302,7 +295,6 @@ public class GameEngine {
     public boolean fortificationControl(Integer playerId, Integer regionId, int army) {
         Region r = regions[regionId];
         if (Objects.equals(r.getPlayer(), playerId)) {
-            // REGION CONTROL
             Player p = player_map.get(playerId);
             return true;
         }
@@ -348,13 +340,7 @@ public class GameEngine {
         return null;
     }
 
-    /*
-     * private String tellRegion(int x, int y) { for(int i = 0; i <
-     * getRegions().length(); i++) { if( contains(regions[i].getArea(), x, y) ) {
-     * return regions[i].getName(); } } return null; }
-     */
-
-    @WebMethod
+   /* @WebMethod
     private boolean contains(Map<Integer, Integer> area, int x, int y) {
         for (Map.Entry<Integer, Integer> entry : area.entrySet()) {
             if (entry.getKey() == x && entry.getValue() == y) {
@@ -362,7 +348,7 @@ public class GameEngine {
             }
         }
         return false;
-    }
+    }*/
 
     @WebMethod
     public void setSelectedRegion(String region) {
@@ -506,14 +492,12 @@ public class GameEngine {
     }
 
     @WebMethod 
-    public boolean checkGameCode(String code)
-    { 
+    public boolean checkGameCode(String code){ 
         return (Integer.toString(roomID).equals(code)); 
     }
     
     @WebMethod 
-    public String getGameCode()
-    { 
+    public String getGameCode(){ 
         String s;
         s = Integer.toString(roomID);
         return s;
@@ -566,4 +550,24 @@ public class GameEngine {
 
     }
 
+    @WebMethod
+    public Player getCurrentPlayer(){
+        return p;
+    }
+    
+    @WebMethod
+    public void changeCurrentPlayer(){
+        
+    }
+    
+    @WebMethod
+    public int getArmyOf(String n){
+        Region r = findRegion(n);
+        return r.totalArmyForce();
+    }
+    
+    @WebMethod
+    public int getArmyOfRegion(Region r){
+        return r.totalArmyForce();
+    }
 }
