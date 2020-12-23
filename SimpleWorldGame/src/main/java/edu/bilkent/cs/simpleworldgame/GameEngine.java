@@ -227,12 +227,13 @@ public class GameEngine {
             distributionMethod = distMethod;
 
             int id = playerIDgen.getAndIncrement();
-            currentPlayer = new Player(id);
-            currentPlayer.setName(hostPlayerName);
-            player_map.put(id, currentPlayer);
+            Player p = new Player(id);
+            p.setName(hostPlayerName);
+            player_map.put(id, p);
             roomID = 1; // Since there will only be one room for now
             playerNumber = numberOfPlayers;
             active_player_num++;
+            currentPlayer = p;
             return "{HOST_PLAYER_ID: " + id + ", ROOM_ID: " + roomID + "}"; // To be converted to a JSON oject in the
                                                                             // client
         }
@@ -276,9 +277,9 @@ public class GameEngine {
             return -1;
         } else {
             int id = playerIDgen.getAndIncrement();
-            currentPlayer = new Player(id);
-            currentPlayer.setName(PlayerName);
-            player_map.put(id, currentPlayer);
+            Player p = new Player(id);
+            p.setName(PlayerName);
+            player_map.put(id, p);
             active_player_num++;
 
             // Check if we have reached the number of players specified by the host
@@ -578,6 +579,23 @@ public class GameEngine {
     
     @WebMethod
     public void changeCurrentPlayer(){
+        // looping over keys 
+        // using iterators 
+        Iterator<Map.Entry<Integer, Player>> itr = player_map.entrySet().iterator(); 
+          
+        while(itr.hasNext()) 
+        { 
+             Map.Entry<Integer, Player> entry = itr.next(); 
+             if(entry.getKey() == currentPlayer.getId()){
+                 if(itr.hasNext())
+                    currentPlayer = itr.next().getValue();  
+                 else{                     
+                     currentPlayer = player_map.values().stream().findFirst().get();
+                 }
+             }
+                                 
+        }
+        
         int nextPlayerId = currentPlayer.getId()+1;
         if(nextPlayerId >= player_map.size())
             currentPlayer = player_map.get(0);
