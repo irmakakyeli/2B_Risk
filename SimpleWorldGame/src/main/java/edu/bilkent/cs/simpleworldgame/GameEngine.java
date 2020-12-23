@@ -341,16 +341,6 @@ public class GameEngine {
         return null;
     }
 
-   /* @WebMethod
-    private boolean contains(Map<Integer, Integer> area, int x, int y) {
-        for (Map.Entry<Integer, Integer> entry : area.entrySet()) {
-            if (entry.getKey() == x && entry.getValue() == y) {
-                return true;
-            }
-        }
-        return false;
-    }*/
-
     @WebMethod
     public void setSelectedRegion(String region) {
         if (getSelectedRegion1() == null) {
@@ -555,7 +545,20 @@ public class GameEngine {
     @WebMethod
     public boolean nextTurn() {
         onceInTurn = true;
+        if(p.id == playerNumber - 1)
+        {
+            p = player_map.get(0);
+        }
+        else
+        {
+            p = player_map.get(p.id ++);
+        }
         return true;
+    }
+    
+    @WebMethod
+    public Player getUser(int index) {
+        return player_map.get(index);
     }
 
     @WebMethod

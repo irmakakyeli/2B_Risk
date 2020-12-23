@@ -406,7 +406,7 @@ public class BoardController extends BaseController{
                         updateMap(game.getSelectedRegion2());
                         game.setSelectedRegion1(null);
                         game.setSelectedRegion2(null);
-                        game.changeCurrentPlayer();
+                        game.nextTurn();
                         changeTheVisibility();
                         showPlayerChange();
                         act = false;
