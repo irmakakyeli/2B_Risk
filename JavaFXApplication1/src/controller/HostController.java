@@ -21,7 +21,7 @@ public class HostController extends BaseController{
     @FXML
     private TextField userName;
     
-     @FXML
+    @FXML
     private Rectangle rectangle;
 
     @FXML
@@ -29,6 +29,8 @@ public class HostController extends BaseController{
 
     @FXML
     private Button ok;
+    
+    private String distributionMethod = "NOT_DEFINED";
 
     public HostController(  GameEngine game, ViewFactory viewFactory, String fxmlName) {
         super(game, viewFactory, fxmlName);
@@ -65,23 +67,38 @@ public class HostController extends BaseController{
             makeAppear();
         }
         else {
-        game.setUserName(userName.getText());
+            game.setUserName(userName.getText());
+            if(distributionMethod == "NOT_DEFINED"){
+                label.setText("Please choose a distribution method");
+                makeAppear();
 
-        // Show the game code
-        label.setText("Game Code: " + game.getGameCode());
-        makeAppear();
-        
-         viewFactory.showRoomPage();
-         Stage stage = (Stage) hostLabel.getScene().getWindow();
-         viewFactory.closeStage(stage);
+            } else if(distributionMethod == "MANUAL"){
+                game.setupGame(userName.getText(), 3, "MANUAL");
+                // Show the game code        
+                label.setText("Game Code: " + game.getGameCode());
+                makeAppear();
+
+                viewFactory.showRoomPage();
+                Stage stage = (Stage) hostLabel.getScene().getWindow();
+                viewFactory.closeStage(stage);
+            } else {
+                game.setupGame(userName.getText(), 3, "AUTO");
+                // Show the game code        
+                label.setText("Game Code: " + game.getGameCode());
+                makeAppear();
+
+                viewFactory.showRoomPage();
+                Stage stage = (Stage) hostLabel.getScene().getWindow();
+                viewFactory.closeStage(stage);
+            }
+
         }
     }
     
     
      @FXML
     void okBtnAction(ActionEvent event) {
-        
-       rectangle.setVisible(false);
+        rectangle.setVisible(false);
         label.setVisible(false);
         ok.setVisible(false);
         ok.setDisable(true);
@@ -108,11 +125,11 @@ public class HostController extends BaseController{
     
     @FXML
     void toggleBtnOn() {
-         game.setConfigration(true);
+        distributionMethod = "AUTO";
     }
     
     @FXML
     void toggleBtnOff() {
-        game.setConfigration(false);
+        distributionMethod = "MANUAL";
     }
 }

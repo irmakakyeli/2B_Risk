@@ -16,7 +16,7 @@ import edu.bilkent.cs.simpleworldgame.Attack.*;
 public class Player {
     Integer id;
     String name;
-    ConcurrentSkipListSet<Region> assigned_Regions;
+    ConcurrentSkipListSet<Integer> assigned_Regions;
     AtomicInteger score;
     boolean isActive, isWinner;
     AttackStrategy strategy;
@@ -27,7 +27,7 @@ public class Player {
     public Player(Integer pid) {
         id = pid;
         isActive = false;
-        assigned_Regions = new ConcurrentSkipListSet<Region>();
+        assigned_Regions = new ConcurrentSkipListSet<Integer>();
         name = "Player-" + id.toString();
         hand = new HashMap<>();// init empty hand as a hashmap,
         hand.put("Infantry", 0);
@@ -149,7 +149,7 @@ public class Player {
     }
 
     public void removeRegion(Region gcountry) {
-        assigned_Regions.remove(gcountry);
+        assigned_Regions.remove(gcountry.getId());
         gcountry.setPlayer(null);
         gcountry.setArmies(0);
     }
@@ -157,7 +157,7 @@ public class Player {
     public void addRegion(Region gcountry, int armyNumber) {
         gcountry.setArmies(armyNumber);
         gcountry.setPlayer(this);
-        assigned_Regions.add(gcountry);
+        assigned_Regions.add(gcountry.getId());
     }
 
     public int cartIntegration() {
@@ -177,14 +177,29 @@ public class Player {
 
     public boolean resign() {
         while (!assigned_Regions.isEmpty()) {
-            Region r = assigned_Regions.first();
-            r.setArmies(1);
-            r.setPlayer(null);
-            assigned_Regions.remove(r);
+            Integer region = assigned_Regions.first();                        
+            assigned_Regions.remove(region);
         }
         return true;
     }
 
+    public int[] getRegionsAndDelete() {
+        Iterator<Integer> iterate = this.assigned_Regions.iterator();
+        int[] region_array = new int[47];
+        for(int i = 0; i < 47; i++)
+            region_array[i] = -1;
+        
+        // Write every region to the array
+        int count = 0;
+        while (iterate.hasNext()) { 
+            region_array[count] = iterate.next();
+            count++;
+        }
+        // Remove assigned regions
+        resign();
+        return region_array;
+    }
+    
     public HashMap getHand() {
         return hand;
     }

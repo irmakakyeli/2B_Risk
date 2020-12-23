@@ -71,14 +71,16 @@ public class JoinController extends BaseController{
             makeAppear();
         }
 
-        // Store data
-        game.joinGame(Integer.parseInt(gameCode.getText()), userName.getText());        
+        // Store data and join the game
+        Integer userId = game.joinGame(Integer.parseInt(gameCode.getText()), userName.getText());        
+        this.userNameString = userName.getText();
+        this.userIdInteger = userId;
         boolean isValid = game.checkGameCode(gameCode.getText());
         boolean isFull = game.isRoomFull();
 
         // Control validity
         if(isValid && ! isFull) {
-            viewFactory.showRoomPage();
+            viewFactory.showRoomPage(userNameString, userIdInteger);
             Stage stage = (Stage) joinLabel.getScene().getWindow();
             viewFactory.closeStage(stage);
         }

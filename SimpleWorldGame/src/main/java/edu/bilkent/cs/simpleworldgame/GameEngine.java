@@ -32,7 +32,7 @@ public class GameEngine {
     AtomicInteger playerIDgen;
     JSONObject config;
     Region[] regions;
-    Player p, winner;
+    Player currentPlayer, winner;
     boolean gameOver, configuration, onceInTurn;
     public String selectedRegion1, selectedRegion2;
 
@@ -128,10 +128,10 @@ public class GameEngine {
 
     @WebMethod
     public Player activatePlayer(Integer id) {
-        p = (Player) player_map.get(id);
-        p.setActive(true);
+        currentPlayer = (Player) player_map.get(id);
+        currentPlayer.setActive(true);
         active_player_num++;
-        return p;
+        return currentPlayer;
     }
 
     @WebMethod
@@ -158,22 +158,22 @@ public class GameEngine {
         Region attackerRegion = findRegion(n1);
         Region defenderRegion = findRegion(n2);
         boolean didWin;
-        if (attackerRegion.getPlayer() == p && defenderRegion.getPlayer() != p
+        if (attackerRegion.getPlayer() == currentPlayer && defenderRegion.getPlayer() != currentPlayer
                 && attackerRegion.totalArmyForce() > 1) {
             // REGION CONTROL
 
             onceInTurn = false;
-            didWin = p.attack(attackerRegion, defenderRegion, onceInTurn);
+            didWin = currentPlayer.attack(attackerRegion, defenderRegion, onceInTurn);
 
             if (didWin) {
                 Player loserPlayer = defenderRegion.getPlayer();
                 loserPlayer.removeRegion(defenderRegion);
-                p.addRegion(defenderRegion, attackerRegion.totalArmyForce() - 1);
+                currentPlayer.addRegion(defenderRegion, attackerRegion.totalArmyForce() - 1);
                 attackerRegion.setArmies(1);
             }
-            if (p.isWinner) {
+            if (currentPlayer.isWinner) {
                 gameOver = true;
-                winner = p;
+                winner = currentPlayer;
             }
             return true;
         } else {
@@ -227,9 +227,9 @@ public class GameEngine {
             distributionMethod = distMethod;
 
             int id = playerIDgen.getAndIncrement();
-            p = new Player(id);
-            p.setName(hostPlayerName);
-            player_map.put(id, p);
+            currentPlayer = new Player(id);
+            currentPlayer.setName(hostPlayerName);
+            player_map.put(id, currentPlayer);
             roomID = 1; // Since there will only be one room for now
             playerNumber = numberOfPlayers;
             active_player_num++;
@@ -242,9 +242,9 @@ public class GameEngine {
     public boolean reinforcementControl(String n1, String n2, int army) {
         Region r1 = findRegion(n1);
         Region r2 = findRegion(n2);
-        if (r1.getPlayer() == p && r2.getPlayer() == p && r1.totalArmyForce() > 1) {
+        if (r1.getPlayer() == currentPlayer && r2.getPlayer() == currentPlayer && r1.totalArmyForce() > 1) {
             // REGION CONTROL
-            p.reinforcement(r1, r2, army);
+            currentPlayer.reinforcement(r1, r2, army);
             return true;
         } else {
             return false;
@@ -253,14 +253,14 @@ public class GameEngine {
 
     @WebMethod
     public int integration() {
-        return p.cartIntegration();
+        return currentPlayer.cartIntegration();
     }
 
     @WebMethod
     public boolean fortificationControl(String n, int army) {
         Region r = findRegion(n);
-        if (Objects.equals(r.getPlayer(), p.getId())) {
-            p.fortification(r, army);
+        if (Objects.equals(r.getPlayer(), currentPlayer.getId())) {
+            currentPlayer.fortification(r, army);
             return true;
         } else {
             return false;
@@ -268,7 +268,7 @@ public class GameEngine {
     }
 
     @WebMethod
-    public int joinGame(int roomId, String hostPlayerName) {
+    public int joinGame(int roomId, String PlayerName) {
         if (active_player_num >= playerNumber) {
             return -1;
         }
@@ -276,9 +276,9 @@ public class GameEngine {
             return -1;
         } else {
             int id = playerIDgen.getAndIncrement();
-            p = new Player(id);
-            p.setName(hostPlayerName);
-            player_map.put(id, p);
+            currentPlayer = new Player(id);
+            currentPlayer.setName(PlayerName);
+            player_map.put(id, currentPlayer);
             active_player_num++;
 
             // Check if we have reached the number of players specified by the host
@@ -295,7 +295,7 @@ public class GameEngine {
     public boolean fortificationControl(Integer playerId, Integer regionId, int army) {
         Region r = regions[regionId];
         if (Objects.equals(r.getPlayer(), playerId)) {
-            Player p = player_map.get(playerId);
+            Player currentPlayer = player_map.get(playerId);
             return true;
         }
         return false;
@@ -386,12 +386,12 @@ public class GameEngine {
 
     @WebMethod
     public void setUserName(String nm) {
-        p.setName(nm);
+        currentPlayer.setName(nm);
     }
 
     @WebMethod
     public String getUserName() {
-        return p.getName();
+        return currentPlayer.getName();
     }
 
     @WebMethod
@@ -435,20 +435,25 @@ public class GameEngine {
 
     @WebMethod
     public String getGameStatistics() {
-        JSONArray JS_RegionArray = new JSONArray();
+        JSONObject gameStats = new JSONObject();
+        JSONArray JS_RegionArray = new JSONArray();        
+        
+        gameStats.put("CURRENT_PLAYER_ID", currentPlayer.getId());
         for (int i = 0; i < 47; i++) {
-            JSONObject JS_PlayerObj = new JSONObject();
+            JSONObject JS_RegionObj = new JSONObject();
             String id = regions[i].getId().toString();
             String name = regions[i].getName();
-            JS_PlayerObj.put("ID", id);
-            JS_PlayerObj.put("NAME", name);
-            JS_PlayerObj.put("CAVALRY_AMOUNT", regions[i].getCavalryAmount());
-            JS_PlayerObj.put("ARTILLERY_AMOUNT", regions[i].getArtilleryAmount());
-            JS_PlayerObj.put("INFANTRY_AMOUNT", regions[i].getInfantryAmount());
-            JS_PlayerObj.put("TOTAL_ARMY_FORCE", regions[i].totalArmyForce());
-            JS_PlayerObj.put("PLAYER_BELONG_TO", regions[i].playerBelongTo);
-            JS_RegionArray.put(JS_PlayerObj);
+            JS_RegionObj.put("ID", id);
+            JS_RegionObj.put("NAME", name);
+            JS_RegionObj.put("CAVALRY_AMOUNT", regions[i].getCavalryAmount());
+            JS_RegionObj.put("ARTILLERY_AMOUNT", regions[i].getArtilleryAmount());
+            JS_RegionObj.put("INFANTRY_AMOUNT", regions[i].getInfantryAmount());
+            JS_RegionObj.put("TOTAL_ARMY_FORCE", regions[i].totalArmyForce());
+            JS_RegionObj.put("PLAYER_BELONG_TO", regions[i].playerBelongTo.getId());
+            JS_RegionArray.put(JS_RegionObj);
         }
+        gameStats.put("REGIONS", JS_RegionArray); // To get the regions first get "REGIONS" then iterate through the regions array
+        
         return JS_RegionArray.toString();
     }
 
@@ -521,8 +526,24 @@ public class GameEngine {
     }
 
     @WebMethod
-    public boolean resignRequest() {
-        return p.resign();
+    public boolean resignRequest(Integer userId) {
+        Player p = player_map.get(userId);
+        if(p == null)
+            return false;
+        
+        int[] player_regions = p.getRegionsAndDelete();
+        int count = 0;
+        
+        while (player_regions[count] != -1) {
+            Region r = regions[player_regions[count]];
+            r.setArmies(1);
+            r.setPlayer(null);            
+            count++;
+        }
+        player_map.remove(userId);
+        
+        System.out.println("Player " + p.getName() + " has resigned. So deleted from player map");
+        return true;        
     }
 
     @WebMethod
@@ -538,12 +559,12 @@ public class GameEngine {
 
     @WebMethod
     public HashMap getCards() {
-        return p.getHand();
+        return currentPlayer.getHand();
     }
 
     @WebMethod
     public int getSoldierWaiting() {
-        return p.armyToGain();
+        return currentPlayer.armyToGain();
     }
 
     public void resetGame() {
@@ -552,12 +573,16 @@ public class GameEngine {
 
     @WebMethod
     public Player getCurrentPlayer(){
-        return p;
+        return currentPlayer;
     }
     
     @WebMethod
     public void changeCurrentPlayer(){
-        
+        int nextPlayerId = currentPlayer.getId()+1;
+        if(nextPlayerId >= player_map.size())
+            currentPlayer = player_map.get(0);
+        else
+            currentPlayer = player_map.get(currentPlayer.getId()+1);
     }
     
     @WebMethod

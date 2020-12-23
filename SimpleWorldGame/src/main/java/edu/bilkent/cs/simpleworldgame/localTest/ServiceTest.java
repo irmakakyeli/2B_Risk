@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  *
@@ -25,19 +26,21 @@ public class ServiceTest {
         GameEngine gmEngine = new GameEngine();
         // This map holds the associations between region names and ids.
         Map<String, Integer> clientRegionMap = new HashMap<String, Integer>();
-        
+                
         
         class MyTimerTask extends TimerTask  {
             GameEngine pEngine;
 
-            public MyTimerTask(GameEngine pEngine) {
-                this.pEngine = pEngine;
-            }
+            //public MyTimerTask(GameEngine pEngine, ) {
+            //    this.pEngine = pEngine;
+            //}
 
             @Override
             public void run() {
-                if(pEngine.isGameActive()){
+                if(pEngine.isGameActive() && !pEngine.isGameOver()){ // To pause this, add a isNotPaused button method
                         String currentGameStats = pEngine.getGameStatistics();
+                        JSONObject gameStatsJson = new JSONObject(currentGameStats);
+                        Integer currentPlayerId = gameStatsJson.getInt("CURRENT_PLAYER_ID");                        
                         System.out.println(currentGameStats);
                 }  
             }
@@ -71,9 +74,9 @@ public class ServiceTest {
         
         String setupInfo = gmEngine.setupGame("Yusuf",4, "AUTO");
         
-        MyTimerTask timert = new MyTimerTask(gmEngine);
-        Timer timer = new Timer();
-        timer.schedule(timert, 0, 4000); 
+        //MyTimerTask timert = new MyTimerTask(gmEngine);
+        //Timer timer = new Timer();
+        //timer.schedule(timert, 0, 4000); 
         
         if(setupInfo != "ERROR"){
             JSONObject json =  new JSONObject(setupInfo);
@@ -88,14 +91,20 @@ public class ServiceTest {
             Integer thirdAttackerPlayerId = player3Id;
             // Now Ayse attacks the region Peru(NOTE: Actually we don't know wether Ayse has Brazil but this should not be an issue in actual GUI)
             System.out.println("Ayse is attacking to Peru from Brazil");
-            gmEngine.attackControl(firstAttackerPlayerId, clientRegionMap.get("Brazil").toString(), clientRegionMap.get("Peru").toString());
+            //gmEngine.attackControl(firstAttackerPlayerId, clientRegionMap.get("Brazil").toString(), clientRegionMap.get("Peru").toString());
             
-            gmEngine.attackControl(secondAttackerPlayerId, clientRegionMap.get("Alaska").toString(), clientRegionMap.get("NorthWest").toString());
+            //gmEngine.attackControl(secondAttackerPlayerId, clientRegionMap.get("Alaska").toString(), clientRegionMap.get("NorthWest").toString());
             
-            gmEngine.attackControl(thirdAttackerPlayerId, clientRegionMap.get("Spain").toString(), clientRegionMap.get("France").toString());
+            //gmEngine.attackControl(thirdAttackerPlayerId, clientRegionMap.get("Spain").toString(), clientRegionMap.get("France").toString());
             
+            System.out.println(gmEngine.getCurrentPlayer().getName());
+            gmEngine.changeCurrentPlayer();
+            System.out.println(gmEngine.getCurrentPlayer().getName());
             
+            if(gmEngine.resignRequest(3))
+                System.out.println("Player with id 3 has successfully resigned");
             
+            System.out.println(gmEngine.getPlayers());
             
             if(gmEngine.isGameOver()){
                 System.out.println("Game Over");

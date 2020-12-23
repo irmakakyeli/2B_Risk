@@ -15,9 +15,12 @@ import view.ViewFactory;
 import ws.client.GameEngine;
 
 public class RoomController extends BaseController{
-    public RoomController(  GameEngine game, ViewFactory viewFactory, String fxmlName) {
+    public RoomController(  GameEngine game, String userName, Integer userId, ViewFactory viewFactory, String fxmlName) {
         super( game, viewFactory, fxmlName);
 
+        this.userNameString = userName;
+        this.userIdInteger = userId;
+        
         roomLabel.setText(game.getGameCode());
         user1.setText(game.getUser(0));
         user2.setText(game.getUser(1));
@@ -63,7 +66,7 @@ public class RoomController extends BaseController{
     }
     @FXML
     void forwardBtnAction() {
-        viewFactory.showBoard();
+        viewFactory.showBoard(this.userNameString, this.userIdInteger);
         Stage stage = (Stage) roomLabel.getScene().getWindow();
         stage.close();
     }

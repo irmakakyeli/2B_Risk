@@ -31,6 +31,7 @@ import ws.client.GameEngine;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import org.json.JSONObject;
 
 
 
@@ -41,11 +42,32 @@ enum Mod {
 }
 
 public class BoardController extends BaseController{
-    public BoardController( GameEngine game, ViewFactory viewFactory, String fxmlName) {
+    JSONObject currentGameState;
+    
+    public BoardController( GameEngine game, String userName, Integer userId, ViewFactory viewFactory, String fxmlName) {
         super(game, viewFactory, fxmlName);
         initialize();
+        this.userNameString = userName;
+        this.userIdInteger = userId;
+        
     }
 
+    class MyTimerTask extends TimerTask  {
+        GameEngine pEngine;
+
+        public MyTimerTask(GameEngine pEngine) {
+            this.pEngine = pEngine;
+        }
+
+        @Override
+        public void run() {
+            if(pEngine.isGameActive() && !pEngine.isGameOver()){ // To pause this, add a isNotPaused button method
+                    String currentGameStats = pEngine.getGameStatistics();
+                    currentGameState = new JSONObject(currentGameStats);                                            
+                    // System.out.println(currentGameStats);
+            }  
+        }
+    }
 
     @FXML
     private ImageView confetti, crown, wreath, shadow;
@@ -228,6 +250,10 @@ public class BoardController extends BaseController{
         labels[44] = Indonesia;
         labels[45] = NewGuinea;
         labels[46] = WesternAustralia;
+        
+        MyTimerTask timert = new MyTimerTask(game);
+        Timer timer = new Timer();
+        timer.schedule(timert, 0, 4000); 
 
     }
 

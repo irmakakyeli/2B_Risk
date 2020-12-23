@@ -34,9 +34,11 @@ public class ViewFactory {
     
     private Stage hostOrJoin;
     
-    private GameEngine game;
+    private final GameEngine game;
+    
     public ViewFactory() {
-        
+        GameEngineService service = new GameEngineService();
+        game = service.getGameEnginePort();
     }
 
     public void showMainMenu(){
@@ -81,14 +83,14 @@ public class ViewFactory {
         hostOrJoin = currStage;
     }
 
-    public void showRoomPage(){
-        BaseController baseController = new RoomController(game, this, "RoomPage.fxml");
+    public void showRoomPage(String userName, Integer userId){
+        BaseController baseController = new RoomController(game, userName, userId, this, "RoomPage.fxml");
         initializeStage(baseController, "css/room.css");
         currentStage = currStage;
     }
 
-   public void showBoard(){
-        BaseController baseController = new BoardController(game, this, "GamePage.fxml");
+   public void showBoard(String userName, Integer userId){
+        BaseController baseController = new BoardController(game, userName, userId, this, "GamePage.fxml");
         initializeStage(baseController, "css/board.css");
         currentStage = currStage;
     }
