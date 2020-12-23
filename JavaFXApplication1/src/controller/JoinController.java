@@ -72,7 +72,7 @@ public class JoinController extends BaseController{
         }
 
         // Store data
-        game.setUserName(userName.getText());
+        game.joinGame(Integer.parseInt(gameCode.getText()), userName.getText());        
         boolean isValid = game.checkGameCode(gameCode.getText());
         boolean isFull = game.isRoomFull();
 
