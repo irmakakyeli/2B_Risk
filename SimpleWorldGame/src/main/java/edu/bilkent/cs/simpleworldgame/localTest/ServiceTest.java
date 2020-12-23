@@ -100,9 +100,14 @@ public class ServiceTest {
             System.out.println(gmEngine.getCurrentPlayer().getName());
             gmEngine.changeCurrentPlayer();
             System.out.println(gmEngine.getCurrentPlayer().getName());
+            gmEngine.changeCurrentPlayer();
+            System.out.println(gmEngine.getCurrentPlayer().getName());
             
             if(gmEngine.resignRequest(3))
                 System.out.println("Player with id 3 has successfully resigned");
+            
+            gmEngine.changeCurrentPlayer();
+            System.out.println(gmEngine.getCurrentPlayer().getName());
             
             System.out.println(gmEngine.getPlayers());
             

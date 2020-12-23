@@ -545,13 +545,13 @@ public class GameEngine {
     @WebMethod
     public boolean nextTurn() {
         onceInTurn = true;
-        if(p.id == playerNumber - 1)
+        if(currentPlayer.id == playerNumber - 1)
         {
-            p = player_map.get(0);
+            currentPlayer = player_map.get(0);
         }
         else
         {
-            p = player_map.get(p.id ++);
+            currentPlayer = player_map.get(currentPlayer.id ++);
         }
         return true;
     }
@@ -590,20 +590,18 @@ public class GameEngine {
         { 
              Map.Entry<Integer, Player> entry = itr.next(); 
              if(entry.getKey() == currentPlayer.getId()){
-                 if(itr.hasNext())
-                    currentPlayer = itr.next().getValue();  
+                 if(itr.hasNext()){
+                    currentPlayer = itr.next().getValue();
+                    return;
+                 }
                  else{                     
-                     currentPlayer = player_map.values().stream().findFirst().get();
+                    currentPlayer = player_map.values().stream().findFirst().get();
+                    return;
                  }
              }
                                  
         }
         
-        int nextPlayerId = currentPlayer.getId()+1;
-        if(nextPlayerId >= player_map.size())
-            currentPlayer = player_map.get(0);
-        else
-            currentPlayer = player_map.get(currentPlayer.getId()+1);
     }
     
     @WebMethod
