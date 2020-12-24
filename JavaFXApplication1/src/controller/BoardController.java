@@ -27,7 +27,8 @@ import java.util.Iterator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Popup;
-import ws.client.GameEngine;
+import ws.client.*;
+import edu.bilkent.cs.simpleworldgame.*;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -276,7 +277,7 @@ public class BoardController extends BaseController{
 
 
         int count = 0;
-        for (Map.Entry<String, Integer> entry : game.getCards().entrySet()) {
+        /*for (Map.Entry<String, Integer> entry : game.getCards().entrySet()) {
             String key = entry.getKey();
             int value = (int) entry.getValue();
             if (value > 0) {
@@ -288,7 +289,7 @@ public class BoardController extends BaseController{
                 count++;
             }
 
-        }
+        }*/
     }
     @FXML
     void integrateBtnAction(ActionEvent event) {

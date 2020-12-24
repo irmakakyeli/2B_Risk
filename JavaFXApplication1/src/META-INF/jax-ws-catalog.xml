@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://13.59.31.129:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?wsdl" uri="wsdl/13.59.31.129_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.wsdl"/>
     <system systemId="http://13.59.31.129:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?xsd=1" uri="wsdl/13.59.31.129_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.xsd_1.xsd"/>
+    <system systemId="http://3.139.101.217:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?wsdl" uri="wsdl/3.139.101.217_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.wsdl"/>
+    <system systemId="http://3.139.101.217:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?xsd=1" uri="wsdl/3.139.101.217_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.xsd_1.xsd"/>
 </catalog>

@@ -11,7 +11,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import view.ViewFactory;
-import ws.client.GameEngine;
+import ws.client.*;
+import edu.bilkent.cs.simpleworldgame.*;
 
 public class HostController extends BaseController{
 

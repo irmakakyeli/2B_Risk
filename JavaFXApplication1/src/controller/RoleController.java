@@ -4,7 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import view.ViewFactory;
-import ws.client.GameEngine;
+import ws.client.*;
+import edu.bilkent.cs.simpleworldgame.*;
 
 public class RoleController extends BaseController {
 

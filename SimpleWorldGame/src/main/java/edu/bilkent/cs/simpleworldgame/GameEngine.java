@@ -258,9 +258,9 @@ public class GameEngine {
     }
 
     @WebMethod
-    public boolean fortificationControl(String n, int army) {
-        Region r = findRegion(n);
-        if (Objects.equals(r.getPlayer(), currentPlayer.getId())) {
+    public boolean fortificationControl(String region, int army) {
+        Region r = findRegion(region);
+        if (r.getPlayer().getId() == currentPlayer.getId()) {
             currentPlayer.fortification(r, army);
             return true;
         } else {
@@ -292,7 +292,7 @@ public class GameEngine {
         }
     }
 
-    @WebMethod
+    /*@WebMethod
     public boolean fortificationControl(Integer playerId, Integer regionId, int army) {
         Region r = regions[regionId];
         if (Objects.equals(r.getPlayer(), playerId)) {
@@ -300,7 +300,7 @@ public class GameEngine {
             return true;
         }
         return false;
-    }
+    }*/
 
     @WebMethod
     public Region getRegion(int index) {
@@ -561,10 +561,10 @@ public class GameEngine {
         return player_map.get(index);
     }
 
-    @WebMethod
-    public HashMap getCards() {
-        return currentPlayer.getHand();
-    }
+    //@WebMethod
+    //public HashMap getCards() {
+    //    return currentPlayer.getHand();
+    //}
 
     @WebMethod
     public int getSoldierWaiting() {

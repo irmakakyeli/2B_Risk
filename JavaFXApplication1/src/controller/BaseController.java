@@ -2,7 +2,8 @@ package controller;
 
 
 import view.ViewFactory;
-import ws.client.GameEngine;
+import edu.bilkent.cs.simpleworldgame.*;
+import ws.client.*;
 
 public abstract class BaseController {
 

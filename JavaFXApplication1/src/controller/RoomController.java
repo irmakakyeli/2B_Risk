@@ -12,7 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import view.ViewFactory;
-import ws.client.GameEngine;
+import ws.client.*;
+import edu.bilkent.cs.simpleworldgame.*;
 
 public class RoomController extends BaseController{
     public RoomController(  GameEngine game, String userName, Integer userId, ViewFactory viewFactory, String fxmlName) {
@@ -22,7 +23,7 @@ public class RoomController extends BaseController{
         this.userIdInteger = userId;
         
         roomLabel.setText(game.getGameCode());
-        user1.setText(game.getUser(0));
+        user1.setText(game.getUserName());
         user2.setText(game.getUser(1));
         user3.setText(game.getUser(2));
         user4.setText(game.getUser(3));
