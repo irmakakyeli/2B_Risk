@@ -142,7 +142,7 @@ public class GameEngine {
             String key = entry.getKey().toString();
             Player value = entry.getValue();
             JS_PlayerObj.put("name", value.name);
-            JS_PlayerObj.put("isActive", Boolean.toString(value.isActive));
+            //JS_PlayerObj.put("isActive", Boolean.toString(value.isActive));
             JS_PlayerArray.put(JS_PlayerObj);
         }
         return JS_PlayerArray.toString();

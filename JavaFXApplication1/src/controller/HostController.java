@@ -84,7 +84,7 @@ public class HostController extends BaseController{
                 
                 // Show the game code        
                 label.setText("Game Code: " + roomId);
-                makeAppear();
+                //makeAppear();
 
                 String userNametoPass = game.getUserName();
 
@@ -102,7 +102,7 @@ public class HostController extends BaseController{
                 
                 // Show the game code        
                 label.setText("Game Code: " + roomId);
-                makeAppear();
+                //makeAppear();
                 
                 String userNametoPass = game.getUserName();
 

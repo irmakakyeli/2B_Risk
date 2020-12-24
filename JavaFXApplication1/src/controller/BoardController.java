@@ -47,7 +47,7 @@ public class BoardController extends BaseController{
     
     public BoardController( GameEngine game, String userName, Integer userId, ViewFactory viewFactory, String fxmlName) {
         super(game, viewFactory, fxmlName);
-        initialize();
+        //initialize();
         this.userNameString = userName;
         this.userIdInteger = userId;
         
@@ -158,8 +158,8 @@ public class BoardController extends BaseController{
    
     private Rectangle[] cards;
     
-    private void initialize(){
-        cards[0] = card1;
+    public void initialize(){
+        /*cards[0] = card1;
         cards[1] = card2;
         cards[2] = card3;
         cards[3] = card4;
@@ -169,7 +169,7 @@ public class BoardController extends BaseController{
         card2.setVisible(false);
         card3.setVisible(false);
         card4.setVisible(false);
-        card5.setVisible(false);
+        card5.setVisible(false);*/
         rectangle2.setVisible(false);
         label2.setVisible(false);
         x.setVisible(false);

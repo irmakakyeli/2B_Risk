@@ -19,12 +19,34 @@ import org.json.*;
 
 public class RoomController extends BaseController{
     String allPlayers;
+    
+    @FXML
+    private Label roomLabel;
+    
+    @FXML
+    private Label user1, user2, user3, user4, user5, user6;
+
+    @FXML
+    private Button add1, add2, add3;
+    
     public RoomController(  GameEngine game, String userName, Integer userId, ViewFactory viewFactory, String fxmlName) {
         super( game, viewFactory, fxmlName);
 
         this.userNameString = userName;
         this.userIdInteger = userId;
         
+        //JSONObject userObj2 = json.getJSONObject("1");               
+        
+        
+        //user2.setText(userObj2.getString("name"));
+        // user2.setText(game.getUser(1)); This will not work since it calls a Player object
+        
+    }
+
+    
+    @FXML
+    void updatePlayers() {
+        roomLabel.setText(game.getGameCode());
         allPlayers = game.getPlayers();
         JSONArray json = new JSONArray(allPlayers);
         for (int i = 0 ; i < json.length(); i++) {
@@ -51,24 +73,7 @@ public class RoomController extends BaseController{
                     break;
             }
         }
-        
-        
-        //JSONObject userObj2 = json.getJSONObject("1");               
-        
-        
-        //user2.setText(userObj2.getString("name"));
-        // user2.setText(game.getUser(1)); This will not work since it calls a Player object
-        roomLabel.setText(game.getGameCode());
     }
-
-    @FXML
-    private Label roomLabel;
-    
-    @FXML
-    private Label user1, user2, user3, user4, user5, user6;
-
-    @FXML
-    private Button add1, add2, add3;
     
     @FXML
     void backBtnAction() {
