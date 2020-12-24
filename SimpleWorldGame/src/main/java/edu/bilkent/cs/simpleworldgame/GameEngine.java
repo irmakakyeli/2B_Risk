@@ -234,6 +234,9 @@ public class GameEngine {
             playerNumber = numberOfPlayers;
             active_player_num++;
             currentPlayer = p;
+            
+            distributeRegions(distributionMethod, playerNumber);
+            isGameActive = true;
             return "{HOST_PLAYER_ID: " + id + ", ROOM_ID: " + roomID + "}"; // To be converted to a JSON oject in the
                                                                             // client
         }
@@ -532,6 +535,7 @@ public class GameEngine {
             count++;
         }
         player_map.remove(userId);
+        active_player_num--;
         
         System.out.println("Player " + p.getName() + " has resigned. So deleted from player map");
         return true;        
@@ -579,7 +583,7 @@ public class GameEngine {
         
         int size = player_map.size();
         for(int i = 0; i < size; i++){
-            resignRequest(i);
+            resignRequest(i);            
         }
         
         player_map.clear();

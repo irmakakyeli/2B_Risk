@@ -151,12 +151,12 @@ public class BoardController extends BaseController implements Initializable{
         labels[45] = NewGuinea;
         labels[46] = WesternAustralia;
         
-        MyTimerTask timert = new MyTimerTask(game);
+        /*MyTimerTask timert = new MyTimerTask(game);
         Timer timer = new Timer();
-        timer.schedule(timert, 0, 4000);
+        timer.schedule(timert, 0, 4000);*/
     }
 
-    class MyTimerTask extends TimerTask  {
+    /*class MyTimerTask extends TimerTask  {
         GameEngine pEngine;
 
         public MyTimerTask(GameEngine pEngine) {
@@ -171,7 +171,7 @@ public class BoardController extends BaseController implements Initializable{
                     // System.out.println(currentGameStats);
             }  
         }
-    }
+    }*/
 
     @FXML
     private ImageView confetti, crown, wreath, shadow;
@@ -526,10 +526,11 @@ public class BoardController extends BaseController implements Initializable{
     }
 
     @FXML
-    void resignBtnAction(ActionEvent event) {
+    void resignBtnAction() {
        
        label.setText("Are you sure to resign?");
        makeAppear();
+       
     }
 
     private void changeTheVisibility(){
@@ -591,16 +592,16 @@ public class BoardController extends BaseController implements Initializable{
         label.setVisible(false);
         no.setVisible(false);
         no.setDisable(true);
-         yes.setVisible(false);
+        yes.setVisible(false);
         yes.setDisable(true);
     }
     
-     @FXML
+    @FXML
     void yesBtnAction(ActionEvent event) {
         
-        // Aler the resign for the database
+        // Alert the resign for the database
         game.resignRequest(userIdInteger);
-       viewFactory.showMainMenu();
+        viewFactory.showMainMenu();
         Stage stage = (Stage) number.getScene().getWindow();
         //viewFactory.closeStage(stage);
         stage.close();
@@ -619,7 +620,7 @@ public class BoardController extends BaseController implements Initializable{
     }
 
     @FXML
-    void mouseEnteredRegion(final ActionEvent event) {
+    void mouseEnteredRegion(ActionEvent event) {
         
     popupwindow.initModality(Modality.APPLICATION_MODAL);
     //popupwindow.setTitle("This is a pop up window");
@@ -640,8 +641,8 @@ public class BoardController extends BaseController implements Initializable{
         
     }
     
-     @FXML
-    void mouseExitedRegion(final ActionEvent event) {
+    @FXML
+    void mouseExitedRegion() {
     
          popupwindow.close();
     }

@@ -122,13 +122,13 @@
             <Font name="Tahoma Bold" size="77.0" />
          </font>
       </Label>
-      <Button layoutX="1192.0" layoutY="640.0" mnemonicParsing="false" onAction="#resignBtnAction" prefHeight="62.0" prefWidth="74.0" visible="false" AnchorPane.bottomAnchor="0.0" />
       <ImageView fx:id="whiteFlag" fitHeight="82.0" fitWidth="113.0" layoutX="1173.0" layoutY="634.0" AnchorPane.bottomAnchor="0.0">
          <image>
             <Image url="@css/resources/pirate-ship-pirate-flag.gif" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b2" height="312.0" layoutX="481.0" layoutY="204.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="334.0" />
+      <Button layoutX="1192.0" layoutY="640.0" mnemonicParsing="false" onAction="#resignBtnAction" prefHeight="62.0" prefWidth="74.0" visible="true" AnchorPane.bottomAnchor="0.0" disable="false" opacity="0.0"/>
+      <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#000000b2" height="312.0" layoutX="481.0" layoutY="204.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="334.0" />
       <Label fx:id="label" alignment="CENTER" layoutX="499.0" layoutY="241.0" prefHeight="114.0" prefWidth="298.0" text="Label" textAlignment="CENTER" textFill="WHITE" visible="false" wrapText="true">
          <font>
             <Font name="System Bold" size="24.0" />
@@ -158,7 +158,7 @@
          <image>
             <Image url="@css/resources/VigorousPaltryBumblebee-size_restricted.gif" />
          </image>
-      </ImageView>
+      </ImageView>      
       <Rectangle fx:id="rectangle2" arcHeight="5.0" arcWidth="5.0" fill="#000000b2" height="362.0" layoutX="253.0" layoutY="149.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="801.0" />
       <Button fx:id="integrate" layoutX="390.0" layoutY="436.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="513.0" style="-fx-background-radius: 50; -fx-background-color: #b80000;" text="Integrate" textFill="WHITE" visible="false">
          <font>
