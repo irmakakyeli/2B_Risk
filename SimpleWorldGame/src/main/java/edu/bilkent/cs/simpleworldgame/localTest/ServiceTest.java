@@ -86,6 +86,20 @@ public class ServiceTest {
             int player2Id = gmEngine.joinGame(roomId, "Fatma");
             int player3Id = gmEngine.joinGame(roomId, "Mehmet");
             
+            String allPlayers = gmEngine.getPlayers();
+            JSONObject allPlayersJson = new JSONObject(allPlayers);
+
+            if(allPlayersJson.getJSONObject("0") != null)
+                JSONObject userObj1 = allPlayersJson.getJSONObject("0");
+            
+            JSONObject userObj2 = allPlayersJson.getJSONObject("1");
+            JSONObject userObj3 = allPlayersJson.getJSONObject("2");
+            JSONObject userObj4 = allPlayersJson.getJSONObject("3");
+            JSONObject userObj5 = allPlayersJson.getJSONObject("4");
+            JSONObject userObj6 = allPlayersJson.getJSONObject("5");
+            
+            System.out.println(userObj1.getString("name"));
+            
             Integer firstAttackerPlayerId = player1Id;
             Integer secondAttackerPlayerId = player2Id;
             Integer thirdAttackerPlayerId = player3Id;

@@ -26,23 +26,43 @@ public class RoomController extends BaseController{
         
         allPlayers = game.getPlayers();
         JSONObject json = new JSONObject(allPlayers);
+        if(json.getJSONObject("0") != null){
+            JSONObject userObj1 = json.getJSONObject("0");
+            user1.setText(userObj1.getString("name"));
+            
+            if(json.getJSONObject("1") != null){
+                JSONObject userObj2 = json.getJSONObject("1");
+                user2.setText(userObj1.getString("name"));
+                
+                if(json.getJSONObject("2") != null){
+                    JSONObject userObj3 = json.getJSONObject("2");
+                    user3.setText(userObj1.getString("name"));
+                    
+                    if(json.getJSONObject("3") != null){
+                        JSONObject userObj4 = json.getJSONObject("3");
+                        user4.setText(userObj1.getString("name"));
+                        
+                        if(json.getJSONObject("4") != null){
+                            JSONObject userObj5 = json.getJSONObject("4");
+                            user5.setText(userObj1.getString("name"));
+                            
+                            if(json.getJSONObject("5") != null){
+                                JSONObject userObj6 = json.getJSONObject("5");
+                                user6.setText(userObj1.getString("name"));
+                            }
+                        }
+                    }
+                }
+            }
+        }
         
-        JSONObject userObj1 = json.getJSONObject("0");
-        JSONObject userObj2 = json.getJSONObject("1");
-        JSONObject userObj3 = json.getJSONObject("2");
-        JSONObject userObj4 = json.getJSONObject("3");
-        JSONObject userObj5 = json.getJSONObject("4");
-        JSONObject userObj6 = json.getJSONObject("5");
+        
+        //JSONObject userObj2 = json.getJSONObject("1");               
         
         
-        roomLabel.setText(game.getGameCode());
-        user1.setText(userObj1.getString("name"));
-        user2.setText(userObj2.getString("name"));
-        user3.setText(userObj3.getString("name"));
-        user4.setText(userObj4.getString("name"));
-        user5.setText(userObj5.getString("name"));
-        user6.setText(userObj6.getString("name"));
+        //user2.setText(userObj2.getString("name"));
         // user2.setText(game.getUser(1)); This will not work since it calls a Player object
+        roomLabel.setText(game.getGameCode());
     }
 
     @FXML
