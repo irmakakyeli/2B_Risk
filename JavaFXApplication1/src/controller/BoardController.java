@@ -599,7 +599,9 @@ public class BoardController extends BaseController{
         game.resignRequest(userIdInteger);
        viewFactory.showMainMenu();
         Stage stage = (Stage) number.getScene().getWindow();
-        viewFactory.closeStage(stage);
+        //viewFactory.closeStage(stage);
+        stage.close();
+        
     }
    
     

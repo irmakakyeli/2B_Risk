@@ -41,6 +41,7 @@ public class ViewFactory {
     }
 
     public void showMainMenu(){
+        //game.resetGame();
         BaseController baseController = new MainMenuController(game, this, "MainMenu.fxml");
         initializeStage(baseController, "css/style.css");
         currentStage = currStage;
@@ -118,8 +119,7 @@ public class ViewFactory {
         stage.show();
     }
 
-    public void closeStage(Stage stage){
-        
+    public void closeStage(Stage stage){        
         stage.close();
     }
     

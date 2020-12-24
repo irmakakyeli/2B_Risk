@@ -136,16 +136,16 @@ public class GameEngine {
 
     @WebMethod
     public String getPlayers() {
-        JSONObject JS_ParentObj = new JSONObject();
+        JSONArray JS_PlayerArray = new JSONArray();
         for (Map.Entry<Integer, Player> entry : player_map.entrySet()) {
             JSONObject JS_PlayerObj = new JSONObject();
             String key = entry.getKey().toString();
             Player value = entry.getValue();
             JS_PlayerObj.put("name", value.name);
             JS_PlayerObj.put("isActive", Boolean.toString(value.isActive));
-            JS_ParentObj.put(key, JS_PlayerObj);
+            JS_PlayerArray.put(JS_PlayerObj);
         }
-        return JS_ParentObj.toString();
+        return JS_PlayerArray.toString();
     }
 
     @WebMethod
@@ -571,8 +571,19 @@ public class GameEngine {
         return currentPlayer.armyToGain();
     }
 
+    @WebMethod
     public void resetGame() {
-
+        isGameSetup = false;
+        if(player_map.isEmpty())
+            return;
+        
+        int size = player_map.size();
+        for(int i = 0; i < size; i++){
+            resignRequest(i);
+        }
+        
+        player_map.clear();
+        
     }
 
     @WebMethod

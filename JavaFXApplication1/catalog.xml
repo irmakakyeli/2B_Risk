@@ -4,4 +4,6 @@
     <system systemId="http://13.59.31.129:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?xsd=1" uri="xml-resources/web-service-references/GameEngineService/wsdl/13.59.31.129_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.xsd_1.xsd"/>
     <system systemId="http://3.139.101.217:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?wsdl" uri="xml-resources/web-service-references/GameEngineService/wsdl/3.139.101.217_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.wsdl"/>
     <system systemId="http://3.139.101.217:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?xsd=1" uri="xml-resources/web-service-references/GameEngineService/wsdl/3.139.101.217_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.xsd_1.xsd"/>
+    <system systemId="http://52.15.165.134:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?wsdl" uri="xml-resources/web-service-references/GameEngineService/wsdl/52.15.165.134_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.wsdl"/>
+    <system systemId="http://52.15.165.134:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?xsd=1" uri="xml-resources/web-service-references/GameEngineService/wsdl/52.15.165.134_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.xsd_1.xsd"/>
 </catalog>

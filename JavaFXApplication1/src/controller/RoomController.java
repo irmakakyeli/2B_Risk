@@ -15,6 +15,7 @@ import view.ViewFactory;
 //import ws.client.*;
 import edu.bilkent.cs.simpleworldgame.*;
 import org.json.JSONObject;
+import org.json.*;
 
 public class RoomController extends BaseController{
     String allPlayers;
@@ -25,34 +26,29 @@ public class RoomController extends BaseController{
         this.userIdInteger = userId;
         
         allPlayers = game.getPlayers();
-        JSONObject json = new JSONObject(allPlayers);
-        if(json.getJSONObject("0") != null){
-            JSONObject userObj1 = json.getJSONObject("0");
-            user1.setText(userObj1.getString("name"));
-            
-            if(json.getJSONObject("1") != null){
-                JSONObject userObj2 = json.getJSONObject("1");
-                user2.setText(userObj1.getString("name"));
-                
-                if(json.getJSONObject("2") != null){
-                    JSONObject userObj3 = json.getJSONObject("2");
-                    user3.setText(userObj1.getString("name"));
-                    
-                    if(json.getJSONObject("3") != null){
-                        JSONObject userObj4 = json.getJSONObject("3");
-                        user4.setText(userObj1.getString("name"));
-                        
-                        if(json.getJSONObject("4") != null){
-                            JSONObject userObj5 = json.getJSONObject("4");
-                            user5.setText(userObj1.getString("name"));
-                            
-                            if(json.getJSONObject("5") != null){
-                                JSONObject userObj6 = json.getJSONObject("5");
-                                user6.setText(userObj1.getString("name"));
-                            }
-                        }
-                    }
-                }
+        JSONArray json = new JSONArray(allPlayers);
+        for (int i = 0 ; i < json.length(); i++) {
+            JSONObject obj = json.getJSONObject(i);
+            String A = obj.getString("name");
+            switch(i){
+                case 0:
+                    user1.setText(A);
+                    break;
+                case 1:
+                    user2.setText(A);
+                    break;
+                case 2:
+                    user3.setText(A);
+                    break;
+                case 3:
+                    user4.setText(A);
+                    break;
+                case 4:
+                    user5.setText(A);
+                    break;
+                case 5:
+                    user6.setText(A);
+                    break;
             }
         }
         

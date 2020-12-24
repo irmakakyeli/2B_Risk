@@ -74,6 +74,7 @@ public class HostController extends BaseController{
                 makeAppear();
 
             } else if(distributionMethod == "MANUAL"){
+                game.resetGame();
                 String playerAndRoom = game.setupGame(userName.getText(), 3, "MANUAL"); // Host player (currentPlayer) name and id is set here
                 JSONObject json =  new JSONObject(playerAndRoom);
                 
@@ -85,10 +86,13 @@ public class HostController extends BaseController{
                 label.setText("Game Code: " + roomId);
                 makeAppear();
 
-                viewFactory.showRoomPage(game.getUserName(), hostId);
+                String userNametoPass = game.getUserName();
+
+                viewFactory.showRoomPage(userNametoPass, hostId);
                 Stage stage = (Stage) hostLabel.getScene().getWindow();
                 viewFactory.closeStage(stage);
             } else {
+                game.resetGame();
                 String playerAndRoom = game.setupGame(userName.getText(), 3, "AUTO"); // Host player (currentPlayer) name and id is set here
                 JSONObject json =  new JSONObject(playerAndRoom);
                 
@@ -99,8 +103,10 @@ public class HostController extends BaseController{
                 // Show the game code        
                 label.setText("Game Code: " + roomId);
                 makeAppear();
+                
+                String userNametoPass = game.getUserName();
 
-                viewFactory.showRoomPage(game.getUserName(), hostId);
+                viewFactory.showRoomPage(userNametoPass, hostId);
                 Stage stage = (Stage) hostLabel.getScene().getWindow();
                 viewFactory.closeStage(stage);
             }

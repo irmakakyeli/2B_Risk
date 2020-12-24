@@ -87,18 +87,27 @@ public class ServiceTest {
             int player3Id = gmEngine.joinGame(roomId, "Mehmet");
             
             String allPlayers = gmEngine.getPlayers();
-            JSONObject allPlayersJson = new JSONObject(allPlayers);
+            JSONArray allPlayersJson = new JSONArray(allPlayers);
 
-            if(allPlayersJson.getJSONObject("0") != null)
-                JSONObject userObj1 = allPlayersJson.getJSONObject("0");
+            //if(allPlayersJson.getJSONObject("0") != null)
+            //JSONArray userObj1 = allPlayersJson.JSONArray("0");
             
-            JSONObject userObj2 = allPlayersJson.getJSONObject("1");
-            JSONObject userObj3 = allPlayersJson.getJSONObject("2");
-            JSONObject userObj4 = allPlayersJson.getJSONObject("3");
-            JSONObject userObj5 = allPlayersJson.getJSONObject("4");
-            JSONObject userObj6 = allPlayersJson.getJSONObject("5");
+            //JSONObject userObj2 = allPlayersJson.getJSONObject("1");
+            //JSONObject userObj3 = allPlayersJson.getJSONObject("2");
+            //JSONObject userObj4 = allPlayersJson.getJSONObject("3");
+            //JSONObject userObj5 = allPlayersJson.getJSONObject("4");
+            //JSONObject userObj6 = allPlayersJson.getJSONObject("5");
             
-            System.out.println(userObj1.getString("name"));
+            for (int i = 0 ; i < allPlayersJson.length(); i++) {
+                JSONObject obj = allPlayersJson.getJSONObject(i);
+                String A = obj.getString("name");
+                System.out.println(A + " " + i);
+            }
+            
+            gmEngine.resetGame();
+            System.out.println(gmEngine.getPlayers());
+            
+            //System.out.println(userObj1.getString("name"));
             
             Integer firstAttackerPlayerId = player1Id;
             Integer secondAttackerPlayerId = player2Id;

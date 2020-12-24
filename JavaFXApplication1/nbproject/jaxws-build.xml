@@ -18,8 +18,8 @@
     </target>
     <target name="wsimport-client-GameEngineService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/GameEngineService"/>
-        <property name="wsdl-GameEngineService" location="xml-resources/web-service-references/GameEngineService/wsdl/3.139.101.217_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/GameEngineService" destdir="${build.generated.dir}/jax-wsCache/GameEngineService" wsdl="${wsdl-GameEngineService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://3.139.101.217:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?wsdl" xnocompile="true" xendorsed="true">
+        <property name="wsdl-GameEngineService" location="xml-resources/web-service-references/GameEngineService/wsdl/52.15.165.134_8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/GameEngineService" destdir="${build.generated.dir}/jax-wsCache/GameEngineService" wsdl="${wsdl-GameEngineService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://52.15.165.134:8080/SimpleWorldGame-1.0-SNAPSHOT/GameEngineService?wsdl" xnocompile="true" xendorsed="true">
             <depends file="${wsdl-GameEngineService}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/GameEngineService"/>
         </wsimport>
