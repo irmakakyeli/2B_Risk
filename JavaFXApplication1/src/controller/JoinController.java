@@ -75,7 +75,7 @@ public class JoinController extends BaseController{
         // Store data and join the game
         Integer userId = game.joinGame(Integer.parseInt(gameCode.getText()), userName.getText()); 
         if(userId == -1){
-            label.setText("ERROROROROOROR");
+            label.setText("ERROR");
         }else{
             this.userNameString = userName.getText();
             this.userIdInteger = userId;

@@ -344,7 +344,7 @@ public class BoardController extends BaseController implements Initializable{
     }
      
    @FXML
-    void RegionBtnAction(MouseEvent event) throws IOException{
+    void regionBtnAction(ActionEvent event) throws IOException{
 
         //String region = game.tellRegion((int) event.getX(), (int) event.getY());
         String region = ((Button)event.getSource()).getText();
@@ -526,7 +526,7 @@ public class BoardController extends BaseController implements Initializable{
     }
 
     @FXML
-    void resignBtnAction() {
+    void resignBtnAction(ActionEvent event) {
        
        label.setText("Are you sure to resign?");
        makeAppear();
