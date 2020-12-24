@@ -29,9 +29,12 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Popup;
 //import ws.client.*;
 import edu.bilkent.cs.simpleworldgame.*;
+import java.net.URL;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.fxml.Initializable;
 import org.json.JSONObject;
 
 
@@ -42,7 +45,7 @@ enum Mod {
     FORTIFICATION
 }
 
-public class BoardController extends BaseController{
+public class BoardController extends BaseController implements Initializable{
     JSONObject currentGameState;
     
     public BoardController( GameEngine game, String userName, Integer userId, ViewFactory viewFactory, String fxmlName) {
@@ -51,6 +54,106 @@ public class BoardController extends BaseController{
         this.userNameString = userName;
         this.userIdInteger = userId;
         
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        /*cards[0] = card1;
+        cards[1] = card2;
+        cards[2] = card3;
+        cards[3] = card4;
+        cards[4] = card5;
+
+        card1.setVisible(false);
+        card2.setVisible(false);
+        card3.setVisible(false);
+        card4.setVisible(false);
+        card5.setVisible(false);*/
+        rectangle2.setVisible(false);
+        label2.setVisible(false);
+        x.setVisible(false);
+        integrate.setVisible(false);
+        x.setDisable(true);
+        integrate.setDisable(true);
+        rect2.setOpacity(0.0);
+        decreaseBtn.setOpacity(0.0);
+        increaseBtn.setOpacity(0.0);
+        number.setOpacity(0.0);
+        File file = new File("css/resources/arrowForAmount.png");
+        Image image = new Image(file.toURI().toString());
+        iw.setImage(image);
+        iw.setOpacity(0.0);
+
+        confetti.setVisible(false);
+        crown.setVisible(false);
+        wreath.setVisible(false);
+        shadow.setVisible(false);
+        winnerName.setVisible(false);
+        tick.setVisible(false);
+        minion.setVisible(false);
+        victory.setVisible(false);
+        winnerCircle.setVisible(false);
+        ok2.setVisible(false);
+        ok2.setDisable(true);
+        
+        rect.setOpacity(0.0);
+        circle.setOpacity(0.0);
+        barRect.setOpacity(0.0);
+        passBtn.setVisible(false);
+        passBtn.setDisable(true);
+
+        labels = new Label[47];
+        labels[0] = Alaska;
+        labels[1] = WesternAmerica;
+        labels[2] = CentralAmerica;
+        labels[3] = EasternUS;
+        labels[4] = Greenland;
+        labels[5] = NorthWest;
+        labels[6] = CentralCanada;
+        labels[7] = EasternCanada;
+        labels[8] = WesternUS;
+        labels[9] = Argentina;
+        labels[10] = Brazil;
+        labels[11] = Peru;
+        labels[12] = Venezuela;
+        labels[13] = Colombia;
+        labels[14] = Bolivia;
+        labels[15] = UnitedKingdom;
+        labels[16] = Iceland;
+        labels[17] = Germany;
+        labels[18] = Skandinavia;
+        labels[19] = SouthernEurope;
+        labels[20] = Russia;
+        labels[21] = Spain;
+        labels[22] = France;
+        labels[23] = Italia;
+        labels[24] = Ukraine;
+        labels[25] = Afghanistan;
+        labels[26] = China;
+        labels[27] = India;
+        labels[28] = Irkutsk;
+        labels[29] = Japan;
+        labels[30] = Kamchatka;
+        labels[31] = MiddleEast;
+        labels[32] = Mongolia;
+        labels[33] = Sian;
+        labels[34] = Siberia;
+        labels[35] = Ural;
+        labels[36] = Yakutsk;
+        labels[37] = Congo;
+        labels[38] = EastAfrica;
+        labels[39] = Egypt;
+        labels[40] = Madagaskar;
+        labels[41] = NorthAfrica;
+        labels[42] = SouthAfrica;
+        labels[43] = EasternAustralia;
+        labels[44] = Indonesia;
+        labels[45] = NewGuinea;
+        labels[46] = WesternAustralia;
+        
+        MyTimerTask timert = new MyTimerTask(game);
+        Timer timer = new Timer();
+        timer.schedule(timert, 0, 4000);
     }
 
     class MyTimerTask extends TimerTask  {
@@ -158,105 +261,6 @@ public class BoardController extends BaseController{
    
     private Rectangle[] cards;
     
-    public void initialize(){
-        /*cards[0] = card1;
-        cards[1] = card2;
-        cards[2] = card3;
-        cards[3] = card4;
-        cards[4] = card5;
-
-        card1.setVisible(false);
-        card2.setVisible(false);
-        card3.setVisible(false);
-        card4.setVisible(false);
-        card5.setVisible(false);*/
-        rectangle2.setVisible(false);
-        label2.setVisible(false);
-        x.setVisible(false);
-        integrate.setVisible(false);
-        x.setDisable(true);
-        integrate.setDisable(true);
-        rect2.setOpacity(0.0);
-        decreaseBtn.setOpacity(0.0);
-        increaseBtn.setOpacity(0.0);
-        number.setOpacity(0.0);
-        File file = new File("css/resources/arrowForAmount.png");
-        Image image = new Image(file.toURI().toString());
-        iw.setImage(image);
-        iw.setOpacity(0.0);
-
-        confetti.setVisible(false);
-        crown.setVisible(false);
-        wreath.setVisible(false);
-        shadow.setVisible(false);
-        winnerName.setVisible(false);
-        tick.setVisible(false);
-        minion.setVisible(false);
-        victory.setVisible(false);
-        winnerCircle.setVisible(false);
-        ok2.setVisible(false);
-        ok2.setDisable(true);
-        
-        rect.setOpacity(0.0);
-        circle.setOpacity(0.0);
-        barRect.setOpacity(0.0);
-        passBtn.setVisible(false);
-        passBtn.setDisable(true);
-
-        labels = new Label[47];
-        labels[0] = Alaska;
-        labels[1] = WesternAmerica;
-        labels[2] = CentralAmerica;
-        labels[3] = EasternUS;
-        labels[4] = Greenland;
-        labels[5] = NorthWest;
-        labels[6] = CentralCanada;
-        labels[7] = EasternCanada;
-        labels[8] = WesternUS;
-        labels[9] = Argentina;
-        labels[10] = Brazil;
-        labels[11] = Peru;
-        labels[12] = Venezuela;
-        labels[13] = Colombia;
-        labels[14] = Bolivia;
-        labels[15] = UnitedKingdom;
-        labels[16] = Iceland;
-        labels[17] = Germany;
-        labels[18] = Skandinavia;
-        labels[19] = SouthernEurope;
-        labels[20] = Russia;
-        labels[21] = Spain;
-        labels[22] = France;
-        labels[23] = Italia;
-        labels[24] = Ukraine;
-        labels[25] = Afghanistan;
-        labels[26] = China;
-        labels[27] = India;
-        labels[28] = Irkutsk;
-        labels[29] = Japan;
-        labels[30] = Kamchatka;
-        labels[31] = MiddleEast;
-        labels[32] = Mongolia;
-        labels[33] = Sian;
-        labels[34] = Siberia;
-        labels[35] = Ural;
-        labels[36] = Yakutsk;
-        labels[37] = Congo;
-        labels[38] = EastAfrica;
-        labels[39] = Egypt;
-        labels[40] = Madagaskar;
-        labels[41] = NorthAfrica;
-        labels[42] = SouthAfrica;
-        labels[43] = EasternAustralia;
-        labels[44] = Indonesia;
-        labels[45] = NewGuinea;
-        labels[46] = WesternAustralia;
-        
-        MyTimerTask timert = new MyTimerTask(game);
-        Timer timer = new Timer();
-        timer.schedule(timert, 0, 4000); 
-
-    }
 
     @FXML
     void helpBtnAction() {
@@ -339,7 +343,7 @@ public class BoardController extends BaseController{
 
     }
      
-   /*@FXML
+   @FXML
     void RegionBtnAction(MouseEvent event) throws IOException{
 
         //String region = game.tellRegion((int) event.getX(), (int) event.getY());
@@ -359,9 +363,9 @@ public class BoardController extends BaseController{
                     }
                     if(act || ! game.isDistributionFinished()) {
                         if(game.isDistributionFinished()) {
-                            game.getCurrentPlayer().fortification(game.getSelectedRegion1(), number.getText());
+                            game.fortificationControl(game.getSelectedRegion1(), (Integer.parseInt(number.getText())));
                         } else {
-                            game.getCurrentPlayer().fortification(game.getSelectedRegion1(), 1);
+                            game.fortificationControl(game.getSelectedRegion1(), 1);
                         }
                         updateMap(game.getSelectedRegion1());
                         updateMap(game.getSelectedRegion2());
@@ -386,7 +390,7 @@ public class BoardController extends BaseController{
                 break;
             case ATTACK:
                 if (game.getSelectedRegion1() != null && game.getSelectedRegion2() != null) {
-                    game.getCurrentPlayer().attack(game.getSelectedRegion1(), game.getSelectedRegion2());
+                    game.attackControl(game.getSelectedRegion1(), game.getSelectedRegion2());
                     updateMap(game.getSelectedRegion1());
                     updateMap(game.getSelectedRegion2());
                     game.setSelectedRegion1(null);
@@ -401,8 +405,7 @@ public class BoardController extends BaseController{
                 if (game.getSelectedRegion1() != null && game.getSelectedRegion2() != null) {
                     changeTheVisibility();
                     if(act) {
-                        game.getCurrentPlayer().reinforcement(game.getSelectedRegion1(),
-                                game.getSelectedRegion2(), number.getText());
+                        game.reinforcementControl(game.getSelectedRegion1(), game.getSelectedRegion2(), (Integer.parseInt(number.getText())));
                         updateMap(game.getSelectedRegion1());
                         updateMap(game.getSelectedRegion2());
                         game.setSelectedRegion1(null);
@@ -416,7 +419,7 @@ public class BoardController extends BaseController{
                 }
                 break;
         }
-    }*/
+    }
 
     public void showPlayerChange(){
         playerTurn.setText(game.getCurrentPlayer() + " is playing");
@@ -490,13 +493,13 @@ public class BoardController extends BaseController{
         return r;
     }
     
-    /*@FXML
+    @FXML
     void increaseBtnAction() {
 
         int compare = 0;
 
         if(action == Mod.REINFORCEMENT) {
-            compare = game.getArmyOfRegion(game.getSelectedRegion2());
+            compare = game.getArmyOf(game.getSelectedRegion2());
         }
 
         if(action == Mod.FORTIFICATION) {
@@ -507,7 +510,7 @@ public class BoardController extends BaseController{
             int i = Integer.parseInt(number.getText()) + 1;
             number.setText(String.valueOf(i));
         }
-    }*/
+    }
 
     @FXML
     void decreaseBtnAction() {

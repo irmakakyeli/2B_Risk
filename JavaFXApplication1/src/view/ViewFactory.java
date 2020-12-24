@@ -90,9 +90,10 @@ public class ViewFactory {
     }
 
    public void showBoard(String userName, Integer userId){
-        BoardController baseController = new BoardController(game, userName, userId, this, "GamePage.fxml");
-        initializeStage(baseController, "css/board.css");
-        baseController.initialize();
+        BoardController boardController = new BoardController(game, userName, userId, this, "GamePage.fxml");
+        //boardController.initialize();
+        initializeStage(boardController, "css/board.css");
+        
         currentStage = currStage;
     }
 

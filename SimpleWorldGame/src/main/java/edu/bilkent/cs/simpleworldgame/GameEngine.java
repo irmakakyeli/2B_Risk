@@ -269,16 +269,16 @@ public class GameEngine {
     }
 
     @WebMethod
-    public int joinGame(int roomId, String PlayerName) {
-        if (active_player_num >= playerNumber) {
+    public int joinGame(int roomId, String playerName) {
+        if (active_player_num > playerNumber) {
             return -1;
         }
         if (isGameSetup == false) {
             return -1;
         } else {
-            int id = playerIDgen.getAndIncrement();
+            int id = playerIDgen.incrementAndGet();
             Player p = new Player(id);
-            p.setName(PlayerName);
+            p.setName(playerName);
             player_map.put(id, p);
             active_player_num++;
 
@@ -346,12 +346,12 @@ public class GameEngine {
         if (getSelectedRegion1() == null) {
             setSelectedRegion1(region);
         } else if (region.equals(getSelectedRegion1())) {
-            setSelectedRegion1(null);
+            //setSelectedRegion1(null);
         } else if (getSelectedRegion2() == null) {
             setSelectedRegion2(region);
 
         } else if (region.equals(getSelectedRegion2())) {
-            setSelectedRegion2(null);
+            //setSelectedRegion2(null);
         }
     }
 
@@ -501,7 +501,7 @@ public class GameEngine {
 
     @WebMethod
     public boolean isRoomFull() {
-        return player_map.size() == playerNumber;
+        return player_map.size() > playerNumber;
     }
 
     @WebMethod

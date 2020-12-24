@@ -73,25 +73,29 @@ public class JoinController extends BaseController{
         }
 
         // Store data and join the game
-        Integer userId = game.joinGame(Integer.parseInt(gameCode.getText()), userName.getText());        
-        this.userNameString = userName.getText();
-        this.userIdInteger = userId;
-        boolean isValid = game.checkGameCode(gameCode.getText());
-        boolean isFull = game.isRoomFull();
+        Integer userId = game.joinGame(Integer.parseInt(gameCode.getText()), userName.getText()); 
+        if(userId == -1){
+            label.setText("ERROROROROOROR");
+        }else{
+            this.userNameString = userName.getText();
+            this.userIdInteger = userId;
+            boolean isValid = game.checkGameCode(gameCode.getText());
+            boolean isFull = game.isRoomFull();
 
-        // Control validity
-        if(isValid && ! isFull) {
-            viewFactory.showRoomPage(userNameString, userIdInteger);
-            Stage stage = (Stage) joinLabel.getScene().getWindow();
-            viewFactory.closeStage(stage);
-        }
-        else if(! isValid){
-            label.setText("Game Code is not valid!");
-            makeAppear();
-        }
-        else{
-            label.setText("The room is full, sorry, next time!");
-            makeAppear();
+            // Control validity
+            if(isValid && ! isFull) {
+                viewFactory.showRoomPage(userNameString, userIdInteger);
+                Stage stage = (Stage) joinLabel.getScene().getWindow();
+                viewFactory.closeStage(stage);
+            }
+            else if(! isValid){
+                label.setText("Game Code is not valid!");
+                makeAppear();
+            }
+            else{
+                label.setText("The room is full, sorry, next time!");
+                makeAppear();
+            }
         }
     }
 

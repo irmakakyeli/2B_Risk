@@ -104,6 +104,8 @@ public class ServiceTest {
                 System.out.println(A + " " + i);
             }
             
+            
+            
             gmEngine.resetGame();
             System.out.println(gmEngine.getPlayers());
             

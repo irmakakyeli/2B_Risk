@@ -23,7 +23,6 @@
       <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="#2aff1f" height="53.0" layoutX="89.0" layoutY="361.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="74.0" />
       <Circle fx:id="circle" fill="#1fff2b" layoutX="126.0" layoutY="409.0" radius="37.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
       <Button id="witch" layoutX="89.0" layoutY="320.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" style="-fx-background-radius: 100; -fx-background-color: #fffbe9; -fx-background-position: center; -fx-background-size: 55; -fx-background-repeat: no-repeat; -fx-border-width: 4px; -fx-border-color: #000; -fx-border-radius: 100;" styleClass="icon" />
-          <Button fx:id="help" layoutX="10.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#helpBtnAction" opacity="0.61" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 100;" styleClass="help" />
       <Button layoutX="117.0" layoutY="76.0" mnemonicParsing="false" onAction="#regionBtnAction" onMouseEntered="#mouseEnteredRegion" onMouseExited="#mouseExitedRegion" opacity="0.0" prefHeight="111.0" prefWidth="109.0" rotate="-1.7" styleClass="alaska" stylesheets="@css/board.css" text="Alaska" />
       <Button layoutX="237.0" layoutY="198.0" mnemonicParsing="false" onAction="#regionBtnAction" onMouseEntered="#mouseEnteredRegion" onMouseExited="#mouseExitedRegion" opacity="0.0" prefHeight="95.0" prefWidth="97.0" rotate="30.4" styleClass="westernAmerica" text="Western America" />
       <Button layoutX="218.0" layoutY="333.0" mnemonicParsing="false" onAction="#regionBtnAction" onMouseEntered="#mouseEnteredRegion" onMouseExited="#mouseExitedRegion" opacity="0.0" prefHeight="39.0" prefWidth="110.0" rotate="27.9" styleClass="centralAmerica" text="Central America" />
@@ -170,6 +169,7 @@
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
+      </Button>
       <Label fx:id="label2" layoutX="582.0" layoutY="148.0" text="CARDS" textFill="RED" visible="false">
          <font>
             <Font name="System Bold" size="49.0" />

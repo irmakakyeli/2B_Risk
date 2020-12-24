@@ -3,6 +3,7 @@ package controller;
 
 import view.ViewFactory;
 import edu.bilkent.cs.simpleworldgame.*;
+//import javafx.fxml.Initializable;
 //import ws.client.*;
 
 public abstract class BaseController {
@@ -13,7 +14,7 @@ public abstract class BaseController {
     protected String userNameString;
     protected Integer userIdInteger;
 
-    public BaseController(GameEngine game, ViewFactory viewFactory, String fxmlName) {
+    public BaseController(GameEngine game, ViewFactory viewFactory, String fxmlName)  {
         this.game = game;
         this.viewFactory = viewFactory;
         this.fxmlName = fxmlName;
