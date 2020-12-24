@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@css/role.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="controller.RoleController" prefHeight="720.0" prefWidth="1280.0" stylesheets="@css/role.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="498.0" layoutY="340.0" mnemonicParsing="false" onAction="#hostBtnAction" opacity="0.0" prefHeight="115.0" prefWidth="283.0" style="-fx-background-radius: 100;" text="HOST" />
       <Button layoutX="498.0" layoutY="484.0" mnemonicParsing="false" onAction="#joinBtnAction" opacity="0.0" prefHeight="115.0" prefWidth="283.0" style="-fx-background-radius: 100;" text="JOIN" />

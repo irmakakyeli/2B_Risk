@@ -11,8 +11,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import view.ViewFactory;
-import ws.client.*;
+//import ws.client.*;
 import edu.bilkent.cs.simpleworldgame.*;
+import org.json.JSONObject;
 
 public class HostController extends BaseController{
 
@@ -59,36 +60,47 @@ public class HostController extends BaseController{
 
         // Check the validity of userName
         if( isNameValid(userName.getText()) == 0){
-           label.setText("Please enter a user name under 14 characters");
-           makeAppear();
+            label.setText("Please enter a user name under 14 characters");
+            makeAppear();
           
         }
         else if(isNameValid(userName.getText()) == (-1)){
             label.setText("Please enter a user name!");
             makeAppear();
         }
-        else {
-            game.setUserName(userName.getText());
+        else {            
             if(distributionMethod == "NOT_DEFINED"){
                 label.setText("Please choose a distribution method");
                 makeAppear();
 
             } else if(distributionMethod == "MANUAL"){
-                game.setupGame(userName.getText(), 3, "MANUAL");
+                String playerAndRoom = game.setupGame(userName.getText(), 3, "MANUAL"); // Host player (currentPlayer) name and id is set here
+                JSONObject json =  new JSONObject(playerAndRoom);
+                
+                // Get player and room id to pass onto other pages
+                int hostId = json.getInt("HOST_PLAYER_ID");
+                int roomId = json.getInt("ROOM_ID");
+                
                 // Show the game code        
-                label.setText("Game Code: " + game.getGameCode());
+                label.setText("Game Code: " + roomId);
                 makeAppear();
 
-                viewFactory.showRoomPage();
+                viewFactory.showRoomPage(game.getUserName(), hostId);
                 Stage stage = (Stage) hostLabel.getScene().getWindow();
                 viewFactory.closeStage(stage);
             } else {
-                game.setupGame(userName.getText(), 3, "AUTO");
+                String playerAndRoom = game.setupGame(userName.getText(), 3, "AUTO"); // Host player (currentPlayer) name and id is set here
+                JSONObject json =  new JSONObject(playerAndRoom);
+                
+                // Get player and room id to pass onto other pages
+                int hostId = json.getInt("HOST_PLAYER_ID");
+                int roomId = json.getInt("ROOM_ID");
+                
                 // Show the game code        
-                label.setText("Game Code: " + game.getGameCode());
+                label.setText("Game Code: " + roomId);
                 makeAppear();
 
-                viewFactory.showRoomPage();
+                viewFactory.showRoomPage(game.getUserName(), hostId);
                 Stage stage = (Stage) hostLabel.getScene().getWindow();
                 viewFactory.closeStage(stage);
             }

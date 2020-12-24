@@ -70,10 +70,10 @@ public class RegionInfo {
         return playerBelongTo;
     }
     
-    public void setPlayer (Player gplayer)
+    /*public void setPlayer (Player gplayer)
     {
         playerBelongTo = gplayer;
-    }
+    }*/
     
     public void setArmies(int number)
     {

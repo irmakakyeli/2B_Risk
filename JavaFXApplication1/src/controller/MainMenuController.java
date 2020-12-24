@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import view.ViewFactory;
-import ws.client.*;
+//import ws.client.*;
 import edu.bilkent.cs.simpleworldgame.*;
 
 public class MainMenuController extends BaseController{

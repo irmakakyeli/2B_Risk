@@ -12,23 +12,37 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import view.ViewFactory;
-import ws.client.*;
+//import ws.client.*;
 import edu.bilkent.cs.simpleworldgame.*;
+import org.json.JSONObject;
 
 public class RoomController extends BaseController{
+    String allPlayers;
     public RoomController(  GameEngine game, String userName, Integer userId, ViewFactory viewFactory, String fxmlName) {
         super( game, viewFactory, fxmlName);
 
         this.userNameString = userName;
         this.userIdInteger = userId;
         
+        allPlayers = game.getPlayers();
+        JSONObject json = new JSONObject(allPlayers);
+        
+        JSONObject userObj1 = json.getJSONObject("0");
+        JSONObject userObj2 = json.getJSONObject("1");
+        JSONObject userObj3 = json.getJSONObject("2");
+        JSONObject userObj4 = json.getJSONObject("3");
+        JSONObject userObj5 = json.getJSONObject("4");
+        JSONObject userObj6 = json.getJSONObject("5");
+        
+        
         roomLabel.setText(game.getGameCode());
-        user1.setText(game.getUserName());
-        user2.setText(game.getUser(1));
-        user3.setText(game.getUser(2));
-        user4.setText(game.getUser(3));
-        user5.setText(game.getUser(4));
-        user6.setText(game.getUser(5));
+        user1.setText(userObj1.getString("name"));
+        user2.setText(userObj2.getString("name"));
+        user3.setText(userObj3.getString("name"));
+        user4.setText(userObj4.getString("name"));
+        user5.setText(userObj5.getString("name"));
+        user6.setText(userObj6.getString("name"));
+        // user2.setText(game.getUser(1)); This will not work since it calls a Player object
     }
 
     @FXML

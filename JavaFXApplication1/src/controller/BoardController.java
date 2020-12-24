@@ -27,7 +27,7 @@ import java.util.Iterator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Popup;
-import ws.client.*;
+//import ws.client.*;
 import edu.bilkent.cs.simpleworldgame.*;
 import java.util.Map;
 import java.util.Timer;
@@ -339,7 +339,7 @@ public class BoardController extends BaseController{
 
     }
      
-   @FXML
+   /*@FXML
     void RegionBtnAction(MouseEvent event) throws IOException{
 
         //String region = game.tellRegion((int) event.getX(), (int) event.getY());
@@ -416,7 +416,7 @@ public class BoardController extends BaseController{
                 }
                 break;
         }
-    }
+    }*/
 
     public void showPlayerChange(){
         playerTurn.setText(game.getCurrentPlayer() + " is playing");
@@ -474,7 +474,8 @@ public class BoardController extends BaseController{
             }
         }
         if(i != 47) {
-            labels[index].setText(game.getArmyOf(region));
+            String army = game.getArmyOf(region) + "";
+            labels[index].setText(army);
         }
     }
         
@@ -489,7 +490,7 @@ public class BoardController extends BaseController{
         return r;
     }
     
-    @FXML
+    /*@FXML
     void increaseBtnAction() {
 
         int compare = 0;
@@ -506,7 +507,7 @@ public class BoardController extends BaseController{
             int i = Integer.parseInt(number.getText()) + 1;
             number.setText(String.valueOf(i));
         }
-    }
+    }*/
 
     @FXML
     void decreaseBtnAction() {
@@ -595,7 +596,7 @@ public class BoardController extends BaseController{
     void yesBtnAction(ActionEvent event) {
         
         // Aler the resign for the database
-        game.resignRequest();
+        game.resignRequest(userIdInteger);
        viewFactory.showMainMenu();
         Stage stage = (Stage) number.getScene().getWindow();
         viewFactory.closeStage(stage);

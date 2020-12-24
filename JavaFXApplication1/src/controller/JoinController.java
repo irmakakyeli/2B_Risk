@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.json.JSONObject; 
-import ws.client.*;
+//import ws.client.*;
 import edu.bilkent.cs.simpleworldgame.*;
 import view.ViewFactory;
 
