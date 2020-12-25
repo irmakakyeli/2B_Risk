@@ -104,6 +104,12 @@ public class ServiceTest {
                 System.out.println(A + " " + i);
             }
             
+            gmEngine.getPlayerColorFor("Alaska");
+            System.out.println(gmEngine.getWinnerColor());
+            
+            System.out.println(gmEngine.getWinnerName());
+            
+            System.out.println(gmEngine.getCurrentPlayerColor());
             
             
             gmEngine.resetGame();

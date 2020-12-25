@@ -2,12 +2,12 @@ package controller;
 import static controller.Mod.ATTACK;
 import static controller.Mod.FORTIFICATION;
 import static controller.Mod.REINFORCEMENT;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -79,6 +79,7 @@ public class BoardController extends BaseController implements Initializable{
         decreaseBtn.setOpacity(0.0);
         increaseBtn.setOpacity(0.0);
         number.setOpacity(0.0);
+        ok.setOpacity(0.0);
         File file = new File("css/resources/arrowForAmount.png");
         Image image = new Image(file.toURI().toString());
         iw.setImage(image);
@@ -173,6 +174,8 @@ public class BoardController extends BaseController implements Initializable{
         }
     }*/
 
+    private Button selectedButton1, selectedButton2;
+    
     @FXML
     private ImageView confetti, crown, wreath, shadow;
 
@@ -195,7 +198,7 @@ public class BoardController extends BaseController implements Initializable{
     private Button cardsBtn1, cardBtn2;
     
     @FXML
-    private Button decreaseBtn, increaseBtn;
+    private Button decreaseBtn, increaseBtn, ok;
 
     @FXML
     private Label number;
@@ -320,6 +323,10 @@ public class BoardController extends BaseController implements Initializable{
     @FXML
     void playBtnAction(ActionEvent event) {
 
+        //String color = "-fx-background-color: " + String.valueOf(game.getCurrentPlayerColor());
+        //rect.setStyle(color);
+        //circle.setStyle(color);
+
         switch(action){
             case FORTIFICATION:
                 fortific.setVisible(true);
@@ -354,6 +361,7 @@ public class BoardController extends BaseController implements Initializable{
         }
 
         game.setSelectedRegion(region);
+        setSelectedButton((Button)event.getSource());
 
         switch(action){
             case FORTIFICATION:
@@ -367,8 +375,8 @@ public class BoardController extends BaseController implements Initializable{
                         } else {
                             game.fortificationControl(game.getSelectedRegion1(), 1);
                         }
-                        updateMap(game.getSelectedRegion1());
-                        updateMap(game.getSelectedRegion2());
+                        updateMap(game.getSelectedRegion1(), getSelectedButton1());
+                        updateMap(game.getSelectedRegion2(), getSelectedButton2());
                         game.setSelectedRegion1(null);
                         game.setSelectedRegion2(null);
                         if(game.isDistributionFinished()) {
@@ -391,8 +399,8 @@ public class BoardController extends BaseController implements Initializable{
             case ATTACK:
                 if (game.getSelectedRegion1() != null && game.getSelectedRegion2() != null) {
                     game.attackControl(game.getSelectedRegion1(), game.getSelectedRegion2());
-                    updateMap(game.getSelectedRegion1());
-                    updateMap(game.getSelectedRegion2());
+                    updateMap(game.getSelectedRegion1(), getSelectedButton1());
+                    updateMap(game.getSelectedRegion2(), getSelectedButton2());
                     game.setSelectedRegion1(null);
                     game.setSelectedRegion2(null);
                     attack.setVisible(false);
@@ -406,8 +414,8 @@ public class BoardController extends BaseController implements Initializable{
                     changeTheVisibility();
                     if(act) {
                         game.reinforcementControl(game.getSelectedRegion1(), game.getSelectedRegion2(), (Integer.parseInt(number.getText())));
-                        updateMap(game.getSelectedRegion1());
-                        updateMap(game.getSelectedRegion2());
+                        updateMap(game.getSelectedRegion1(), getSelectedButton1());
+                        updateMap(game.getSelectedRegion2(), getSelectedButton2());
                         game.setSelectedRegion1(null);
                         game.setSelectedRegion2(null);
                         game.nextTurn();
@@ -427,15 +435,24 @@ public class BoardController extends BaseController implements Initializable{
 
     public void finishTheGame(){
 
+        //String color = "-fx-background-color: " + game.getWinnerColor();
+
         confetti.setVisible(true);
         crown.setVisible(true);
         wreath.setVisible(true);
         shadow.setVisible(true);
+
+        //winnerName.setStyle(color);
+        //winnerName.setText(game.getWinnerName().toUpperCase());
         winnerName.setVisible(true);
+
         tick.setVisible(true);
         minion.setVisible(true);
         victory.setVisible(true);
+
+        //winnerCircle.setStyle(color);
         winnerCircle.setVisible(true);
+
         ok2.setVisible(true);
         ok2.setDisable(false);
 
@@ -444,7 +461,37 @@ public class BoardController extends BaseController implements Initializable{
         viewFactory.showMainMenu();
     }
 
-    private void updateMap(String region) {
+    public void setSelectedButton(Button butt){
+        if (getSelectedButton1() == null) {
+            setSelectedButton1(butt);
+        } else if (butt.equals(getSelectedButton1())) {
+            setSelectedButton1(null);
+        } else if (getSelectedButton2() == null) {
+            setSelectedButton2(butt);
+
+        } else if (butt.equals(getSelectedButton2())) {
+            setSelectedButton2(null);
+        }
+    }
+
+    public Button getSelectedButton1(){
+        return selectedButton1;
+    }
+
+    public Button getSelectedButton2(){
+        return selectedButton2;
+    }
+
+    public void setSelectedButton1(Button butt){
+        selectedButton1 = butt;
+    }
+
+    public void setSelectedButton2(Button butt){
+        selectedButton2 = butt;
+    }
+    
+    
+    private void updateMap(String region, Button butt) {
         // TODO
         class MyTimerTask extends TimerTask  {
             GameEngine pEngine;
@@ -458,13 +505,17 @@ public class BoardController extends BaseController implements Initializable{
                 if(pEngine.isGameActive()){
                         String currentGameStats = pEngine.getGameStatistics();
                         System.out.println(currentGameStats);
-                }  
+                }
             }
         }
-        
+
         MyTimerTask timert = new MyTimerTask(game);
         Timer timer = new Timer();
-        timer.schedule(timert, 0, 4000); 
+        timer.schedule(timert, 0, 4000);
+
+        //String color = "-fx-background-color: " + game.getPlayerColorFor(region);
+        //butt.setStyle(color);
+        updateLabel(region);
     }
 
     private void updateLabel(String region) {
@@ -544,8 +595,8 @@ public class BoardController extends BaseController implements Initializable{
             number.setOpacity(1.0);
         } else {
             number.setOpacity(0.0);
-        }
-
+        }        
+        
         if(iw.getOpacity() > 0) {
             iw.setOpacity(1.0);
         } else {
@@ -568,6 +619,18 @@ public class BoardController extends BaseController implements Initializable{
             increaseBtn.setDisable(false);
         } else {
             increaseBtn.setDisable(true);
+        }
+        
+        if(ok.isVisible()) {
+            ok.setVisible(false);
+        } else {
+            ok.setVisible(true);
+        }
+
+        if(ok.isDisable()) {
+            ok.setDisable(false);
+        } else {
+            ok.setDisable(true);
         }
 
         if(decreaseBtn.isDisable()) {
@@ -620,12 +683,12 @@ public class BoardController extends BaseController implements Initializable{
     }
 
     @FXML
-    void mouseEnteredRegion(ActionEvent event) {
+    void mouseEnteredRegion(MouseEvent event) {
         
-    popupwindow.initModality(Modality.APPLICATION_MODAL);
+    //popupwindow.initModality(Modality.APPLICATION_MODAL);
     //popupwindow.setTitle("This is a pop up window");
       
-    Label label1= new Label(((Button)event.getSource()).getText());
+    /*Label label1= new Label(((Button)event.getSource()).getText());
      
     Label label2= new Label("Belongs to: -Player-");
     
@@ -637,14 +700,14 @@ public class BoardController extends BaseController implements Initializable{
        
     popupwindow.setScene(scene1);
       
-    popupwindow.showAndWait();
+    popupwindow.showAndWait();*/
         
     }
     
     @FXML
-    void mouseExitedRegion() {
+    void mouseExitedRegion(MouseEvent event) {
     
-         popupwindow.close();
+         //popupwindow.close();
     }
     
 

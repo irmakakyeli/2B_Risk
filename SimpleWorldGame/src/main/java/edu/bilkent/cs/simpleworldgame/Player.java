@@ -23,10 +23,12 @@ public class Player {
     Card card;
     HashMap<String, Integer> hand; // player's hand
     int cCount, aCount, iCount; // soldier cards count
+    String colour;
 
     public Player(Integer pid) {
         id = pid;
         isActive = false;
+        isWinner = false;
         assigned_Regions = new ConcurrentSkipListSet<Integer>();
         name = "Player-" + id.toString();
         hand = new HashMap<>();// init empty hand as a hashmap,
@@ -36,7 +38,45 @@ public class Player {
         card = new Card(20);
 
     }
+    
+    public String getColor(){
+        return colour;
+    }
+    
+    public void setColor(int playerId){
+        switch(playerId){
+            case 0:
+                colour = "#808080";
+                break;
+            case 1:
+                colour = "#809cb6";
+                break;
+            case 2:
+                colour = "#c8b2d3";
+                break;
+            case 3:
+                colour = "#c9f898";
+                break;
+            case 4:
+                colour = "#f6f173";
+                break;
+            case 5:
+                colour = "#f7bd88";
+                break;
+            case 6:
+                colour = "#f34b3f";
+                break;
+            default:
+                colour = "#000000";
+                break;
+        }
+                
+    }
 
+    public boolean getIsWinner(){
+        return false;
+    }
+    
     public String getName() {
         return name;
     }

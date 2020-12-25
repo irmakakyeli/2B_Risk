@@ -229,10 +229,11 @@ public class GameEngine {
             int id = playerIDgen.getAndIncrement();
             Player p = new Player(id);
             p.setName(hostPlayerName);
+            p.setColor(id);
             player_map.put(id, p);
             roomID = 1; // Since there will only be one room for now
             playerNumber = numberOfPlayers;
-            active_player_num++;
+            active_player_num = 1;
             currentPlayer = p;
             
             distributeRegions(distributionMethod, playerNumber);
@@ -279,9 +280,10 @@ public class GameEngine {
         if (isGameSetup == false) {
             return -1;
         } else {
-            int id = playerIDgen.incrementAndGet();
+            int id = playerIDgen.getAndIncrement();
             Player p = new Player(id);
             p.setName(playerName);
+            p.setColor(id);
             player_map.put(id, p);
             active_player_num++;
 
@@ -397,6 +399,39 @@ public class GameEngine {
     public boolean getConfiguration() {
         return configuration;
     }
+    
+    /*@WebMethod
+    public String getPlayerColorFor(String region){
+        Region r = findRegion(region);
+        return r.playerBelongTo.getColor();
+    }
+    
+    @WebMethod
+    public String getWinnerColor(){
+        int size = player_map.size();
+        for(int i = 0; i < size; i++){
+            if(player_map.get(i).getIsWinner())
+                return player_map.get(i).getColor();
+            
+        }
+        return "white";
+    }
+    
+    @WebMethod
+    public String getWinnerName(){
+        int size = player_map.size();
+        for(int i = 0; i < size; i++){
+            if(player_map.get(i).isWinner)
+                return player_map.get(i).getName();
+            
+        }
+        return "ERROR";
+    }
+    
+    @WebMethod
+    public String getCurrentPlayerColor(){
+        return currentPlayer.getColor();
+    }*/
 
     @WebMethod
     public void setConfiguration(boolean con) {
@@ -488,6 +523,7 @@ public class GameEngine {
         }
 
         return currentTroopCount >= troopCount;
+        //return true;
     }
 
     @WebMethod 
